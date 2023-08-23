@@ -9,6 +9,7 @@ services:
     working_dir: "/src"
     ports:
       - "3000:3000"
+      - "24678:24678" # HMR用のポートを追加
     tty: true
     environment:
     - HOST=0.0.0.0
