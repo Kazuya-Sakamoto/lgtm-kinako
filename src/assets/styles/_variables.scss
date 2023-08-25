@@ -1,0 +1,44 @@
+$pc: 1024px; // PC
+$tab: 680px; // タブレット
+$sp: 480px; // スマホ
+
+$brand: (
+  pale: #d5ebec,
+  light: #5cccce,
+  main: #3cabad,
+  dark: #207b7d,
+);
+
+$base: (
+  pale: #e5e5e5,
+  light: #d5d5d5,
+  main: #848b8c,
+  dark: #3f4243,
+);
+
+$accent1: (
+  pale: #d1e3f5,
+  light: #9fc9f2,
+  main: #6aa7e5,
+  dark: #2261a1,
+);
+
+$accent2: (
+  pale: #faf2e2,
+  light: #fad179,
+  main: #e5b95a,
+  dark: #cb9f40,
+);
+
+$alert: (
+  pale: #fbe0e5,
+  light: #f8aab9,
+  main: #e2667e,
+  dark: #b71131,
+);
+
+$background: (
+  light: #f2f2f2,
+  main: #ffffff,
+  dark: #000000,
+);

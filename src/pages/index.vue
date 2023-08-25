@@ -1,26 +1,23 @@
 <script setup lang="ts">
-import { reactive, computed } from 'vue'
+import { reactive } from "vue";
+import TheTemplate from "@/components/templates/Album/index.vue";
+import { albumsQuery, albumQuery } from "../mock/albumsQuery";
 
 type State = {
-  text: string
-}
+  albums: albumQuery[];
+};
 
 const initialState = (): State => ({
-  text: "kinako",
-})
-const state = reactive<State>(initialState())
-
-
+  albums: [],
+});
+const state = reactive<State>(initialState());
+state.albums = albumsQuery();
 </script>
 
 <template>
   <div>
-    {{ state.text }}
+    <TheTemplate :albums="state.albums" />
   </div>
 </template>
 
-
-
-<style>
-
-</style>
+<style scoped lang="scss"></style>
