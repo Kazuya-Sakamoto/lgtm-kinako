@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive } from "vue";
-import TheTemplate from "@/components/templates/Album/index.vue";
+import TheTemplate from "@/components/templates/albums/index.vue";
 import { albumsQuery, albumQuery } from "../mock/albumsQuery";
 
 type State = {
