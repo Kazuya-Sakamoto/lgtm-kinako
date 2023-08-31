@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { defineProps, withDefaults } from "#app";
 import TButton from "@/components/atoms/TButton.vue";
+
 export type Input = {
   email: string;
   password: string;
@@ -54,7 +54,7 @@ const props = withDefaults(defineProps<Props>(), {
           </button>
           <div class="px-6 py-6 lg:px-8">
             <h3 class="mb-4 text-xl font-medium text-gray-800">ログイン</h3>
-            <form class="space-y-6" action="#">
+            <div class="space-y-6">
               <div>
                 <label
                   for="email"
@@ -100,7 +100,7 @@ const props = withDefaults(defineProps<Props>(), {
                 size="full"
                 textColor="white"
               />
-            </form>
+            </div>
           </div>
         </div>
       </div>

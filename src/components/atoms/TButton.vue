@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { defineProps, computed } from "vue";
+import { computed } from "vue";
 
 type Size = "small" | "medium" | "large" | "full";
 type Color = "default" | "blue" | "primaryB" | "primary";
 type TextColor = "white" | "default";
+
 const props = defineProps({
   color: String as () => Color,
   size: {

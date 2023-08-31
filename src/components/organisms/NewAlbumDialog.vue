@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps, withDefaults } from "#app";
 import TButton from "@/components/atoms/TButton.vue";
 
 export type Input = {

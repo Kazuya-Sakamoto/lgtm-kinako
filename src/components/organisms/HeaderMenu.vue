@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { defineProps, withDefaults } from "#app";
-
 type Props = {
   showHeaderMenu: boolean;
   onOpenshowHeaderMenu: () => void;
@@ -18,9 +16,9 @@ const props = withDefaults(defineProps<Props>(), {
 
 const toggleHeaderMenu = () => {
   if (props.showHeaderMenu) {
-    props.onCloseshowHeaderMenu(); // モーダルが開いていたら閉じる
+    props.onCloseshowHeaderMenu();
   } else {
-    props.onOpenshowHeaderMenu(); // モーダルが閉じてたら開く
+    props.onOpenshowHeaderMenu();
   }
 };
 </script>

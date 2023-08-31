@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from "#app";
 import { albumQuery } from "../../mock/albumsQuery";
 
 type Props = {
@@ -20,7 +19,7 @@ const props = defineProps<Props>();
       class="rounded-lg bg-white sm:aspect-h-1 relative h-80 w-full overflow-hidden sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64"
     >
       <img
-        :src="album.imageUrl"
+        :src="album.image"
         alt="画像"
         class="h-full w-full object-cover object-center cursor-pointer"
       />
