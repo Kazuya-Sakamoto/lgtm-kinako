@@ -35,7 +35,6 @@ const textColorClass = computed(() => {
     white: "text-white",
     default: "text-gray-800",
   };
-  console.log(textColorClassMap[textColor], "textColorClassMap[textColor]");
   return textColorClassMap[textColor];
 });
 

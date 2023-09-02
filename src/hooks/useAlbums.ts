@@ -14,7 +14,7 @@ export const useAlbums = () => {
   const fetchAlbums = async () => {
     try {
       albumLoading.value = true;
-      const res = await $fetch<albums[]>("http://localhost:8080/album", {
+      const res = await $fetch<albums[]>("http://localhost:8080/album/random", {
         method: "GET",
         // headers: conf.headers,
         // retry: 3

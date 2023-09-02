@@ -5,6 +5,7 @@ type Props = {
   onCloseshowHeaderMenu: () => void;
   onShowNewDialog: () => void;
   onShowLoginDialog: () => void;
+  isLogin: () => boolean;
 };
 const props = withDefaults(defineProps<Props>(), {
   showHeaderMenu: false,
@@ -12,6 +13,7 @@ const props = withDefaults(defineProps<Props>(), {
   onCloseshowHeaderMenu: () => {},
   onShowNewDialog: () => {},
   onShowLoginDialog: () => {},
+  isLogin: () => false,
 });
 
 const toggleHeaderMenu = () => {
@@ -73,6 +75,7 @@ const toggleHeaderMenu = () => {
           >プライバシーポリシー</a
         >
         <button
+          v-if="props.isLogin()"
           @click="props.onShowNewDialog()"
           class="text-gray-700 hover:bg-yellow-100 block w-full px-4 py-2 text-left text-sm"
           role="menuitem"

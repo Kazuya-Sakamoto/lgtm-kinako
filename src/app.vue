@@ -5,10 +5,12 @@ import HeaderMenu from "@/components/organisms/HeaderMenu.vue";
 import { reactive } from "vue";
 import { useLoginStore } from "./store/login";
 import { storeToRefs } from "pinia";
+import IsLogin from "@/components/molecules/IsLogin.vue";
+import { $fetch } from "ofetch";
 
 const loginStore = useLoginStore();
-const { onLoginStore } = loginStore;
-const { token } = storeToRefs(loginStore);
+const { onLoginStore, isLogin } = loginStore;
+const { token, csrfToken } = storeToRefs(loginStore);
 console.log(token.value, "token.value");
 
 export type Input = {
@@ -20,7 +22,7 @@ export type Input = {
 
 type State = {
   showLoginDialog: boolean;
-  loginLoading: boolean;
+  buttonLoading: boolean;
   input: {
     email: string;
     password: string;
@@ -32,7 +34,7 @@ type State = {
 };
 const initialState = (): State => ({
   showLoginDialog: false,
-  loginLoading: false,
+  buttonLoading: false,
   input: {
     email: "",
     password: "",
@@ -44,12 +46,11 @@ const initialState = (): State => ({
 });
 const state = reactive<State>(initialState());
 
-// TODO: この辺はhooksに移植する
 const onLogin = async () => {
-  state.loginLoading = true;
+  state.buttonLoading = true;
   await onLoginStore(state.input.email, state.input.password);
   state.showLoginDialog = false;
-  state.loginLoading = false;
+  state.buttonLoading = false;
 };
 
 const onInput = (item: { name: keyof Input; value: string }) => {
@@ -73,6 +74,25 @@ const onFileChange = (e: Event) => {
   }
 };
 
+const onCreateNewAlbum = async () => {
+  const params = {
+    image: state.input.imageUrl,
+    title: state.input.title,
+  };
+
+  console.log("onCreateNewAlbum");
+  const res = await $fetch("http://localhost:8080/album", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken.value,
+    },
+    body: JSON.stringify(params),
+    credentials: "include",
+  });
+  console.log(res, "res");
+  state.showNewDialog = false;
+};
 const onCloseshowNewDialog = () => {
   state.showNewDialog = false;
   onInput({ name: "imageUrl", value: "" });
@@ -81,19 +101,24 @@ const onCloseshowNewDialog = () => {
 
 <template>
   <div>
+    <template v-if="isLogin()">
+      <IsLogin />
+    </template>
     <LoginDialog
       :showLoginDialog="state.showLoginDialog"
       :closeLoginDialog="() => (state.showLoginDialog = false)"
       :onInput="onInput"
       :onLogin="onLogin"
-      :loginLoading="state.loginLoading"
+      :buttonLoading="state.buttonLoading"
     />
     <NewAlbumDialog
       :showNewDialog="state.showNewDialog"
-      :closeNewDialog="onCloseshowNewDialog"
+      :onCloseshowNewDialog="onCloseshowNewDialog"
+      :onCreateNewAlbum="onCreateNewAlbum"
       :onInput="onInput"
       :imageUrl="state.input.imageUrl"
       :onFileChange="onFileChange"
+      :buttonLoading="state.buttonLoading"
     />
     <header class="bg-white">
       <nav
@@ -117,6 +142,7 @@ const onCloseshowNewDialog = () => {
             :onCloseshowHeaderMenu="() => (state.showHeaderMenu = false)"
             :onShowNewDialog="() => (state.showNewDialog = true)"
             :onShowLoginDialog="() => (state.showLoginDialog = true)"
+            :isLogin="isLogin"
           />
         </div>
       </nav>

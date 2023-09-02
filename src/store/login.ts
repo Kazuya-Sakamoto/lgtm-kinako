@@ -1,6 +1,7 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import { $fetch } from "ofetch";
+// import { handleStatusCode } from "../lib/error"
 
 export const useLoginStore = defineStore(
   "login",
@@ -9,19 +10,15 @@ export const useLoginStore = defineStore(
     const token = ref("");
     const fetchCsrfToken = async () => {
       try {
-        const response = await $fetch("http://localhost:8080/csrf", {
+        const res = await $fetch("http://localhost:8080/csrf", {
           method: "GET",
           credentials: "include",
         });
-
-        if (response.ok) {
-          const data = await response.json();
-          csrfToken.value = data.csrf_token;
-        } else {
-          console.error("Failed to fetch CSRF token");
-        }
+        console.log(res.csrf_token, "csrf_token");
+        csrfToken.value = res.csrf_token;
       } catch (error) {
         console.error(error);
+        alert(`エラーが発生しました。${error}`);
       }
     };
 
@@ -31,21 +28,29 @@ export const useLoginStore = defineStore(
         email,
         password,
       };
-
-      const res = await $fetch("http://localhost:8080/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRF-Token": csrfToken.value,
-        },
-        body: JSON.stringify(params),
-        credentials: "include",
-      });
-      console.log(res, "res");
-      token.value = res;
+      try {
+        const res = await $fetch("http://localhost:8080/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken.value,
+          },
+          body: JSON.stringify(params),
+          credentials: "include",
+        });
+        console.log(res, "token");
+        token.value = res;
+      } catch (error) {
+        console.log(error);
+        alert(`エラーが発生しました。${error}`);
+      }
     };
 
-    return { csrfToken, token, onLoginStore };
+    const isLogin = () => {
+      return !!token.value;
+    };
+
+    return { csrfToken, token, onLoginStore, isLogin };
   },
   {
     persist: true,

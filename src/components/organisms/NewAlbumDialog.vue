@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import TButton from "@/components/atoms/TButton.vue";
+import ButtonLoading from "@/components/molecules/ButtonLoading.vue";
 
 export type Input = {
   email: string;
@@ -10,19 +11,21 @@ export type Input = {
 
 type Props = {
   showNewDialog: boolean;
-  closeNewDialog: () => void;
+  onCloseshowNewDialog: () => void;
+  onCreateNewAlbum: () => void;
   onInput: (item: { name: keyof Input; value: string }) => void;
-  // onLogin: () => void;
   imageUrl: string;
   onFileChange: (e: Event) => void;
+  buttonLoading: boolean;
 };
 const props = withDefaults(defineProps<Props>(), {
   showNewDialog: false,
-  closeNewDialog: () => {},
+  onCloseshowNewDialog: () => {},
+  onCreateNewAlbum: () => {},
   onInput: () => {},
   imageUrl: "",
-  // onLogin: () => {},
   onFileChange: () => {},
+  buttonLoading: false,
 });
 </script>
 
@@ -36,7 +39,7 @@ const props = withDefaults(defineProps<Props>(), {
       <div class="relative w-full max-w-md max-h-full">
         <div class="relative rounded-lg shadow bg-white dark:bg-white">
           <button
-            @click="props.closeNewDialog"
+            @click="props.onCloseshowNewDialog"
             type="button"
             class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
             data-modal-hide="authentication-modal"
@@ -60,7 +63,7 @@ const props = withDefaults(defineProps<Props>(), {
           </button>
           <div class="px-6 py-6 lg:px-8">
             <h3 class="mb-4 text-xl font-medium text-gray-800">アップロード</h3>
-            <form class="space-y-6" action="#">
+            <div class="space-y-6">
               <div>
                 <div
                   class="file_upload p-5 relative border-4 border-dotted border-gray-300 rounded-lg"
@@ -125,14 +128,16 @@ const props = withDefaults(defineProps<Props>(), {
                 />
               </div>
               <TButton
-                :click="() => {}"
+                v-if="!props.buttonLoading"
+                @click="props.onCreateNewAlbum()"
                 class="font-bold focus:ring-4 focus:outline-none"
                 color="primary"
                 text="アップロードする"
                 size="full"
                 textColor="white"
               />
-            </form>
+              <ButtonLoading v-else />
+            </div>
           </div>
         </div>
       </div>

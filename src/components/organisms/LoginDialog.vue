@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import TButton from "@/components/atoms/TButton.vue";
+import ButtonLoading from "@/components/molecules/ButtonLoading.vue";
 
 export type Input = {
   email: string;
@@ -11,14 +12,14 @@ type Props = {
   closeLoginDialog: () => void;
   onInput: (item: { name: keyof Input; value: string }) => void;
   onLogin: () => void;
-  loginLoading: boolean;
+  buttonLoading: boolean;
 };
 const props = withDefaults(defineProps<Props>(), {
   showLoginDialog: false,
   closeLoginDialog: () => {},
   onInput: () => {},
   onLogin: () => {},
-  loginLoading: false,
+  buttonLoading: false,
 });
 </script>
 
@@ -95,7 +96,7 @@ const props = withDefaults(defineProps<Props>(), {
                 />
               </div>
               <TButton
-                v-if="!props.loginLoading"
+                v-if="!props.buttonLoading"
                 @click="onLogin()"
                 class="font-bold focus:ring-4 focus:outline-none"
                 color="primary"
@@ -103,15 +104,7 @@ const props = withDefaults(defineProps<Props>(), {
                 size="full"
                 textColor="white"
               />
-              <div
-                v-else
-                className="flex justify-center"
-                aria-label="読み込み中"
-              >
-                <div
-                  className="animate-spin h-10 w-10 border-4 border-yellow-500 rounded-full border-t-transparent"
-                ></div>
-              </div>
+              <ButtonLoading v-else />
             </div>
           </div>
         </div>
