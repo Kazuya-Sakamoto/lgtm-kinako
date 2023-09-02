@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Album from "@/components/organisms/Album.vue";
-import { albumQuery } from "../../../mock/albumsQuery";
+import { albumQuery } from "@/mock/albumsQuery";
 import Loading from "@/components/organisms/Loading.vue";
 
 type Props = {

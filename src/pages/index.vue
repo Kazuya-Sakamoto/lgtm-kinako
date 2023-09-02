@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { reactive } from "vue";
 import TheTemplate from "@/components/templates/albums/index.vue";
-import { albumQuery } from "../mock/albumsQuery";
-import { useAlbums } from "../hooks/useAlbums";
+import { albumQuery } from "@/mock/albumsQuery";
+import { useAlbums } from "@/hooks/useAlbums";
 
 type State = {
   albums: albumQuery[];

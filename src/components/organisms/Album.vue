@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { albumQuery } from "../../mock/albumsQuery";
+import { albumQuery } from "@/mock/albumsQuery";
 
 type Props = {
   album: albumQuery;

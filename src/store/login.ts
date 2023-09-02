@@ -1,7 +1,6 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import { $fetch } from "ofetch";
-// import { handleStatusCode } from "../lib/error"
 
 export const useLoginStore = defineStore(
   "login",
@@ -22,7 +21,7 @@ export const useLoginStore = defineStore(
       }
     };
 
-    const onLoginStore = async (email, password) => {
+    const onLoginStore = async (email: string, password: string) => {
       await fetchCsrfToken();
       const params = {
         email,
