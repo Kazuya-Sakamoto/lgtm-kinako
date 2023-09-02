@@ -3,7 +3,13 @@ import LoginDialog from "@/components/organisms/LoginDialog.vue";
 import NewAlbumDialog from "@/components/organisms/NewAlbumDialog.vue";
 import HeaderMenu from "@/components/organisms/HeaderMenu.vue";
 import { reactive } from "vue";
-import { $fetch } from "ofetch";
+import { useLoginStore } from "./store/login";
+import { storeToRefs } from "pinia";
+
+const loginStore = useLoginStore();
+const { onLoginStore } = loginStore;
+const { token } = storeToRefs(loginStore);
+console.log(token.value, "token.value");
 
 export type Input = {
   email: string;
@@ -14,6 +20,7 @@ export type Input = {
 
 type State = {
   showLoginDialog: boolean;
+  loginLoading: boolean;
   input: {
     email: string;
     password: string;
@@ -25,6 +32,7 @@ type State = {
 };
 const initialState = (): State => ({
   showLoginDialog: false,
+  loginLoading: false,
   input: {
     email: "",
     password: "",
@@ -38,13 +46,10 @@ const state = reactive<State>(initialState());
 
 // TODO: この辺はhooksに移植する
 const onLogin = async () => {
-  console.log("onLogin");
-  const res = $fetch("http://localhost:8080/login", {
-    method: "POST",
-    body: { email: state.input.email, password: state.input.password },
-  });
-  console.log(res, "res");
-  // console.log("ログイン完了");
+  state.loginLoading = true;
+  await onLoginStore(state.input.email, state.input.password);
+  state.showLoginDialog = false;
+  state.loginLoading = false;
 };
 
 const onInput = (item: { name: keyof Input; value: string }) => {
@@ -81,6 +86,7 @@ const onCloseshowNewDialog = () => {
       :closeLoginDialog="() => (state.showLoginDialog = false)"
       :onInput="onInput"
       :onLogin="onLogin"
+      :loginLoading="state.loginLoading"
     />
     <NewAlbumDialog
       :showNewDialog="state.showNewDialog"

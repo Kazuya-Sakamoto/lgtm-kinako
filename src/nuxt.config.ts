@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   alias: {
     // "@src": path.resolve(__dirname, "../src"),
   },
+  modules: ["@pinia/nuxt", "@pinia-plugin-persistedstate/nuxt"],
   components: [
     {
       path: "@/components",
