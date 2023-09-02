@@ -11,12 +11,14 @@ type Props = {
   closeLoginDialog: () => void;
   onInput: (item: { name: keyof Input; value: string }) => void;
   onLogin: () => void;
+  loginLoading: boolean;
 };
 const props = withDefaults(defineProps<Props>(), {
   showLoginDialog: false,
   closeLoginDialog: () => {},
   onInput: () => {},
   onLogin: () => {},
+  loginLoading: false,
 });
 </script>
 
@@ -93,6 +95,7 @@ const props = withDefaults(defineProps<Props>(), {
                 />
               </div>
               <TButton
+                v-if="!props.loginLoading"
                 @click="onLogin()"
                 class="font-bold focus:ring-4 focus:outline-none"
                 color="primary"
@@ -100,6 +103,15 @@ const props = withDefaults(defineProps<Props>(), {
                 size="full"
                 textColor="white"
               />
+              <div
+                v-else
+                className="flex justify-center"
+                aria-label="読み込み中"
+              >
+                <div
+                  className="animate-spin h-10 w-10 border-4 border-yellow-500 rounded-full border-t-transparent"
+                ></div>
+              </div>
             </div>
           </div>
         </div>
