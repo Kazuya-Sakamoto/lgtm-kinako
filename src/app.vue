@@ -59,6 +59,9 @@ const onInput = (item: { name: keyof Input; value: string }) => {
     [item.name]: item.value,
   };
 };
+const loginValidation = () => {
+  return state.input.email.trim() !== "" && state.input.password.trim() !== "";
+};
 
 const onFileChange = (e: Event) => {
   const target = e.target as HTMLInputElement;
@@ -81,17 +84,22 @@ const onCreateNewAlbum = async () => {
   };
 
   console.log("onCreateNewAlbum");
-  const res = await $fetch("http://localhost:8080/album", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRF-Token": csrfToken.value,
-    },
-    body: JSON.stringify(params),
-    credentials: "include",
-  });
-  console.log(res, "res");
-  state.showNewDialog = false;
+  try {
+    const res = await $fetch("http://localhost:8080/album", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": csrfToken.value,
+      },
+      body: JSON.stringify(params),
+      credentials: "include",
+    });
+    console.log(res, "res");
+    state.showNewDialog = false;
+  } catch (error) {
+    console.error(error);
+    alert(`エラーが発生しました。${error}`);
+  }
 };
 const onCloseshowNewDialog = () => {
   state.showNewDialog = false;
@@ -110,6 +118,7 @@ const onCloseshowNewDialog = () => {
       :onInput="onInput"
       :onLogin="onLogin"
       :buttonLoading="state.buttonLoading"
+      :loginValidation="loginValidation"
     />
     <NewAlbumDialog
       :showNewDialog="state.showNewDialog"

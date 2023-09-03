@@ -13,6 +13,7 @@ type Props = {
   onInput: (item: { name: keyof Input; value: string }) => void;
   onLogin: () => void;
   buttonLoading: boolean;
+  loginValidation: () => boolean;
 };
 const props = withDefaults(defineProps<Props>(), {
   showLoginDialog: false,
@@ -20,6 +21,7 @@ const props = withDefaults(defineProps<Props>(), {
   onInput: () => {},
   onLogin: () => {},
   buttonLoading: false,
+  loginValidation: () => false,
 });
 </script>
 
@@ -103,6 +105,7 @@ const props = withDefaults(defineProps<Props>(), {
                 text="ログインする"
                 size="full"
                 textColor="white"
+                :disabled="!props.loginValidation()"
               />
               <ButtonLoading v-else />
             </div>

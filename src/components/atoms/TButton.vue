@@ -13,10 +13,12 @@ const props = defineProps({
   },
   text: String,
   textColor: String as () => TextColor,
+  disabled: Boolean,
 });
 
 const buttonColorClass = computed(() => {
   const buttonColor = props.color || "default";
+  // const isDisabled = props.disabled || false;
   const buttonColorClassMap = {
     blue: "bg-blue-700 hover:bg-blue-800 border border-blue-700",
     default:
@@ -24,8 +26,10 @@ const buttonColorClass = computed(() => {
     primaryB:
       "text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300",
     primary:
-      "text-white bg-yellow-500 border border-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300",
+      "text-white bg-yellow-400 border border-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300",
   };
+  // const disabledColor = "bg-gray-400 rounded focus:outline-none";
+
   return buttonColorClassMap[buttonColor];
 });
 
@@ -70,7 +74,11 @@ const buttonText = computed(() => {
 
 <template>
   <div>
-    <button :class="buttonClass" :style="buttonStyle">
+    <button
+      :class="buttonClass"
+      :style="buttonStyle"
+      :disabled="props.disabled"
+    >
       {{ buttonText }}
     </button>
   </div>
