@@ -28,4 +28,10 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  runtimeConfig: {
+    apiKey: "",
+    public: {
+      apiUrl: "",
+    },
+  },
 });

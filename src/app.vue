@@ -13,6 +13,8 @@ const { onLoginStore, isLogin } = loginStore;
 const { token, csrfToken } = storeToRefs(loginStore);
 console.log(token.value, "token.value");
 
+const config = useRuntimeConfig();
+
 export type Input = {
   email: string;
   password: string;
@@ -83,9 +85,8 @@ const onCreateNewAlbum = async () => {
     title: state.input.title,
   };
 
-  console.log("onCreateNewAlbum");
   try {
-    const res = await $fetch("http://localhost:8080/album", {
+    const res = await $fetch(`${config.public.apiUrl}/album`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

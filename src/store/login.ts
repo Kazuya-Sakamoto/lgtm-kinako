@@ -5,11 +5,12 @@ import { $fetch } from "ofetch";
 export const useLoginStore = defineStore(
   "login",
   () => {
+    const config = useRuntimeConfig();
     const csrfToken = ref("");
     const token = ref("");
     const fetchCsrfToken = async () => {
       try {
-        const res = await $fetch("http://localhost:8080/csrf", {
+        const res = await $fetch(`${config.public.apiUrl}/csrf`, {
           method: "GET",
           credentials: "include",
         });
@@ -28,7 +29,7 @@ export const useLoginStore = defineStore(
         password,
       };
       try {
-        const res = await $fetch("http://localhost:8080/login", {
+        const res = await $fetch(`${config.public.apiUrl}/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
