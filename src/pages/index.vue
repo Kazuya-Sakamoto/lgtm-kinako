@@ -21,7 +21,7 @@ const { albums, albumLoading, fetchAlbums } = useAlbums();
 fetchAlbums();
 
 const onCopyImageUrl = (album: albumQuery) => {
-  const url = `![LGTM](data:image/png;base64,${album.image})`;
+  const url = `![LGTM](${album.image})`;
   window.navigator.clipboard.writeText(url).then(() => {
     state.showClipboardMap[album.id] = true;
   });
