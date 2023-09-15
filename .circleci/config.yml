@@ -46,6 +46,18 @@ jobs:
       - restore_node
       - save_node
 
+  lint:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - restore_npm
+      - save_npm
+      - run: cd src && npm install
+      - run: cd src && npm run lint
+
+# 他のジョブも同様に修正
+
 workflows:
   version: 2
   build_and_test:
@@ -57,14 +69,13 @@ workflows:
             branches:
               only: /.*/
       - lint:
-          executor:
-            name: default
-          steps:
-            - checkout
-            - restore_npm
-            - save_npm
-            - run: cd src && npm install
-            - run: cd src && npm run lint
+          requires:
+            - node
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              only: /.*/
       - test:
           requires:
             - node
