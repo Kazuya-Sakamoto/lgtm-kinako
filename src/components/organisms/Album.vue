@@ -16,7 +16,7 @@ const props = defineProps<Props>();
     style="cursor: pointer"
   >
     <div
-      class="rounded-lg bg-white sm:aspect-h-1 relative h-80 w-full overflow-hidden sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64"
+      class="mt-2 bg-white sm:aspect-h-1 relative h-96 w-full overflow-hidden group-hover:opacity-75"
     >
       <img
         :src="album.image"
@@ -25,16 +25,14 @@ const props = defineProps<Props>();
       />
       <div
         v-if="props.showClipboardMap[album.id]"
-        class="absolute inset-0 flex items-center justify-center bg-slate-900 bg-opacity-75 text-white border-2 border-yellow-300 rounded"
+        class="absolute rounded-lg inset-0 flex items-center justify-center bg-slate-900 bg-opacity-75 text-white border-2 border-yellow-300"
       >
-        コピーしました。
+        リンクをコピーしました
       </div>
     </div>
-    <h3 class="mt-2 mb-4 text-sm text-gray-500">
-      <a href="#">
-        <span class="absolute inset-0"></span>
-        {{ album.title }}
-      </a>
+    <h3 class="mt-1 mb-2 text-sm text-gray-500">
+      <span class="absolute inset-0"></span>
+      {{ album.title }}
     </h3>
   </div>
 </template>
