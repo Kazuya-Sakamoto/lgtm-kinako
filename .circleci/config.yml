@@ -42,7 +42,11 @@ jobs:
       - checkout
       - restore_yarn
       - save_yarn
-      - run: cd src && yarn install
+      - run:
+          name: Install dependencies
+          command: |
+            cd src
+            yarn install
       - restore_node
       - save_node
 
