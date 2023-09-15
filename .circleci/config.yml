@@ -46,8 +46,6 @@ jobs:
       - restore_node
       - save_node
 
-  # 他のジョブも同様に修正
-
 workflows:
   version: 2
   build_and_test:
