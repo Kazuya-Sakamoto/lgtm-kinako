@@ -19,8 +19,6 @@ export const useAlbums = () => {
         `${config.public.apiUrl}/album/random`,
         {
           method: "GET",
-          // headers: conf.headers,
-          // retry: 3
         }
       );
       console.log(res, "res");

@@ -17,7 +17,7 @@ const initialState = (): State => ({
 });
 const state = reactive<State>(initialState());
 
-const { albums, albumLoading, fetchAlbums } = useAlbums();
+const { albums, albumLoading, fetchAlbums, refetch } = useAlbums();
 fetchAlbums();
 
 const onCopyImageUrl = (album: albumQuery) => {
@@ -38,6 +38,7 @@ const onCopyImageUrl = (album: albumQuery) => {
       :albumLoading="albumLoading"
       :onCopyImageUrl="onCopyImageUrl"
       :showClipboardMap="state.showClipboardMap"
+      :refetch="refetch"
     />
   </div>
 </template>
