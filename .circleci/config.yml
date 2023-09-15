@@ -58,6 +58,15 @@ workflows:
               only: /.*/
             branches:
               only: /.*/
+      - lint:
+          executor:
+            name: default
+          steps:
+            - checkout
+            - restore_npm
+            - save_npm
+            - run: cd src && npm install
+            - run: cd src && npm run lint
       - test:
           requires:
             - node
@@ -68,6 +77,7 @@ workflows:
               only: /.*/
       - build:
           requires:
+            - lint
             - test
           filters:
             tags:
