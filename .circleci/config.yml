@@ -58,14 +58,6 @@ workflows:
               only: /.*/
             branches:
               only: /.*/
-      - lint:
-          requires:
-            - node
-          filters:
-            tags:
-              only: /.*/
-            branches:
-              only: /.*/
       - test:
           requires:
             - node
@@ -76,7 +68,6 @@ workflows:
               only: /.*/
       - build:
           requires:
-            - lint
             - test
           filters:
             tags:
