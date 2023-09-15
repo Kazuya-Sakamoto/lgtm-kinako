@@ -56,7 +56,15 @@ jobs:
       - run: cd src && npm install
       - run: cd src && npm run lint
 
-# 他のジョブも同様に修正
+  test:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - restore_npm
+      - save_npm
+      - run: cd src && npm install
+      - run: cd src && npm run test
 
 workflows:
   version: 2
