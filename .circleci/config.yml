@@ -74,11 +74,3 @@ workflows:
               only: /.*/
             branches:
               only: /.*/
-      - build:
-          requires:
-            - lint
-          filters:
-            tags:
-              only: /.*/
-            branches:
-              only: /.*/
