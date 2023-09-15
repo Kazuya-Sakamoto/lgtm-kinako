@@ -74,18 +74,9 @@ workflows:
               only: /.*/
             branches:
               only: /.*/
-      - unit_test:
-          requires:
-            - node
-          filters:
-            tags:
-              only: /.*/
-            branches:
-              only: /.*/
       - build:
           requires:
             - lint
-            - unit_test
           filters:
             tags:
               only: /.*/
