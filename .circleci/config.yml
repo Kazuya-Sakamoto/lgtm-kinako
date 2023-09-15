@@ -2,7 +2,7 @@ version: 2.1
 executors:
   default:
     docker:
-      - image: circleci/node:18.17.1
+      - image: circleci/node:latest
         environment:
           TZ: Asia/Tokyo
           working_directory: ~/repo/src
