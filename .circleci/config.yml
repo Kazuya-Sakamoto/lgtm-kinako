@@ -8,29 +8,29 @@ executors:
           working_directory: ~/repo/src
 
 commands:
-  restore_npm:
+  restore_yarn:
     steps:
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "src/package-lock.json" }}
+            - v1-dependencies-{{ checksum "src/yarn.lock" }}
             - v1-dependencies-
 
-  save_npm:
+  save_yarn:
     steps:
       - save_cache:
           paths:
             - src/node_modules
-          key: v1-dependencies-{{ checksum "src/package-lock.json" }}
+          key: v1-dependencies-{{ checksum "src/yarn.lock" }}
 
   restore_node:
     steps:
       - restore_cache:
-          key: node-v2-{{ checksum "src/package-lock.json" }}
+          key: node-v2-{{ checksum "src/yarn.lock" }}
 
   save_node:
     steps:
       - save_cache:
-          key: node-v2-{{ checksum "src/package-lock.json" }}
+          key: node-v2-{{ checksum "src/yarn.lock" }}
           paths:
             - src/node_modules
 
@@ -40,9 +40,9 @@ jobs:
       name: default
     steps:
       - checkout
-      - restore_npm
-      - save_npm
-      - run: cd src && npm install
+      - restore_yarn
+      - save_yarn
+      - run: cd src && yarn install
       - restore_node
       - save_node
 
