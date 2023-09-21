@@ -1,15 +1,115 @@
 version: 2.1
-jobs:
-  say-hello:
+executors:
+  default:
     docker:
-      - image: cimg/base:stable
+      - image: circleci/node:16.8.0
+        environment:
+          TZ: Asia/Tokyo
+          working_directory: ~/repo
+commands:
+  # install_npm_dependencies:
+  #   steps:
+  #     - run:
+  #         name: Install_npm_dependencies
+  #         commands: npm install
+  restore_npm:
+    steps:
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package-lock.json" }}
+            - v1-dependencies-
+  save_npm:
+    steps:
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
+  restore_node:
+    steps:
+      - restore_cache:
+          key: node-v2-{{ checksum "package-lock.json" }}
+  save_node:
+    steps:
+      - save_cache:
+          key: node-v2-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+
+jobs:
+  node:
+    executor:
+      name: default
     steps:
       - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+      - restore_npm
+      - save_npm
+      # - install_npm_dependencies
+      - run: npm install
+      - restore_node
+      - save_node
+  build:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - restore_npm
+      - save_npm
+      # - install_npm_dependencies
+      - run: npm install
+      - run: npm run build
+  lint:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - restore_npm
+      - save_npm
+      # - install_npm_dependencies
+      - run: npm install
+      - run: npm run lint
+  test:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - restore_npm
+      - save_npm
+      # - install_npm_dependencies
+      - run: npm install
+      - run: npm run test
 
 workflows:
-  say-hello-workflow:
+  version: 2
+  build_and_test:
     jobs:
-      - say-hello
+      - node:
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              only: /.*/
+      - lint:
+          requires:
+            - node
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              only: /.*/
+      - test:
+          requires:
+            - node
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              only: /.*/
+      - build:
+          requires:
+            - lint
+            - test
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              only: /.*/
