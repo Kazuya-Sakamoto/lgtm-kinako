@@ -109,7 +109,7 @@ const onCloseshowNewDialog = () => {
 </script>
 
 <template>
-  <div>
+  <div class="font-sans">
     <template v-if="isLogin()">
       <IsLogin />
     </template>
@@ -169,3 +169,8 @@ const onCloseshowNewDialog = () => {
     </footer>
   </div>
 </template>
+<style scoped lang="scss">
+.image-filter {
+  filter: blur(3px);
+}
+</style>

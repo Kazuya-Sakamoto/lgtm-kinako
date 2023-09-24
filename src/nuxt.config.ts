@@ -5,7 +5,11 @@ export default defineNuxtConfig({
   alias: {
     // "@src": path.resolve(__dirname, "../src"),
   },
-  modules: ["@pinia/nuxt", "@pinia-plugin-persistedstate/nuxt"],
+  modules: [
+    "@pinia/nuxt",
+    "@pinia-plugin-persistedstate/nuxt",
+    "@nuxtjs/google-fonts",
+  ],
   components: [
     {
       path: "@/components",
@@ -33,5 +37,12 @@ export default defineNuxtConfig({
     public: {
       apiUrl: "",
     },
+  },
+  googleFonts: {
+    families: {
+      Montserrat: true,
+    },
+    download: true,
+    css: true,
   },
 });
