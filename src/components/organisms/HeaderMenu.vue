@@ -58,21 +58,29 @@ const toggleHeaderMenu = () => {
       tabindex="-1"
     >
       <div class="py-1" role="none">
-        <a
-          href="#"
+        <nuxt-link
+          to="/"
           class="text-gray-700 hover:bg-yellow-100 block px-4 py-2 text-sm"
           role="menuitem"
           tabindex="-1"
           id="menu-item-2"
-          >利用規約</a
+          >きなこの画像を見る</nuxt-link
         >
-        <a
-          href="#"
+        <nuxt-link
+          to="/terms"
+          class="text-gray-700 hover:bg-yellow-100 block px-4 py-2 text-sm"
+          role="menuitem"
+          tabindex="-1"
+          id="menu-item-2"
+          >利用規約</nuxt-link
+        >
+        <nuxt-link
+          to="/privacy"
           class="text-gray-700 hover:bg-yellow-100 block px-4 py-2 text-sm"
           role="menuitem"
           tabindex="-1"
           id="menu-item-1"
-          >プライバシーポリシー</a
+          >プライバシーポリシー</nuxt-link
         >
         <button
           v-if="props.isLogin()"

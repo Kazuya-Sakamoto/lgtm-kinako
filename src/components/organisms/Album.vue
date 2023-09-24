@@ -25,7 +25,7 @@ const props = defineProps<Props>();
       />
       <div
         v-if="props.showClipboardMap[album.id]"
-        class="absolute rounded-lg inset-0 flex items-center justify-center bg-slate-900 bg-opacity-75 text-white border-2 border-yellow-300"
+        class="absolute inset-0 flex items-center justify-center bg-slate-900 bg-opacity-75 text-white border-2 border-yellow-300"
       >
         リンクをコピーしました
       </div>

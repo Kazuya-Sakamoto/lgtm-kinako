@@ -18,8 +18,8 @@ const props = withDefaults(defineProps<Props>(), {});
     <div class="bg-white">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col items-center">
-          <div class="text-2xl">きなこのLGTM画像を共有出来るサービスです</div>
-          <div class="mt-10 flex flex-col items-center">
+          <div class="text-xl">きなこのLGTM画像を共有出来るサービスです</div>
+          <div class="mt-2 lg:mt-6 sm:mt-4 flex flex-col items-center">
             <div>画像をクリックするとMarkdownがコピーされます。</div>
             <button
               @click="props.refetch()"
@@ -51,7 +51,7 @@ const props = withDefaults(defineProps<Props>(), {});
           </template>
           <div
             v-else
-            class="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-2 lg:space-y-0"
+            class="mt-6 space-y-4 lg:grid lg:grid-cols-4 lg:gap-x-2 lg:space-y-0"
           >
             <div v-for="(album, i) in props.albums" :key="i">
               <Album

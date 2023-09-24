@@ -160,10 +160,10 @@ const onCloseshowNewDialog = () => {
     <div>
       <NuxtPage />
     </div>
-    <footer class="bg-yellow-100 rounded-lg shadow m-4">
+    <footer class="bg-yellow-100 rounded-lg shadow">
       <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
         <span class="block text-sm text-gray-500 sm:text-center"
-          >© kinako-LGTM</span
+          >© LGTM-kinako</span
         >
       </div>
     </footer>
