@@ -10,8 +10,7 @@ import { $fetch } from "ofetch";
 
 const loginStore = useLoginStore();
 const { onLoginStore, isLogin } = loginStore;
-const { token, csrfToken } = storeToRefs(loginStore);
-console.log(token.value, "token.value");
+const { csrfToken } = storeToRefs(loginStore);
 
 const config = useRuntimeConfig();
 

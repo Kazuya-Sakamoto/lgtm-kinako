@@ -21,7 +21,6 @@
   "dependencies": {
     "@nuxtjs/dotenv": "^1.4.1",
     "@pinia/nuxt": "^0.4.11",
-    "@types/node": "^20.5.9",
-    "cookie": "^0.5.0"
+    "@types/node": "^20.5.9"
   }
 }
