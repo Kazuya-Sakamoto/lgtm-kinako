@@ -1,10 +1,10 @@
-export type albumQuery = {
+export type AlbumQuery = {
   id: number;
   title: string;
   image: string;
 };
 
-export const albumsQuery = (): albumQuery[] => [
+export const albumsQuery = (): AlbumQuery[] => [
   {
     id: 1,
     title: "きなこのLGTM初めての投稿",

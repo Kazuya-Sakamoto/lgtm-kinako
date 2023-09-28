@@ -26,7 +26,7 @@ const buttonColorClass = computed(() => {
     primaryB:
       "text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300",
     primary:
-      "text-white bg-amber-300 border border-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300",
+      "text-white bg-yellow-500 border border-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300",
   };
   // const disabledColor = "bg-gray-400 rounded focus:outline-none";
 

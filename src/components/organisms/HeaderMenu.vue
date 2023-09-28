@@ -64,7 +64,7 @@ const toggleHeaderMenu = () => {
           role="menuitem"
           tabindex="-1"
           id="menu-item-2"
-          >きなこの画像を見る</nuxt-link
+          >きなこをみる</nuxt-link
         >
         <nuxt-link
           to="/terms"

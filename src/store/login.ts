@@ -1,21 +1,23 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import { $fetch } from "ofetch";
 
 export const useLoginStore = defineStore(
   "login",
   () => {
     const config = useRuntimeConfig();
-    const csrfToken = ref("");
-    const token = ref("");
+    const csrfToken = ref<string>("");
+    const token = ref<string>("");
+
     const fetchCsrfToken = async () => {
       try {
-        const res = await $fetch(`${config.public.apiUrl}/csrf`, {
+        const response = await fetch(`${config.public.apiUrl}/csrf`, {
           method: "GET",
           credentials: "include",
         });
-        console.log(res.csrf_token, "csrf_token");
-        csrfToken.value = res.csrf_token;
+        if (!response.ok) return;
+
+        const data = await response.json();
+        csrfToken.value = data.csrf_token;
       } catch (error) {
         console.error(error);
         alert(`エラーが発生しました。${error}`);
@@ -28,8 +30,9 @@ export const useLoginStore = defineStore(
         email,
         password,
       };
+
       try {
-        const res = await $fetch(`${config.public.apiUrl}/login`, {
+        const response = await fetch(`${config.public.apiUrl}/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -38,8 +41,10 @@ export const useLoginStore = defineStore(
           body: JSON.stringify(params),
           credentials: "include",
         });
-        console.log(res, "token");
-        token.value = res;
+        if (!response.ok) return;
+
+        const data = await response.json();
+        token.value = data;
       } catch (error) {
         console.log(error);
         alert(`エラーが発生しました。${error}`);

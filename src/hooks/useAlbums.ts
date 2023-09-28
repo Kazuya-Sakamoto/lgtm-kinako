@@ -1,7 +1,6 @@
 import { ref } from "vue";
-import { $fetch } from "ofetch";
 
-type albums = {
+export type Album = {
   image: string;
   id: number;
   title: string;
@@ -9,20 +8,19 @@ type albums = {
 
 export const useAlbums = () => {
   const config = useRuntimeConfig();
-  const albums = ref<albums[]>([]);
+  const albums = ref<Album[]>([]);
   const albumLoading = ref(false);
 
   const fetchAlbums = async () => {
     try {
       albumLoading.value = true;
-      const res = await $fetch<albums[]>(
-        `${config.public.apiUrl}/album/random`,
-        {
-          method: "GET",
-        }
+      const response: Response = await fetch(
+        `${config.public.apiUrl}/album/random`
       );
-      console.log(res, "res");
-      albums.value = res;
+      if (!response.ok) return;
+
+      const data: Album[] = await response.json();
+      albums.value = data;
     } catch (error) {
       console.error(error);
     } finally {

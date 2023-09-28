@@ -3,10 +3,9 @@ import LoginDialog from "@/components/organisms/LoginDialog.vue";
 import NewAlbumDialog from "@/components/organisms/NewAlbumDialog.vue";
 import HeaderMenu from "@/components/organisms/HeaderMenu.vue";
 import { reactive } from "vue";
-import { useLoginStore } from "./store/login";
+import { useLoginStore } from "@/store/login";
 import { storeToRefs } from "pinia";
 import IsLogin from "@/components/molecules/IsLogin.vue";
-import { $fetch } from "ofetch";
 
 const loginStore = useLoginStore();
 const { onLoginStore, isLogin } = loginStore;
@@ -49,9 +48,15 @@ const state = reactive<State>(initialState());
 
 const onLogin = async () => {
   state.buttonLoading = true;
-  await onLoginStore(state.input.email, state.input.password);
-  state.showLoginDialog = false;
-  state.buttonLoading = false;
+  try {
+    await onLoginStore(state.input.email, state.input.password);
+    state.showLoginDialog = false;
+  } catch (error) {
+    console.error(error);
+    alert(`エラーが発生しました。${error}`);
+  } finally {
+    state.buttonLoading = false;
+  }
 };
 
 const onInput = (item: { name: keyof Input; value: string }) => {
@@ -79,13 +84,14 @@ const onFileChange = (e: Event) => {
 };
 
 const onCreateNewAlbum = async () => {
+  state.buttonLoading = true;
   const params = {
     image: state.input.imageUrl,
     title: state.input.title,
   };
 
   try {
-    const res = await $fetch(`${config.public.apiUrl}/album`, {
+    const response = await fetch(`${config.public.apiUrl}/album`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -94,11 +100,16 @@ const onCreateNewAlbum = async () => {
       body: JSON.stringify(params),
       credentials: "include",
     });
-    console.log(res, "res");
+    if (!response.ok) return;
+
+    const data = await response.json();
+    console.log(data, "res");
     state.showNewDialog = false;
   } catch (error) {
     console.error(error);
     alert(`エラーが発生しました。${error}`);
+  } finally {
+    state.buttonLoading = false;
   }
 };
 const onCloseshowNewDialog = () => {
