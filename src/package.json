@@ -16,7 +16,9 @@
     "nuxt": "^3.6.5",
     "postcss": "^8.4.28",
     "sass": "^1.66.1",
-    "tailwindcss": "^3.3.3"
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.2.2",
+    "vue-tsc": "^1.8.16"
   },
   "dependencies": {
     "@nuxtjs/dotenv": "^1.4.1",

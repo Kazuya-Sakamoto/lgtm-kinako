@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { setSeo } from "@/lib/seo";
+const pageSeo = setSeo("利用規約");
+useHead(pageSeo);
+</script>
 
 <template>
   <div class="bg-white mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 leading-8">

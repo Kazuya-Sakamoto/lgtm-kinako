@@ -6,6 +6,7 @@ import { reactive } from "vue";
 import { useLoginStore } from "@/store/login";
 import { storeToRefs } from "pinia";
 import IsLogin from "@/components/molecules/IsLogin.vue";
+import { checkEmailVal, isPasswordLengthValid } from "@/lib/validation";
 
 const loginStore = useLoginStore();
 const { onLoginStore, isLogin } = loginStore;
@@ -66,7 +67,12 @@ const onInput = (item: { name: keyof Input; value: string }) => {
   };
 };
 const loginValidation = () => {
-  return state.input.email.trim() !== "" && state.input.password.trim() !== "";
+  return (
+    state.input.email.trim() !== "" &&
+    checkEmailVal(state.input.email) &&
+    state.input.password.trim() !== "" &&
+    isPasswordLengthValid(state.input.password)
+  );
 };
 
 const onFileChange = (e: Event) => {

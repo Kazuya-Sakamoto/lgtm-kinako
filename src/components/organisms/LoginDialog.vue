@@ -64,17 +64,16 @@ const props = withDefaults(defineProps<Props>(), {
                 <label
                   for="email"
                   class="block mb-2 text-sm font-medium text-gray-900"
-                  >Email</label
+                  >メールアドレス</label
                 >
                 <input
                   @input="
-                    (e) =>
-                      props.onInput({ name: 'email', value: e.target.value })
-                  "
+                    (e) => 
+                      props.onInput({ name: 'email', value: (e.target as HTMLInputElement)?.value || '' })"
                   type="email"
                   name="email"
                   class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                  placeholder="kinako@kinako.com"
+                  placeholder="lgtm.kinako@gmail.com"
                   required
                 />
               </div>
@@ -82,16 +81,14 @@ const props = withDefaults(defineProps<Props>(), {
                 <label
                   for="password"
                   class="block mb-2 text-sm font-medium text-gray-800"
-                  >Password</label
+                  >パスワード</label
                 >
                 <input
                   @input="
-                    (e) =>
-                      props.onInput({ name: 'password', value: e.target.value })
-                  "
+                    (e) => 
+                      props.onInput({ name: 'password', value: (e.target as HTMLInputElement)?.value || '' })"
                   type="password"
                   name="password"
-                  id="password"
                   placeholder="••••••••"
                   class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   required
