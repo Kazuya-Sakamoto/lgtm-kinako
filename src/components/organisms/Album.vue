@@ -20,7 +20,7 @@ const props = defineProps<Props>();
     >
       <img
         :src="album.image"
-        alt="画像"
+        alt="LGTM-kinako きなこ、わんこ、わんちゃん 犬のLGTM画像。"
         class="h-full w-full object-cover object-center cursor-pointer"
       />
       <div
