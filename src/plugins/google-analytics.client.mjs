@@ -1,19 +1,18 @@
-// plugins/google-analytics.client.mjs
+import VueGtag from "vue-gtag";
 
-import { createGtag } from "vue-gtag";
-
-export default ({ app }) => {
+// Nuxtプラグインの登録
+export default defineNuxtPlugin((nuxtApp) => {
   // ルーター取得
-  const router = app.router;
+  const router = useRouter();
 
-  // Google Analyticsの初期化
-  const gtag = createGtag({
-    property: {
+  // Vue登録
+  nuxtApp.vueApp.use(
+    VueGtag,
+    {
+      appName: "lgtm-kinako",
       pageTrackerScreenviewEnabled: true,
-      id: "G-TJ0G7F77QG", // ここにGoogle Analytics(GA4)の測定IDを指定する
+      config: { id: `G-TJ0G7F77QG` },
     },
-  });
-
-  // プラグインの適用
-  app.use(gtag, router);
-};
+    router
+  );
+});
