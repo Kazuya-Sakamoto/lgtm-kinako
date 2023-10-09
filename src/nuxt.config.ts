@@ -12,6 +12,7 @@ export default defineNuxtConfig({
       link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
     },
   },
+  plugins: ["~/plugins/google-analytics.client.mjs"],
   typescript: {
     shim: false,
     strict: true,

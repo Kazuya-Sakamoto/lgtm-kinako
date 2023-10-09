@@ -23,6 +23,7 @@
   "dependencies": {
     "@nuxtjs/dotenv": "^1.4.1",
     "@pinia/nuxt": "^0.4.11",
-    "@types/node": "^20.5.9"
+    "@types/node": "^20.5.9",
+    "vue-gtag": "^2.0.1"
   }
 }
