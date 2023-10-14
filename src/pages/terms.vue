@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useHead } from "@/.nuxt/imports";
 import { setSeo } from "@/lib/seo";
 const pageSeo = setSeo("利用規約");
 useHead(pageSeo);

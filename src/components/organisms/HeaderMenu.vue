@@ -91,6 +91,15 @@ const toggleHeaderMenu = () => {
         >
           画像をアップロード
         </button>
+        <nuxt-link
+          v-if="props.isLogin()"
+          to="/all"
+          class="text-gray-700 hover:bg-yellow-100 block w-full px-4 py-2 text-left text-sm"
+          role="menuitem"
+          tabindex="-1"
+        >
+          すべてのきなこ
+        </nuxt-link>
         <button
           @click="props.onShowLoginDialog()"
           type="button"

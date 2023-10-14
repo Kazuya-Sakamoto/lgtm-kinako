@@ -1,3 +1,4 @@
+import { useRuntimeConfig } from "@/.nuxt/imports";
 import { ref } from "vue";
 import { defineStore } from "pinia";
 

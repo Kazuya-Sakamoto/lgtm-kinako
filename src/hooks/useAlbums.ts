@@ -1,5 +1,5 @@
 import { ref } from "vue";
-
+import { useRuntimeConfig } from "@/.nuxt/imports";
 export type Album = {
   image: string;
   id: number;
@@ -28,10 +28,26 @@ export const useAlbums = () => {
     }
   };
 
+  const fetchAllAlbums = async () => {
+    try {
+      albumLoading.value = true;
+      const response: Response = await fetch(`${config.public.apiUrl}/album`);
+      if (!response.ok) return;
+
+      const data: Album[] = await response.json();
+      albums.value = data;
+    } catch (error) {
+      console.error(error);
+    } finally {
+      albumLoading.value = false;
+    }
+  };
+
   return {
     albums,
     albumLoading,
     fetchAlbums,
     refetch: fetchAlbums,
+    fetchAllAlbums,
   };
 };

@@ -2,6 +2,7 @@
 import Album from "@/components/organisms/Album.vue";
 import { Album as AlbumQuery } from "@/hooks/useAlbums";
 import Loading from "@/components/organisms/Loading.vue";
+import Alert from "@/components/molecules/Alert.vue";
 
 type Props = {
   albums: AlbumQuery[];
@@ -9,20 +10,23 @@ type Props = {
   onCopyImageUrl: (album: AlbumQuery) => void;
   showClipboardMap: Record<string, boolean>;
   refetch: () => Promise<void>;
+  isAll?: boolean;
 };
-const props = withDefaults(defineProps<Props>(), {});
+const props = withDefaults(defineProps<Props>(), {
+  isAll: false,
+});
 </script>
 
 <template>
   <div class="bg-white">
     <div class="bg-white">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col items-center">
+        <div v-if="!props.isAll" class="flex flex-col items-center">
           <h1 class="lg:text-xl">きなこのLGTM画像を共有出来るサービスです</h1>
           <div
             class="text-sm lg:text-lg mt-2 lg:mt-6 sm:mt-4 flex flex-col items-center"
           >
-            <div>画像をクリックするとMarkdownがコピーされます。</div>
+            <div>画像をクリックするとMarkdownがコピーされます</div>
             <button
               :disabled="props.albumLoading"
               class="mt-8 inline-flex items-center justify-center rounded-xl bg-yellow-500 py-3 px-6 font-dm text-base font-medium text-white shadow-xl shadow-yellow-400/75 transition-transform duration-200 ease-in-out hover:scale-[1.02]"
@@ -67,13 +71,24 @@ const props = withDefaults(defineProps<Props>(), {});
             </button>
           </div>
         </div>
+        <div v-else>
+          <Alert
+            title="管理画面"
+            description="管理用で全てのきなこを表示しています"
+          />
+          <p class="lg:text-xl mt-2">合計数: {{ props.albums.length }}枚</p>
+        </div>
         <div class="mx-auto max-w-2xl sm:pb-20 sm:py-5 custom-py lg:max-w-none">
           <template v-if="props.albumLoading">
             <Loading />
           </template>
           <div
             v-else
-            class="mt-6 space-y-4 lg:grid lg:grid-cols-4 lg:gap-x-2 lg:space-y-0"
+            class="mt-6 space-y-4"
+            :class="{
+              'lg:grid lg:grid-cols-4 lg:gap-x-2 lg:space-y-0': !props.isAll,
+              'lg:grid lg:grid-cols-5 lg:gap-x-1 lg:space-y-0': props.isAll,
+            }"
           >
             <div v-for="(album, i) in props.albums" :key="i">
               <Album

@@ -105,7 +105,7 @@ const props = withDefaults(defineProps<Props>(), {
                   <img
                     v-else
                     :src="props.imageUrl"
-                    alt="アップロードされた画像"
+                    alt="アップロードされた きなこ、わんこ、わんちゃん 犬のLGTM画像。"
                   />
                 </div>
               </div>
@@ -118,7 +118,7 @@ const props = withDefaults(defineProps<Props>(), {
                 <input
                   @input="
                     (e) =>
-                      props.onInput({ name: 'title', value: e.target.value })
+                      props.onInput({ name: 'title', value: (e.target as HTMLInputElement)?.value || '' })
                   "
                   type="text"
                   name="title"

@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import { useRuntimeConfig } from "@/.nuxt/imports";
 import LoginDialog from "@/components/organisms/LoginDialog.vue";
 import NewAlbumDialog from "@/components/organisms/NewAlbumDialog.vue";
 import HeaderMenu from "@/components/organisms/HeaderMenu.vue";
 import { reactive } from "vue";
 import { useLoginStore } from "@/store/login";
 import { storeToRefs } from "pinia";
-import IsLogin from "@/components/molecules/IsLogin.vue";
+import Alert from "@/components/molecules/Alert.vue";
 import { checkEmailVal, isPasswordLengthValid } from "@/lib/validation";
 
 const loginStore = useLoginStore();
@@ -127,7 +128,10 @@ const onCloseshowNewDialog = () => {
 <template>
   <div class="font-sans">
     <template v-if="isLogin()">
-      <IsLogin />
+      <Alert
+        title="ログイン中"
+        description="ログイン中なので作業に気をつけてください"
+      />
     </template>
     <LoginDialog
       :showLoginDialog="state.showLoginDialog"
