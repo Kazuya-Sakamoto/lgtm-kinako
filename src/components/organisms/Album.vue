@@ -16,7 +16,7 @@ const props = defineProps<Props>();
     style="cursor: pointer"
   >
     <div
-      class="mt-2 bg-white sm:aspect-h-1 relative h-96 w-full overflow-hidden group-hover:opacity-75"
+      class="border-inherit border drop-shadow-xl mt-2 bg-white sm:aspect-h-1 relative h-96 w-full overflow-hidden group-hover:opacity-75"
     >
       <img
         :src="album.image"

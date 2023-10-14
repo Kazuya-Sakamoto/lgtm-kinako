@@ -11,7 +11,7 @@ export const useLoginStore = defineStore(
 
     const fetchCsrfToken = async () => {
       try {
-        const response = await fetch(`${config.public.apiUrl}/csrf`, {
+        const response = await fetch(`${config.public.API_URL}/csrf`, {
           method: "GET",
           credentials: "include",
         });
@@ -33,7 +33,7 @@ export const useLoginStore = defineStore(
       };
 
       try {
-        const response = await fetch(`${config.public.apiUrl}/login`, {
+        const response = await fetch(`${config.public.API_URL}/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

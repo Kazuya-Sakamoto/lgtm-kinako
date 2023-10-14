@@ -60,13 +60,6 @@ const onLogin = async () => {
     state.buttonLoading = false;
   }
 };
-
-const onInput = (item: { name: keyof Input; value: string }) => {
-  state.input = {
-    ...state.input,
-    [item.name]: item.value,
-  };
-};
 const loginValidation = () => {
   return (
     state.input.email.trim() !== "" &&
@@ -74,6 +67,13 @@ const loginValidation = () => {
     state.input.password.trim() !== "" &&
     isPasswordLengthValid(state.input.password)
   );
+};
+
+const onInput = (item: { name: keyof Input; value: string }) => {
+  state.input = {
+    ...state.input,
+    [item.name]: item.value,
+  };
 };
 
 const onFileChange = (e: Event) => {
@@ -89,7 +89,6 @@ const onFileChange = (e: Event) => {
     reader.readAsDataURL(file);
   }
 };
-
 const onCreateNewAlbum = async () => {
   state.buttonLoading = true;
   const params = {
@@ -98,7 +97,7 @@ const onCreateNewAlbum = async () => {
   };
 
   try {
-    const response = await fetch(`${config.public.apiUrl}/album`, {
+    const response = await fetch(`${config.public.API_URL}/album`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -181,8 +180,15 @@ const onCloseshowNewDialog = () => {
       <NuxtPage />
     </div>
     <footer class="bg-yellow-100 rounded-lg shadow">
-      <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
-        <span class="block text-sm text-gray-500 sm:text-center"
+      <img
+        class="wcb-chan"
+        src="https://d18g0hf2wnz3gs.cloudfront.net/favicon.jpg"
+        alt="LGTM-kinako きなこ、わんこ、わんちゃん 犬のLGTM画像。"
+        width="100"
+        height="117"
+      />
+      <div class="bg-lime-300 font-bold w-full mx-auto p-3">
+        <span class="text-white block text-sm sm:text-center"
           >© LGTM-kinako</span
         >
       </div>
@@ -192,5 +198,16 @@ const onCloseshowNewDialog = () => {
 <style scoped lang="scss">
 .image-filter {
   filter: blur(3px);
+}
+.wcb-chan {
+  animation: img-move 6s steps(6, start) infinite;
+}
+.wcb-chan-nostep {
+  animation: img-move 6s infinite;
+}
+@keyframes img-move {
+  to {
+    transform: translateX(300px);
+  }
 }
 </style>

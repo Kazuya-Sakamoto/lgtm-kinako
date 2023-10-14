@@ -89,14 +89,14 @@ const props = withDefaults(defineProps<Props>(), {
                       props.onInput({ name: 'password', value: (e.target as HTMLInputElement)?.value || '' })"
                   type="password"
                   name="password"
-                  placeholder="••••••••"
                   class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                  placeholder="••••••••"
                   required
                 />
               </div>
               <TButton
                 v-if="!props.buttonLoading"
-                @click="onLogin()"
+                @click="props.onLogin()"
                 class="font-bold focus:ring-4 focus:outline-none"
                 color="primary"
                 text="ログインする"

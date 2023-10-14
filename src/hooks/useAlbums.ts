@@ -15,7 +15,7 @@ export const useAlbums = () => {
     try {
       albumLoading.value = true;
       const response: Response = await fetch(
-        `${config.public.apiUrl}/album/random`
+        `${config.public.API_URL}/album/random`
       );
       if (!response.ok) return;
 
@@ -31,7 +31,7 @@ export const useAlbums = () => {
   const fetchAllAlbums = async () => {
     try {
       albumLoading.value = true;
-      const response: Response = await fetch(`${config.public.apiUrl}/album`);
+      const response: Response = await fetch(`${config.public.API_URL}/album`);
       if (!response.ok) return;
 
       const data: Album[] = await response.json();
