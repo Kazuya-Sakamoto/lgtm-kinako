@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useHead } from "@/.nuxt/imports";
 import { reactive } from "vue";
 import TheTemplate from "@/components/templates/albums/index.vue";
 import { useAlbums, Album as AlbumQuery } from "@/hooks/useAlbums";
@@ -8,20 +9,18 @@ const pageSeo = setSeo("きなこ（犬）のLGTM画像");
 useHead(pageSeo);
 
 type State = {
-  albums: AlbumQuery[];
-  albumLoading: boolean;
   showClipboardMap: Record<string, boolean>;
 };
-
 const initialState = (): State => ({
-  albums: [],
-  albumLoading: false,
   showClipboardMap: {},
 });
 const state = reactive<State>(initialState());
 
 const { albums, albumLoading, fetchAlbums, refetch } = useAlbums();
-fetchAlbums();
+
+(async () => {
+  await fetchAlbums();
+})();
 
 const onCopyImageUrl = (album: AlbumQuery) => {
   const url = `![LGTM](${album.image})`;
