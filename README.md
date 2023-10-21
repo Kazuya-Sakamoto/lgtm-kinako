@@ -2,7 +2,7 @@
 
 ## 概要
 
-きなこの LGTM 画像を共有出来るサービスです。画像をクリックすると Markdown がコピーされ使用することができます。
+きなこ（うちの愛犬）の LGTM 画像を共有出来るサービスです。画像をクリックすると Markdown がコピーされ使用することができます。
 
 - サービス URL
   - https://lgtm-kinako.com/
@@ -44,8 +44,14 @@ $ docker-compose exec app sh
 
 ## 使用ツール
 
-### icon
+## monitoring
+
+- [Google Analytics](https://analytics.google.com/analytics/web/#/p287815666/reports/dashboard?params=_u..nav%3Dmaui&r=lifecycle-engagement-overview&ruid=lifecycle-engagement-overview,life-cycle,engagement&collectionId=life-cycle)
+
+### hosting
+
+- [Vercel](https://vercel.com/dashboard)
+
+### ui/ux
 
 - [Heroicons](https://heroicons.com/)
-- [Google Analytics4](https://analytics.google.com/analytics/web/?hl=ja&pli=1#/p287815666/reports/dashboard?params=_u..nav%3Dmaui&r=lifecycle-engagement-overview&ruid=lifecycle-engagement-overview,life-cycle,engagement&collectionId=life-cycle)
-- [Vercel](https://vercel.com/dashboard)

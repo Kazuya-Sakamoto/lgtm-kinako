@@ -28,10 +28,17 @@ export const useAlbums = () => {
     }
   };
 
-  const fetchAllAlbums = async () => {
+  const fetchAllAlbums = async (csrfToken: string) => {
     try {
       albumLoading.value = true;
-      const response: Response = await fetch(`${config.public.API_URL}/album`);
+      const response: Response = await fetch(`${config.public.API_URL}/album`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-Token": csrfToken,
+        },
+        credentials: "include",
+      });
       if (!response.ok) return;
 
       const data: Album[] = await response.json();
