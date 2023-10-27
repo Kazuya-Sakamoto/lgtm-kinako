@@ -8,6 +8,7 @@ import { useLoginStore } from "@/store/login";
 import { storeToRefs } from "pinia";
 import Alert from "@/components/molecules/Alert.vue";
 import { checkEmailVal, isPasswordLengthValid } from "@/lib/validation";
+import { h } from "@/lib/headers";
 
 const loginStore = useLoginStore();
 const { onLoginStore, isLogin } = loginStore;
@@ -99,10 +100,7 @@ const onCreateNewAlbum = async () => {
   try {
     const response = await fetch(`${config.public.API_URL}/album`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRF-Token": csrfToken.value,
-      },
+      headers: h(csrfToken.value),
       body: JSON.stringify(params),
       credentials: "include",
     });

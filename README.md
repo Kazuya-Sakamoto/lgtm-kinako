@@ -44,7 +44,7 @@ $ docker-compose exec app sh
 
 ## 使用ツール
 
-## monitoring
+### monitoring
 
 - [Google Analytics](https://analytics.google.com/analytics/web/#/p287815666/reports/dashboard?params=_u..nav%3Dmaui&r=lifecycle-engagement-overview&ruid=lifecycle-engagement-overview,life-cycle,engagement&collectionId=life-cycle)
 
@@ -52,6 +52,7 @@ $ docker-compose exec app sh
 
 - [Vercel](https://vercel.com/dashboard)
 
-### ui/ux
+### design
 
-- [Heroicons](https://heroicons.com/)
+- icon
+  - [Heroicons](https://heroicons.com/)

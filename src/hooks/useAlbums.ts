@@ -1,5 +1,7 @@
 import { ref } from "vue";
 import { useRuntimeConfig } from "@/.nuxt/imports";
+import { h } from "@/lib/headers";
+
 export type Album = {
   image: string;
   id: number;
@@ -15,7 +17,12 @@ export const useAlbums = () => {
     try {
       albumLoading.value = true;
       const response: Response = await fetch(
-        `${config.public.API_URL}/album/random`
+        `${config.public.API_URL}/album/random`,
+        {
+          method: "GET",
+          headers: h(),
+          credentials: "include",
+        }
       );
       if (!response.ok) return;
 
@@ -33,10 +40,7 @@ export const useAlbums = () => {
       albumLoading.value = true;
       const response: Response = await fetch(`${config.public.API_URL}/album`, {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRF-Token": csrfToken,
-        },
+        headers: h(csrfToken),
         credentials: "include",
       });
       if (!response.ok) return;

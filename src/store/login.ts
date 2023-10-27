@@ -1,6 +1,7 @@
 import { useRuntimeConfig } from "@/.nuxt/imports";
 import { ref } from "vue";
 import { defineStore } from "pinia";
+import { h } from "@/lib/headers";
 
 export const useLoginStore = defineStore(
   "login",
@@ -35,10 +36,7 @@ export const useLoginStore = defineStore(
       try {
         const response = await fetch(`${config.public.API_URL}/login`, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-Token": csrfToken.value,
-          },
+          headers: h(csrfToken.value),
           body: JSON.stringify(params),
           credentials: "include",
         });

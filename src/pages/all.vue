@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useHead } from "@/.nuxt/imports";
-import { reactive } from "vue";
+import { useHead, useRouter } from "@/.nuxt/imports";
+import { reactive, onMounted } from "vue";
 import TheTemplate from "@/components/templates/albums/index.vue";
 import { useAlbums, Album as AlbumQuery } from "@/hooks/useAlbums";
 import { useLoginStore } from "@/store/login";
@@ -9,6 +9,8 @@ import { storeToRefs } from "pinia";
 const loginStore = useLoginStore();
 const { isLogin } = loginStore;
 const { csrfToken } = storeToRefs(loginStore);
+
+const router = useRouter();
 
 useHead({
   meta: [
@@ -29,10 +31,13 @@ const state = reactive<State>(initialState());
 
 const { albums, albumLoading, fetchAllAlbums } = useAlbums();
 
-(async () => {
-  if (!isLogin()) return alert("ログインが必要です");
+onMounted(async () => {
+  if (!isLogin()) {
+    alert("ログインが必要です");
+    return router.push("/");
+  }
   await fetchAllAlbums(csrfToken.value);
-})();
+});
 
 const fetchData = async () => {
   await fetchAllAlbums(csrfToken.value);

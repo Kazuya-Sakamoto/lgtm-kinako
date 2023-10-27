@@ -31,6 +31,11 @@ export default defineNuxtConfig({
             "LGTM-kinakoは、きなこ、犬、わんこ、わんちゃんのLGTM画像を自由にダウンロードして使用できるサービスです。GitHubでプルリクエストをレビューした際にLooks Good To Meの略でLGTMと書くことがあります。このLGTM画像にきなこの画像を使ってみてください。LGTM-kinakoは、様々なエンジニアたちがLGTMを送り合うことができます。",
         },
         { name: "twitter:card", content: "summary" },
+        {
+          name: "keywords",
+          content:
+            "LGTM,犬,わんこ,わんちゃん,きなこ,動物,生き物,かわいい,いきもの",
+        },
       ],
       link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
     },
