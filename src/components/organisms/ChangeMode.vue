@@ -1,10 +1,28 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { reactive } from "vue";
+import { useNuxtApp } from "@/.nuxt/imports";
+
+const nuxtApp = useNuxtApp();
+console.log(`Your Mode is ${nuxtApp.$colorMode.value}`);
+type State = {
+  mode: "light" | "dark";
+};
+const initialState = (): State => ({
+  mode: nuxtApp.$colorMode.value,
+});
+const state = reactive<State>(initialState());
+
+const onChangeMode = (mode: State["mode"]) => {
+  state.mode = mode;
+  nuxtApp.$colorMode.preference = mode;
+};
+</script>
 
 <template>
   <div>
     <button
-      v-show="$colorMode.preference === 'dark'"
-      @click="$colorMode.preference = 'light'"
+      v-show="state.mode === 'dark'"
+      @click="onChangeMode('light')"
       type="button"
       aria-expanded="true"
       aria-haspopup="true"
@@ -25,8 +43,8 @@
       </svg>
     </button>
     <button
-      v-show="$colorMode.preference === 'light'"
-      @click="$colorMode.preference = 'dark'"
+      v-show="state.mode === 'light'"
+      @click="onChangeMode('dark')"
       type="button"
       aria-expanded="true"
       aria-haspopup="true"
