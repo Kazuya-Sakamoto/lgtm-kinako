@@ -6,7 +6,9 @@ useHead(pageSeo);
 </script>
 
 <template>
-  <div class="bg-white mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 leading-8">
+  <div
+    class="bg-white dark:bg-gray-900 dark:text-white mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 leading-8 pb-10"
+  >
     <h1 class="text-xl">利用規約</h1>
     <p>
       LGTM-kinako（以下、"サイト"と称します）を利用する前に、以下の利用規約をよくお読みいただき、これに同意する必要があります。本サイトを利用することで、以下の規約に同意したものとみなされます。
@@ -37,7 +39,7 @@ useHead(pageSeo);
     <p>
       利用規約に関するご質問、ご意見、お問い合わせは、以下の連絡先までお願いいたします。
     </p>
-    <ul class="mb-12">
+    <ul>
       <li>Email: lgtm.kinako@gmail.com</li>
     </ul>
   </div>

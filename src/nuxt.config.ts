@@ -49,7 +49,14 @@ export default defineNuxtConfig({
   alias: {
     // "@src": path.resolve(__dirname, "../src"),
   },
-  modules: ["@pinia/nuxt", "@pinia-plugin-persistedstate/nuxt"],
+  modules: [
+    "@pinia/nuxt",
+    "@pinia-plugin-persistedstate/nuxt",
+    "@nuxtjs/color-mode",
+  ],
+  colorMode: {
+    classSuffix: "",
+  },
   components: [
     {
       path: "@/components",

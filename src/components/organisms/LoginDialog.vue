@@ -33,7 +33,9 @@ const props = withDefaults(defineProps<Props>(), {
       class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 fixed flex justify-center items-center top-0 left-0 right-0 z-50 w-full p-4 o verflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-gray-800 bg-opacity-70"
     >
       <div class="relative w-full max-w-md max-h-full">
-        <div class="relative rounded-lg shadow bg-white dark:bg-white">
+        <div
+          class="relative rounded-lg shadow bg-white dark:bg-gray-900 dark:text-white"
+        >
           <button
             @click="props.closeLoginDialog"
             type="button"
@@ -58,12 +60,14 @@ const props = withDefaults(defineProps<Props>(), {
             <span class="sr-only">Close modal</span>
           </button>
           <div class="px-6 py-6 lg:px-8">
-            <h3 class="mb-4 text-xl font-medium text-gray-800">ログイン</h3>
+            <h3 class="mb-4 text-xl font-medium text-gray-800 dark:text-white">
+              ログイン
+            </h3>
             <div class="space-y-6">
               <div>
                 <label
                   for="email"
-                  class="block mb-2 text-sm font-medium text-gray-900"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >メールアドレス</label
                 >
                 <input
@@ -72,7 +76,7 @@ const props = withDefaults(defineProps<Props>(), {
                       props.onInput({ name: 'email', value: (e.target as HTMLInputElement)?.value || '' })"
                   type="email"
                   name="email"
-                  class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                  class="bg-gray-50 dark:bg-gray-600 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   placeholder="lgtm.kinako@gmail.com"
                   required
                 />
@@ -80,7 +84,7 @@ const props = withDefaults(defineProps<Props>(), {
               <div>
                 <label
                   for="password"
-                  class="block mb-2 text-sm font-medium text-gray-800"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >パスワード</label
                 >
                 <input
@@ -89,7 +93,7 @@ const props = withDefaults(defineProps<Props>(), {
                       props.onInput({ name: 'password', value: (e.target as HTMLInputElement)?.value || '' })"
                   type="password"
                   name="password"
-                  class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                  class="bg-gray-50 dark:bg-gray-600 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   placeholder="••••••••"
                   required
                 />

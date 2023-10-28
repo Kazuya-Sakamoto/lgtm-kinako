@@ -30,7 +30,7 @@ const props = defineProps<Props>();
         リンクをコピーしました
       </div>
     </div>
-    <h3 class="mt-1 mb-2 text-sm text-gray-500">
+    <h3 class="mt-1 mb-2 text-sm text-gray-500 dark:text-white">
       <span class="absolute inset-0"></span>
       {{ album.title }}
     </h3>
