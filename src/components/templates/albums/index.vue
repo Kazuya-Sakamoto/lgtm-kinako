@@ -18,8 +18,8 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <div class="bg-white">
-    <div class="bg-white">
+  <div>
+    <div class="bg-white dark:bg-gray-900 dark:text-white">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div v-if="!props.isAll" class="flex flex-col items-center">
           <h1 class="lg:text-xl">きなこのLGTM画像を共有出来るサービスです</h1>

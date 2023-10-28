@@ -9,6 +9,7 @@ import { storeToRefs } from "pinia";
 import Alert from "@/components/molecules/Alert.vue";
 import { checkEmailVal, isPasswordLengthValid } from "@/lib/validation";
 import { h } from "@/lib/headers";
+import ChangeMode from "@/components/organisms/ChangeMode.vue";
 
 const loginStore = useLoginStore();
 const { onLoginStore, isLogin } = loginStore;
@@ -147,19 +148,13 @@ const onCloseshowNewDialog = () => {
       :onFileChange="onFileChange"
       :buttonLoading="state.buttonLoading"
     />
-    <header class="bg-white">
+    <header class="bg-white dark:bg-gray-900 dark:text-white">
       <nav
         class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global"
       >
         <div class="flex lg:flex-1">
-          <!-- <a href="/" class="-m-1.5 p-1.5">
-            <img
-              class="h-16 w-auto"
-              src="@/assets/img/kinako-top-icon.png"
-              alt=""
-            />
-          </a> -->
+          <ChangeMode />
         </div>
         <div class="hidden lg:flex lg:gap-x-4"></div>
         <div class="lg:flex lg:flex-1 lg:justify-end">
@@ -174,10 +169,10 @@ const onCloseshowNewDialog = () => {
         </div>
       </nav>
     </header>
-    <div>
+    <div class="dark:bg-gray-900 dark:text-white">
       <NuxtPage />
     </div>
-    <footer class="bg-yellow-100 rounded-lg shadow">
+    <footer class="bg-yellow-100 dark:bg-gray-900 dark:text-white shadow">
       <img
         class="wcb-chan"
         src="https://d18g0hf2wnz3gs.cloudfront.net/favicon.jpg"
@@ -185,7 +180,7 @@ const onCloseshowNewDialog = () => {
         width="100"
         height="117"
       />
-      <div class="bg-lime-300 font-bold w-full mx-auto p-3">
+      <div class="bg-lime-300 dark:bg-lime-800 font-bold w-full mx-auto p-3">
         <span class="text-white block text-sm sm:text-center"
           >© LGTM-kinako</span
         >
