@@ -175,10 +175,12 @@ const onCloseshowNewDialog = () => {
     <footer class="bg-yellow-100 dark:bg-gray-900 dark:text-white shadow">
       <img
         class="wcb-chan"
+        loading="lazy"
+        decoding="async"
         src="https://d18g0hf2wnz3gs.cloudfront.net/favicon.jpg"
         alt="LGTM-kinako きなこ、わんこ、わんちゃん 犬のLGTM画像。"
         width="100"
-        height="117"
+        height="100"
       />
       <div class="bg-lime-300 dark:bg-lime-800 font-bold w-full mx-auto p-3">
         <span class="text-white block text-sm sm:text-center"

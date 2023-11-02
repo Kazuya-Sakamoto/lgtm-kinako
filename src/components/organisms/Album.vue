@@ -20,6 +20,10 @@ const props = defineProps<Props>();
     >
       <img
         :src="album.image"
+        loading="eager"
+        decoding="async"
+        width="300"
+        height="400"
         alt="LGTM-kinako きなこ、わんこ、わんちゃん 犬のLGTM画像。"
         class="h-full w-full object-cover object-center cursor-pointer"
       />

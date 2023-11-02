@@ -104,6 +104,7 @@ const props = withDefaults(defineProps<Props>(), {
                   </template>
                   <img
                     v-else
+                    loading="eager"
                     :src="props.imageUrl"
                     alt="アップロードされた きなこ、わんこ、わんちゃん 犬のLGTM画像。"
                   />
