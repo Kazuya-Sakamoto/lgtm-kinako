@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import Album from "@/components/organisms/Album.vue";
 import { Album as AlbumQuery } from "@/hooks/useAlbums";
-import Loading from "@/components/organisms/Loading.vue";
-import Alert from "@/components/molecules/Alert.vue";
+import AlbumLoading from "@/components/organisms/AlbumLoading.vue";
+import BaseAlert from "@/components/molecules/BaseAlert.vue";
 
 type Props = {
   albums: AlbumQuery[];
@@ -72,7 +72,7 @@ const props = withDefaults(defineProps<Props>(), {
           </div>
         </div>
         <div v-else>
-          <Alert
+          <BaseAlert
             title="管理画面"
             description="管理用で全てのきなこを表示しています"
           />
@@ -80,7 +80,7 @@ const props = withDefaults(defineProps<Props>(), {
         </div>
         <div class="mx-auto max-w-2xl sm:pb-20 sm:py-5 custom-py lg:max-w-none">
           <template v-if="props.albumLoading">
-            <Loading />
+            <AlbumLoading />
           </template>
           <div
             v-else

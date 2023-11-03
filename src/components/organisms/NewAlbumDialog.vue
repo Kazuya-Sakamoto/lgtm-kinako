@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TButton from "@/components/atoms/TButton.vue";
-import ButtonLoading from "@/components/molecules/ButtonLoading.vue";
+import BaseButtonLoading from "@/components/molecules/BaseButtonLoading.vue";
 
 export type Input = {
   email: string;
@@ -137,7 +137,7 @@ const props = withDefaults(defineProps<Props>(), {
                 size="full"
                 textColor="white"
               />
-              <ButtonLoading v-else />
+              <BaseButtonLoading v-else />
             </div>
           </div>
         </div>

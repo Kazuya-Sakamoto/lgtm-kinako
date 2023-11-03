@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { useRuntimeConfig } from "@/.nuxt/imports";
-import LoginDialog from "@/components/organisms/LoginDialog.vue";
-import NewAlbumDialog from "@/components/organisms/NewAlbumDialog.vue";
-import HeaderMenu from "@/components/organisms/HeaderMenu.vue";
 import { reactive } from "vue";
 import { useLoginStore } from "@/store/login";
 import { storeToRefs } from "pinia";
-import Alert from "@/components/molecules/Alert.vue";
+import LoginDialog from "@/components/organisms/LoginDialog.vue";
+import NewAlbumDialog from "@/components/organisms/NewAlbumDialog.vue";
+import HeaderMenu from "@/components/organisms/HeaderMenu.vue";
+import HeaderChangeMode from "@/components/organisms/HeaderChangeMode.vue";
+import BaseAlert from "@/components/molecules/BaseAlert.vue";
 import { checkEmailVal, isPasswordLengthValid } from "@/lib/validation";
 import { h } from "@/lib/headers";
-import ChangeMode from "@/components/organisms/ChangeMode.vue";
 
 const loginStore = useLoginStore();
 const { onLoginStore, isLogin } = loginStore;
@@ -126,7 +126,7 @@ const onCloseshowNewDialog = () => {
 <template>
   <div class="font-sans">
     <template v-if="isLogin()">
-      <Alert
+      <BaseAlert
         title="ログイン中"
         description="ログイン中なので作業に気をつけてください"
       />
@@ -154,7 +154,7 @@ const onCloseshowNewDialog = () => {
         aria-label="Global"
       >
         <div class="flex lg:flex-1">
-          <ChangeMode />
+          <HeaderChangeMode />
         </div>
         <div class="hidden lg:flex lg:gap-x-4"></div>
         <div class="lg:flex lg:flex-1 lg:justify-end">
