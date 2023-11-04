@@ -3,6 +3,11 @@ import { ref } from "vue";
 import { defineStore } from "pinia";
 import { h } from "@/lib/headers";
 
+type LoginParams = {
+  email: string;
+  password: string;
+};
+
 export const useLoginStore = defineStore(
   "login",
   () => {
@@ -26,18 +31,15 @@ export const useLoginStore = defineStore(
       }
     };
 
-    const onLoginStore = async (email: string, password: string) => {
+    const onLoginStore = async ({ email, password }: LoginParams) => {
       await fetchCsrfToken();
-      const params = {
-        email,
-        password,
-      };
+      const params = { email, password };
 
       try {
         const response = await fetch(`${config.public.API_URL}/login`, {
           method: "POST",
           headers: h(csrfToken.value),
-          body: JSON.stringify(params),
+          body: JSON.stringify({ ...params }),
           credentials: "include",
         });
         if (!response.ok) return;
@@ -45,7 +47,7 @@ export const useLoginStore = defineStore(
         const data = await response.json();
         token.value = data;
       } catch (error) {
-        console.log(error);
+        console.error(error);
         alert(`エラーが発生しました。${error}`);
       }
     };

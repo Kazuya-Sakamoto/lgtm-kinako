@@ -10,12 +10,14 @@ import HeaderChangeMode from "@/components/organisms/HeaderChangeMode.vue";
 import BaseAlert from "@/components/molecules/BaseAlert.vue";
 import { checkEmailVal, isPasswordLengthValid } from "@/lib/validation";
 import { h } from "@/lib/headers";
+import { useNuxtApp } from "@/.nuxt/imports";
 
 const loginStore = useLoginStore();
 const { onLoginStore, isLogin } = loginStore;
 const { csrfToken } = storeToRefs(loginStore);
 
 const config = useRuntimeConfig();
+const nuxtApp = useNuxtApp();
 
 export type Input = {
   email: string;
@@ -53,7 +55,10 @@ const state = reactive<State>(initialState());
 const onLogin = async () => {
   state.buttonLoading = true;
   try {
-    await onLoginStore(state.input.email, state.input.password);
+    await onLoginStore({
+      email: state.input.email,
+      password: state.input.password,
+    });
     state.showLoginDialog = false;
   } catch (error) {
     console.error(error);
@@ -173,15 +178,37 @@ const onCloseshowNewDialog = () => {
       <NuxtPage />
     </div>
     <footer class="bg-yellow-100 dark:bg-gray-900 dark:text-white shadow">
-      <img
-        class="wcb-chan"
-        loading="lazy"
-        decoding="async"
-        src="https://d18g0hf2wnz3gs.cloudfront.net/favicon.jpg"
-        alt="LGTM-kinako きなこ、わんこ、わんちゃん 犬のLGTM画像。"
-        width="100"
-        height="100"
-      />
+      <div class="flex justify-between w-11/12 pr-2">
+        <img
+          class="wcb-chan"
+          loading="lazy"
+          decoding="async"
+          src="https://d18g0hf2wnz3gs.cloudfront.net/favicon.jpg"
+          alt="LGTM-kinako 可愛い動物の画像。かわいい動物の画像。"
+          width="100"
+          height="100"
+        />
+        <img
+          v-show="nuxtApp.$colorMode.value === 'light'"
+          class="image"
+          loading="lazy"
+          decoding="async"
+          src="@/assets/img/sun.png"
+          alt="LGTM-kinako 可愛い動物の画像。かわいい動物の画像。"
+          width="50"
+          height="50"
+        />
+        <img
+          v-show="nuxtApp.$colorMode.value === 'dark'"
+          class="image"
+          loading="lazy"
+          decoding="async"
+          src="@/assets/img/moon.png"
+          alt="LGTM-kinako 可愛い動物の画像。かわいい動物の画像。"
+          width="50"
+          height="50"
+        />
+      </div>
       <div class="bg-lime-300 dark:bg-lime-800 font-bold w-full mx-auto p-3">
         <span class="text-white block text-sm sm:text-center"
           >© LGTM-kinako</span
@@ -193,6 +220,10 @@ const onCloseshowNewDialog = () => {
 <style scoped lang="scss">
 .image-filter {
   filter: blur(3px);
+}
+.image {
+  width: 50px;
+  height: 50px;
 }
 .wcb-chan {
   animation: img-move 6s steps(6, start) infinite;
