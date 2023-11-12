@@ -33,9 +33,7 @@ const props = withDefaults(defineProps<Props>(), {
       class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 fixed flex justify-center items-center top-0 left-0 right-0 z-50 w-full p-4 o verflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-gray-800 bg-opacity-70"
     >
       <div class="relative w-full max-w-md max-h-full">
-        <div
-          class="relative rounded-lg shadow bg-white dark:bg-gray-900 dark:text-white"
-        >
+        <div class="theme__dark relative rounded-lg shadow bg-white">
           <button
             @click="props.closeLoginDialog"
             type="button"

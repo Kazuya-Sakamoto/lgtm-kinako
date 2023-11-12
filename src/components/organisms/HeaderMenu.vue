@@ -31,7 +31,7 @@ const toggleHeaderMenu = () => {
       <button
         @click="toggleHeaderMenu()"
         type="button"
-        class="drop-shadow-xl inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 dark:bg-gray-900 dark:text-white"
+        class="theme__dark drop-shadow-xl inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300"
         aria-expanded="true"
         aria-haspopup="true"
       >
@@ -51,7 +51,7 @@ const toggleHeaderMenu = () => {
     </div>
     <div
       v-if="props.showHeaderMenu"
-      class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-900 dark:text-white"
+      class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-neutral-900 dark:text-white"
       role="menu"
       aria-orientation="vertical"
       aria-labelledby="menu-button"
@@ -60,7 +60,7 @@ const toggleHeaderMenu = () => {
       <div @click="toggleHeaderMenu()" class="py-1" role="none">
         <nuxt-link
           to="/"
-          class="text-gray-700 dark:text-white hover:bg-yellow-100 dark:hover:opacity-30 dark:hover:bg-gray-900 block px-4 py-2 text-sm"
+          class="text-gray-700 dark:text-white hover:bg-yellow-100 dark:hover:opacity-30 dark:hover:bg-neutral-900 block px-4 py-2 text-sm"
           role="menuitem"
           tabindex="-1"
           id="menu-item-2"
@@ -68,7 +68,7 @@ const toggleHeaderMenu = () => {
         >
         <nuxt-link
           to="/terms"
-          class="text-gray-700 dark:text-white hover:bg-yellow-100 dark:hover:opacity-30 dark:hover:bg-gray-900 block px-4 py-2 text-sm"
+          class="text-gray-700 dark:text-white hover:bg-yellow-100 dark:hover:opacity-30 dark:hover:bg-neutral-900 block px-4 py-2 text-sm"
           role="menuitem"
           tabindex="-1"
           id="menu-item-2"
@@ -76,7 +76,7 @@ const toggleHeaderMenu = () => {
         >
         <nuxt-link
           to="/privacy"
-          class="text-gray-700 dark:text-white hover:bg-yellow-100 dark:hover:opacity-30 dark:hover:bg-gray-900 block px-4 py-2 text-sm"
+          class="text-gray-700 dark:text-white hover:bg-yellow-100 dark:hover:opacity-30 dark:hover:bg-neutral-900 block px-4 py-2 text-sm"
           role="menuitem"
           tabindex="-1"
           id="menu-item-1"
@@ -85,7 +85,7 @@ const toggleHeaderMenu = () => {
         <button
           v-if="props.isLogin()"
           @click="props.onShowNewDialog()"
-          class="text-gray-700 dark:text-white hover:bg-yellow-100 dark:hover:opacity-30 dark:hover:bg-gray-900 block w-full px-4 py-2 text-left text-sm"
+          class="text-gray-700 dark:text-white hover:bg-yellow-100 dark:hover:opacity-30 dark:hover:bg-neutral-900 block w-full px-4 py-2 text-left text-sm"
           role="menuitem"
           tabindex="-1"
         >
@@ -94,7 +94,7 @@ const toggleHeaderMenu = () => {
         <nuxt-link
           v-if="props.isLogin()"
           to="/all"
-          class="text-gray-700 dark:text-white hover:bg-yellow-100 dark:hover:opacity-30 dark:hover:bg-gray-900 block w-full px-4 py-2 text-left text-sm"
+          class="text-gray-700 dark:text-white hover:bg-yellow-100 dark:hover:opacity-30 dark:hover:bg-neutral-900 block w-full px-4 py-2 text-left text-sm"
           role="menuitem"
           tabindex="-1"
         >
@@ -103,7 +103,7 @@ const toggleHeaderMenu = () => {
         <button
           @click="props.onShowLoginDialog()"
           type="button"
-          class="text-gray-700 dark:text-white hover:bg-yellow-100 dark:hover:opacity-30 dark:hover:bg-gray-900 block w-full px-4 py-2 text-left text-sm"
+          class="text-gray-700 dark:text-white hover:bg-yellow-100 dark:hover:opacity-30 dark:hover:bg-neutral-900 block w-full px-4 py-2 text-left text-sm"
           role="menuitem"
           tabindex="-1"
           id="menu-item-3"

@@ -6,9 +6,7 @@ useHead(pageSeo);
 </script>
 
 <template>
-  <div
-    class="bg-white dark:bg-gray-900 dark:text-white mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 leading-8 pb-10"
-  >
+  <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 leading-8 pb-10">
     <h1 class="text-xl">プライバシーポリシー</h1>
     <p>
       このプライバシーポリシーは、[LGTM-kinako]（以下「当サイト」といいます）が収集する情報とその情報の使用について説明します。当サイトを利用することで、以下のプライバシーポリシーに同意したものとみなされます。

@@ -9,12 +9,12 @@
 - バックエンドリポジトリ
   - https://github.com/Kazuya-Sakamoto/lgtm-kinako-api
 
-## 使用パッケージ
+## 環境
 
 - Node.js v18.18.0
 - Nuxt.js v3.6.5
 - TypeScript v5.2.2
-- Tailwind CSS 3.3.3
+- Tailwind CSS v3.3.5
 
 ## 環境構築
 

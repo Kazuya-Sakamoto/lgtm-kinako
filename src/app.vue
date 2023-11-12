@@ -153,7 +153,7 @@ const onCloseshowNewDialog = () => {
       :onFileChange="onFileChange"
       :buttonLoading="state.buttonLoading"
     />
-    <header class="bg-white dark:bg-gray-900 dark:text-white">
+    <header class="bg-white theme__dark">
       <nav
         class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global"
@@ -174,10 +174,10 @@ const onCloseshowNewDialog = () => {
         </div>
       </nav>
     </header>
-    <div class="dark:bg-gray-900 dark:text-white">
+    <div class="theme__dark">
       <NuxtPage />
     </div>
-    <footer class="bg-yellow-100 dark:bg-gray-900 dark:text-white shadow">
+    <footer class="bg-yellow-100 theme__dark shadow">
       <div class="flex justify-between w-11/12 pr-2">
         <img
           class="wcb-chan"

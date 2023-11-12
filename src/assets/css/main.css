@@ -3,3 +3,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* @layer base {
+} */
+
+/*
+  * custom functions は __で区切る
+*/
+@layer components {
+  .theme__dark {
+    @apply dark:bg-gray-950 dark:bg-gradient-to-l dark:from-neutral-800 dark:text-white;
+  }
+}
+
+/* @layer utilities {
+  .content__auto {
+    content-visibility: auto;
+  }
+} */
