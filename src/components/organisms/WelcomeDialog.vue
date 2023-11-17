@@ -46,8 +46,16 @@ const props = withDefaults(defineProps<Props>(), {});
               LGTM-kinakoへようこそ🎉
             </h2>
             <div class="relative text-center">
-              <video autoplay muted loop width="100%" class="rounded-lg">
-                <source src="@/assets/movie/wel.MP4" type="video/mp4" />
+              <video
+                autoplay
+                muted
+                loop
+                width="100%"
+                class="rounded-lg"
+                playsinline
+                style="pointer-events: none"
+              >
+                <source src="@/assets/movie/welcome.mp4" type="video/mp4" />
               </video>
               <h3
                 class="font-bold px-3 absolute bottom-5 leading-8 my-2 text-md text-white"
