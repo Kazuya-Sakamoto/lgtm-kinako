@@ -9,7 +9,7 @@ export const useWelcomeDialogStore = defineStore("welcomeDialog", {
   actions: {
     openDialog() {
       if (this.done) return;
-      this.show = true;
+      // this.show = true;
     },
     closeDialog() {
       this.show = false;
