@@ -1,9 +1,16 @@
 <script setup lang="ts">
+import { ref } from "vue";
 type Props = {
   show: boolean;
   closeDialog: () => void;
 };
 const props = withDefaults(defineProps<Props>(), {});
+
+const videoLoaded = ref(false);
+const onVideoLoaded = () => {
+  console.log("onVideoLoaded sssss");
+  videoLoaded.value = true;
+};
 </script>
 
 <template>
@@ -46,7 +53,15 @@ const props = withDefaults(defineProps<Props>(), {});
               LGTM-kinakoへようこそ🎉
             </h2>
             <div class="relative text-center">
+              <div v-show="!videoLoaded" class="animate-pulse w-auto">
+                <div>
+                  <div
+                    class="main__shadow rounded bg-gray-200 border-inherit mt-2 sm:aspect-h-1 relative h-96 w-full overflow-hidden group-hover:opacity-75"
+                  />
+                </div>
+              </div>
               <video
+                v-show="videoLoaded"
                 autoplay
                 muted
                 loop
@@ -54,6 +69,7 @@ const props = withDefaults(defineProps<Props>(), {});
                 class="rounded-lg"
                 playsinline
                 style="pointer-events: none"
+                @loadeddata="onVideoLoaded"
               >
                 <source src="@/assets/movie/welcome.mp4" type="video/mp4" />
               </video>
