@@ -65,6 +65,7 @@ export default defineNuxtConfig({
   ],
   css: ["~/assets/css/main.css"],
   vite: {
+    assetsInclude: ["**/*.MP4"],
     css: {
       preprocessorOptions: {
         scss: {

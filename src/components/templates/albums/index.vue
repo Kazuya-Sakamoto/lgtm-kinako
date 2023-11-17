@@ -3,6 +3,7 @@ import Album from "@/components/organisms/Album.vue";
 import { Album as AlbumQuery } from "@/hooks/useAlbums";
 import AlbumLoading from "@/components/organisms/AlbumLoading.vue";
 import BaseAlert from "@/components/molecules/BaseAlert.vue";
+import WelcomeDialog from "@/components/organisms/WelcomeDialog.vue";
 
 type Props = {
   albums: AlbumQuery[];
@@ -11,6 +12,8 @@ type Props = {
   showClipboardMap: Record<string, boolean>;
   refetch: () => Promise<void>;
   isAll?: boolean;
+  show: boolean;
+  closeDialog: () => void;
 };
 const props = withDefaults(defineProps<Props>(), {
   isAll: false,
@@ -19,6 +22,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <div>
+    <WelcomeDialog :show="show" :closeDialog="closeDialog" />
     <div class="theme__dark bg-white">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div v-if="!props.isAll" class="flex flex-col items-center">
@@ -29,7 +33,7 @@ const props = withDefaults(defineProps<Props>(), {
             <div>画像をクリックするとMarkdownがコピーされます</div>
             <button
               :disabled="props.albumLoading"
-              class="mt-8 inline-flex items-center justify-center rounded-xl bg-yellow-500 py-3 px-6 font-dm text-base font-medium text-white shadow-xl shadow-yellow-400/75 transition-transform duration-200 ease-in-out hover:scale-[1.02]"
+              class="mt-8 inline-flex items-center justify-center rounded-lg bg-yellow-500 py-3 px-6 font-dm text-base font-medium text-white shadow-xl shadow-yellow-400/75 transition-transform duration-200 ease-in-out hover:scale-[1.02]"
               @click="props.refetch()"
             >
               <div v-if="props.albumLoading">

@@ -2,7 +2,6 @@
 import { useNuxtApp } from "@/.nuxt/imports";
 
 const nuxtApp = useNuxtApp();
-console.log(`Your Mode is ${nuxtApp.$colorMode.value}`);
 
 const onChangeMode = (mode: "light" | "dark") => {
   nuxtApp.$colorMode.preference = mode;

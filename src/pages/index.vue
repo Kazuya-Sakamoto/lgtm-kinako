@@ -4,6 +4,9 @@ import { reactive } from "vue";
 import TheTemplate from "@/components/templates/albums/index.vue";
 import { useAlbums, Album as AlbumQuery } from "@/hooks/useAlbums";
 import { setSeo } from "@/lib/seo";
+import { useWelcomeDialogStore } from "@/store/welcomeDialog";
+
+const welcomeDialogStore = useWelcomeDialogStore();
 
 const pageSeo = setSeo("きなこ（犬）のLGTM画像");
 useHead(pageSeo);
@@ -19,6 +22,7 @@ const state = reactive<State>(initialState());
 const { albums, albumLoading, fetchAlbums, refetch } = useAlbums();
 
 (async () => {
+  welcomeDialogStore.openDialog();
   await fetchAlbums();
 })();
 
@@ -41,6 +45,8 @@ const onCopyImageUrl = (album: AlbumQuery) => {
       :onCopyImageUrl="onCopyImageUrl"
       :showClipboardMap="state.showClipboardMap"
       :refetch="refetch"
+      :show="welcomeDialogStore.show"
+      :closeDialog="welcomeDialogStore.closeDialog"
     />
   </div>
 </template>

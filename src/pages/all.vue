@@ -58,6 +58,8 @@ const onCopyAlbumID = (album: AlbumQuery) => {
       :showClipboardMap="{}"
       :refetch="fetchData"
       :isAll="true"
+      :show="false"
+      :closeDialog="() => {}"
     />
   </div>
 </template>
