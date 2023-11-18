@@ -3,7 +3,7 @@ type Props = {
   showHeaderMenu: boolean;
   onOpenshowHeaderMenu: () => void;
   onCloseshowHeaderMenu: () => void;
-  onShowNewDialog: () => void;
+  onShowNewAlbumDialog: () => void;
   onShowLoginDialog: () => void;
   isLogin: () => boolean;
 };
@@ -11,17 +11,15 @@ const props = withDefaults(defineProps<Props>(), {
   showHeaderMenu: false,
   onOpenshowHeaderMenu: () => {},
   onCloseshowHeaderMenu: () => {},
-  onShowNewDialog: () => {},
+  onShowNewAlbumDialog: () => {},
   onShowLoginDialog: () => {},
   isLogin: () => false,
 });
 
 const toggleHeaderMenu = () => {
-  if (props.showHeaderMenu) {
-    props.onCloseshowHeaderMenu();
-  } else {
-    props.onOpenshowHeaderMenu();
-  }
+  props.showHeaderMenu
+    ? props.onCloseshowHeaderMenu()
+    : props.onOpenshowHeaderMenu();
 };
 </script>
 
@@ -29,11 +27,11 @@ const toggleHeaderMenu = () => {
   <div class="relative inline-block text-left">
     <div>
       <button
-        @click="toggleHeaderMenu()"
         type="button"
         class="theme__dark main__shadow inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300"
         aria-expanded="true"
         aria-haspopup="true"
+        @click="toggleHeaderMenu()"
       >
         <svg
           class="h-6 w-6 text-gray-400"
@@ -57,56 +55,59 @@ const toggleHeaderMenu = () => {
       aria-labelledby="menu-button"
       tabindex="-1"
     >
-      <div @click="toggleHeaderMenu()" class="py-1" role="none">
+      <div class="py-1" role="none" @click="toggleHeaderMenu()">
         <nuxt-link
+          id="menu-item-2"
           to="/"
-          class="text-gray-700 dark:text-white hover:bg-yellow-100 dark:hover:opacity-30 dark:hover:bg-neutral-900 block px-4 py-2 text-sm"
+          class="block px-4 py-2 text-sm text-gray-700 hover:bg-yellow-100 dark:text-white dark:hover:bg-neutral-900 dark:hover:opacity-30"
           role="menuitem"
           tabindex="-1"
-          id="menu-item-2"
-          >きなこをみる</nuxt-link
         >
+          きなこをみる
+        </nuxt-link>
         <nuxt-link
+          id="menu-item-2"
           to="/terms"
-          class="text-gray-700 dark:text-white hover:bg-yellow-100 dark:hover:opacity-30 dark:hover:bg-neutral-900 block px-4 py-2 text-sm"
+          class="block px-4 py-2 text-sm text-gray-700 hover:bg-yellow-100 dark:text-white dark:hover:bg-neutral-900 dark:hover:opacity-30"
           role="menuitem"
           tabindex="-1"
-          id="menu-item-2"
-          >利用規約</nuxt-link
         >
+          利用規約
+        </nuxt-link>
         <nuxt-link
+          id="menu-item-1"
           to="/privacy"
-          class="text-gray-700 dark:text-white hover:bg-yellow-100 dark:hover:opacity-30 dark:hover:bg-neutral-900 block px-4 py-2 text-sm"
+          class="block px-4 py-2 text-sm text-gray-700 hover:bg-yellow-100 dark:text-white dark:hover:bg-neutral-900 dark:hover:opacity-30"
           role="menuitem"
           tabindex="-1"
-          id="menu-item-1"
-          >プライバシーポリシー</nuxt-link
         >
+          プライバシーポリシー
+        </nuxt-link>
         <button
           v-if="props.isLogin()"
-          @click="props.onShowNewDialog()"
-          class="text-gray-700 dark:text-white hover:bg-yellow-100 dark:hover:opacity-30 dark:hover:bg-neutral-900 block w-full px-4 py-2 text-left text-sm"
+          class="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-yellow-100 dark:text-white dark:hover:bg-neutral-900 dark:hover:opacity-30"
           role="menuitem"
           tabindex="-1"
+          @click="props.onShowNewAlbumDialog()"
         >
           画像をアップロード
         </button>
         <nuxt-link
           v-if="props.isLogin()"
           to="/all"
-          class="text-gray-700 dark:text-white hover:bg-yellow-100 dark:hover:opacity-30 dark:hover:bg-neutral-900 block w-full px-4 py-2 text-left text-sm"
+          class="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-yellow-100 dark:text-white dark:hover:bg-neutral-900 dark:hover:opacity-30"
           role="menuitem"
           tabindex="-1"
         >
           すべてのきなこ
         </nuxt-link>
         <button
-          @click="props.onShowLoginDialog()"
+          id="menu-item-3"
           type="button"
-          class="text-gray-700 dark:text-white hover:bg-yellow-100 dark:hover:opacity-30 dark:hover:bg-neutral-900 block w-full px-4 py-2 text-left text-sm"
+          class="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-yellow-100 dark:text-white dark:hover:bg-neutral-900 dark:hover:opacity-30"
           role="menuitem"
           tabindex="-1"
-          id="menu-item-3"
+          @click="props.onShowLoginDialog()"
         >
           ログインする
         </button>

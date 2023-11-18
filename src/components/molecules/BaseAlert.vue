@@ -8,13 +8,13 @@ const props = withDefaults(defineProps<Props>(), {});
 
 <template>
   <div
-    class="bg-fuchsia-100 border-t-4 border-fuchsia-500 rounded-b text-fuchsia-900 px-4 py-3 shadow-md"
+    class="rounded-b border-t-4 border-fuchsia-500 bg-fuchsia-100 px-4 py-3 text-fuchsia-900 shadow-md"
     role="alert"
   >
     <div class="flex">
       <div class="py-1">
         <svg
-          class="fill-current h-6 w-6 text-fuchsia-500 mr-4"
+          class="mr-4 h-6 w-6 fill-current text-fuchsia-500"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
         >
@@ -24,8 +24,12 @@ const props = withDefaults(defineProps<Props>(), {});
         </svg>
       </div>
       <div>
-        <p class="font-bold">{{ props.title }}</p>
-        <p class="text-sm">{{ props.description }}</p>
+        <p class="font-bold">
+          {{ props.title }}
+        </p>
+        <p class="text-sm">
+          {{ props.description }}
+        </p>
       </div>
     </div>
   </div>

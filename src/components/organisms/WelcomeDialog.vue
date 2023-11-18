@@ -8,7 +8,6 @@ const props = withDefaults(defineProps<Props>(), {});
 
 const videoLoaded = ref(false);
 const onVideoLoaded = () => {
-  console.log("onVideoLoaded sssss");
   videoLoaded.value = true;
 };
 </script>
@@ -18,19 +17,19 @@ const onVideoLoaded = () => {
     <div
       v-if="props.show"
       tabindex="-1"
-      class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 fixed flex justify-center items-center top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%)] max-h-full bg-gray-800 bg-opacity-70"
+      class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 fixed inset-x-0 top-0 z-50 flex h-[calc(100%)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden bg-gray-800 bg-opacity-70 p-4 md:inset-0"
       @click="props.closeDialog()"
     >
-      <div class="relative w-full max-w-md max-h-full" @click.stop>
-        <div class="theme__dark relative rounded-lg shadow bg-white">
+      <div class="relative max-h-full w-full max-w-md" @click.stop>
+        <div class="theme__dark relative rounded-lg bg-white shadow">
           <button
-            @click="props.closeDialog()"
             type="button"
-            class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
+            class="absolute right-2.5 top-3 ml-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900"
             data-modal-hide="authentication-modal"
+            @click="props.closeDialog()"
           >
             <svg
-              class="w-3 h-3"
+              class="h-3 w-3"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -46,17 +45,17 @@ const onVideoLoaded = () => {
             </svg>
             <span class="sr-only">Close modal</span>
           </button>
-          <div class="py-5 px-4">
+          <div class="px-4 py-5">
             <h2
-              class="text-center mb-3 text-xl font-medium text-gray-800 dark:text-white"
+              class="mb-3 text-center text-xl font-medium text-gray-800 dark:text-white"
             >
               LGTM-kinakoへようこそ🎉
             </h2>
             <div class="relative text-center">
-              <div v-show="!videoLoaded" class="animate-pulse w-auto">
+              <div v-show="!videoLoaded" class="w-auto animate-pulse">
                 <div>
                   <div
-                    class="main__shadow rounded bg-gray-200 border-inherit mt-2 sm:aspect-h-1 relative h-96 w-full overflow-hidden group-hover:opacity-75"
+                    class="main__shadow sm:aspect-h-1 relative mt-2 h-96 w-full overflow-hidden rounded border-inherit bg-gray-200 group-hover:opacity-75"
                   />
                 </div>
               </div>
@@ -74,7 +73,7 @@ const onVideoLoaded = () => {
                 <source src="@/assets/movie/welcome.mp4" type="video/mp4" />
               </video>
               <h3
-                class="font-bold px-3 absolute bottom-5 leading-8 my-2 text-md text-white"
+                class="text-md absolute bottom-5 my-2 px-3 font-bold leading-8 text-white"
               >
                 画像をクリックするとMarkdownがコピーされ、LGTMを送るのに使用できます。
                 <br />

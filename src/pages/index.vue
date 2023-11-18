@@ -41,12 +41,12 @@ const onCopyImageUrl = (album: AlbumQuery) => {
   <div>
     <TheTemplate
       :albums="albums"
-      :albumLoading="albumLoading"
-      :onCopyImageUrl="onCopyImageUrl"
-      :showClipboardMap="state.showClipboardMap"
+      :album-loading="albumLoading"
+      :on-copy-image-url="onCopyImageUrl"
+      :show-clipboard-map="state.showClipboardMap"
       :refetch="refetch"
       :show="welcomeDialogStore.show"
-      :closeDialog="welcomeDialogStore.closeDialog"
+      :close-dialog="welcomeDialogStore.closeDialog"
     />
   </div>
 </template>

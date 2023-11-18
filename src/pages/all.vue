@@ -53,13 +53,13 @@ const onCopyAlbumID = (album: AlbumQuery) => {
   <div>
     <TheTemplate
       :albums="albums"
-      :albumLoading="albumLoading"
-      :onCopyImageUrl="onCopyAlbumID"
-      :showClipboardMap="{}"
+      :album-loading="albumLoading"
+      :on-copy-image-url="onCopyAlbumID"
+      :show-clipboard-map="{}"
       :refetch="fetchData"
-      :isAll="true"
+      :is-all="true"
       :show="false"
-      :closeDialog="() => {}"
+      :close-dialog="() => {}"
     />
   </div>
 </template>

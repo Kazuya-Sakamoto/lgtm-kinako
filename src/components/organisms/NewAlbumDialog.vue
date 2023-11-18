@@ -1,26 +1,20 @@
 <script setup lang="ts">
 import TButton from "@/components/atoms/TButton.vue";
 import BaseButtonLoading from "@/components/molecules/BaseButtonLoading.vue";
-
-export type Input = {
-  email: string;
-  password: string;
-  imageUrl: string;
-  title: string;
-};
+import { CreateNewAlbumInput } from "@/app.vue";
 
 type Props = {
-  showNewDialog: boolean;
-  onCloseshowNewDialog: () => void;
+  showNewAlbumDialog: boolean;
+  onCloseNewAlbumDialog: () => void;
   onCreateNewAlbum: () => void;
-  onInput: (item: { name: keyof Input; value: string }) => void;
+  onInput: (item: { name: keyof CreateNewAlbumInput; value: string }) => void;
   imageUrl: string;
   onFileChange: (e: Event) => void;
   buttonLoading: boolean;
 };
 const props = withDefaults(defineProps<Props>(), {
-  showNewDialog: false,
-  onCloseshowNewDialog: () => {},
+  showNewAlbumDialog: false,
+  onCloseNewAlbumDialog: () => {},
   onCreateNewAlbum: () => {},
   onInput: () => {},
   imageUrl: "",
@@ -32,20 +26,20 @@ const props = withDefaults(defineProps<Props>(), {
 <template>
   <div>
     <div
-      v-if="props.showNewDialog"
+      v-if="props.showNewAlbumDialog"
       tabindex="-1"
-      class="fixed flex justify-center items-center top-0 left-0 right-0 z-50 w-full p-4 o verflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-gray-800 bg-opacity-70"
+      class="o verflow-x-hidden fixed inset-x-0 top-0 z-50 flex h-[calc(100%)] max-h-full w-full items-center justify-center overflow-y-auto bg-gray-800 bg-opacity-70 p-4 md:inset-0"
     >
-      <div class="relative w-full max-w-md max-h-full">
-        <div class="relative rounded-lg shadow bg-white dark:bg-white">
+      <div class="relative max-h-full w-full max-w-md">
+        <div class="relative rounded-lg bg-white shadow dark:bg-white">
           <button
-            @click="props.onCloseshowNewDialog"
             type="button"
-            class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
+            class="absolute right-2.5 top-3 ml-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900"
             data-modal-hide="authentication-modal"
+            @click="props.onCloseNewAlbumDialog"
           >
             <svg
-              class="w-3 h-3"
+              class="h-3 w-3"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -61,17 +55,17 @@ const props = withDefaults(defineProps<Props>(), {
             </svg>
             <span class="sr-only">Close modal</span>
           </button>
-          <div class="px-6 py-6 lg:px-8">
+          <div class="p-6 lg:px-8">
             <h3 class="mb-4 text-xl font-medium text-gray-800">アップロード</h3>
             <div class="space-y-6">
               <div>
                 <div
-                  class="file_upload p-5 relative border-4 border-dotted border-gray-300 rounded-lg"
+                  class="file_upload relative rounded-lg border-4 border-dotted border-gray-300 p-5"
                   style="width: 100%"
                 >
                   <template v-if="!props.imageUrl">
                     <svg
-                      class="text-gray-600 w-24 mx-auto mb-4"
+                      class="mx-auto mb-4 w-24 text-gray-600"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -85,17 +79,17 @@ const props = withDefaults(defineProps<Props>(), {
                       />
                     </svg>
                     <div
-                      class="rounded-lg bg-white sm:aspect-h-1 relative h-26 w-full overflow-hidden sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75"
+                      class="sm:aspect-h-1 h-26 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 relative w-full overflow-hidden rounded-lg bg-white group-hover:opacity-75"
                     >
                       <label>
                         <input
-                          @change="onFileChange"
-                          class="text-sm cursor-pointer w-36 hidden"
+                          class="hidden w-36 cursor-pointer text-sm"
                           type="file"
                           multiple
+                          @change="onFileChange"
                         />
                         <div
-                          class="bg-gray-100 text-gray-800 border border-gray-300 rounded cursor-pointer py-2 px-4"
+                          class="cursor-pointer rounded border border-gray-300 bg-gray-100 px-4 py-2 text-gray-800"
                         >
                           選択する
                         </div>
@@ -113,29 +107,29 @@ const props = withDefaults(defineProps<Props>(), {
               <div>
                 <label
                   for="title"
-                  class="block mb-2 text-sm font-medium text-gray-800"
+                  class="mb-2 block text-sm font-medium text-gray-800"
                   >タイトル</label
                 >
                 <input
+                  type="text"
+                  name="title"
+                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-800 focus:border-blue-500 focus:ring-blue-500"
+                  placeholder="可愛すぎでした"
+                  required
                   @input="
                     (e) =>
                       props.onInput({ name: 'title', value: (e.target as HTMLInputElement)?.value || '' })
                   "
-                  type="text"
-                  name="title"
-                  class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                  placeholder="可愛すぎでした"
-                  required
                 />
               </div>
               <TButton
                 v-if="!props.buttonLoading"
-                @click="props.onCreateNewAlbum()"
-                class="font-bold focus:ring-4 focus:outline-none"
+                class="font-bold focus:outline-none focus:ring-4"
                 color="primary"
                 text="アップロードする"
                 size="full"
-                textColor="white"
+                text-color="white"
+                @click="props.onCreateNewAlbum()"
               />
               <BaseButtonLoading v-else />
             </div>

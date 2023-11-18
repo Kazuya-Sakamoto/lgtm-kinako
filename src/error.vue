@@ -4,9 +4,9 @@
   <div class="container">
     <div class="boo-wrapper">
       <div class="boo">
-        <div class="face"></div>
+        <div class="face" />
       </div>
-      <div class="shadow"></div>
+      <div class="shadow" />
 
       <h1>ページが存在しません</h1>
       <p class="px-1 py-4">
@@ -16,7 +16,7 @@
       <div class="mt-6">
         <nuxt-link to="/">
           <button
-            class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded"
+            class="rounded border border-gray-400 bg-white px-4 py-2 font-semibold text-gray-800 hover:bg-gray-100"
           >
             ホームに戻る
           </button>

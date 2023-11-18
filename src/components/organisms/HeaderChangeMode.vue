@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useNuxtApp } from "@/.nuxt/imports";
+import { m } from "@/master";
 
 const nuxtApp = useNuxtApp();
-
-const onChangeMode = (mode: "light" | "dark") => {
+const onChangeMode = (mode: typeof m.MODE_DARK | typeof m.MODE_LIGHT) => {
   nuxtApp.$colorMode.preference = mode;
 };
 </script>
@@ -11,11 +11,11 @@ const onChangeMode = (mode: "light" | "dark") => {
 <template>
   <div>
     <button
-      v-show="nuxtApp.$colorMode.value === 'dark'"
-      @click="onChangeMode('light')"
+      v-show="nuxtApp.$colorMode.value === m.MODE_DARK"
       type="button"
       aria-expanded="true"
       aria-haspopup="true"
+      @click="onChangeMode(m.MODE_LIGHT)"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -23,7 +23,7 @@ const onChangeMode = (mode: "light" | "dark") => {
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="currentColor"
-        class="w-6 h-6"
+        class="h-6 w-6"
       >
         <path
           stroke-linecap="round"
@@ -33,11 +33,11 @@ const onChangeMode = (mode: "light" | "dark") => {
       </svg>
     </button>
     <button
-      v-show="nuxtApp.$colorMode.value === 'light'"
-      @click="onChangeMode('dark')"
+      v-show="nuxtApp.$colorMode.value === m.MODE_LIGHT"
       type="button"
       aria-expanded="true"
       aria-haspopup="true"
+      @click="onChangeMode(m.MODE_DARK)"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +45,7 @@ const onChangeMode = (mode: "light" | "dark") => {
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="currentColor"
-        class="w-6 h-6"
+        class="h-6 w-6"
       >
         <path
           stroke-linecap="round"

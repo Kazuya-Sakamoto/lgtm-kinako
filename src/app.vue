@@ -1,54 +1,54 @@
 <script setup lang="ts">
-import { useRuntimeConfig } from "@/.nuxt/imports";
 import { reactive } from "vue";
 import { useLoginStore } from "@/store/login";
-import { storeToRefs } from "pinia";
 import LoginDialog from "@/components/organisms/LoginDialog.vue";
 import NewAlbumDialog from "@/components/organisms/NewAlbumDialog.vue";
 import HeaderMenu from "@/components/organisms/HeaderMenu.vue";
 import HeaderChangeMode from "@/components/organisms/HeaderChangeMode.vue";
 import BaseAlert from "@/components/molecules/BaseAlert.vue";
 import { checkEmailVal, isPasswordLengthValid } from "@/lib/validation";
-import { h } from "@/lib/headers";
 import { useNuxtApp } from "@/.nuxt/imports";
+import { useCreateAlbum } from "@/hooks/useCreateAlbum";
+import { m } from "@/master";
 
 const loginStore = useLoginStore();
 const { onLoginStore, isLogin } = loginStore;
-const { csrfToken } = storeToRefs(loginStore);
-
-const config = useRuntimeConfig();
+const { createNewAlbum } = useCreateAlbum();
 const nuxtApp = useNuxtApp();
 
-export type Input = {
+export type LoginInput = {
   email: string;
   password: string;
+};
+export type CreateNewAlbumInput = {
   imageUrl: string;
   title: string;
 };
+const defaultLoginInput = (): LoginInput => ({
+  email: "",
+  password: "",
+});
+const defaultCreateNewAlbumInput = (): CreateNewAlbumInput => ({
+  imageUrl: "",
+  title: "",
+});
 
 type State = {
   showLoginDialog: boolean;
-  buttonLoading: boolean;
-  input: {
-    email: string;
-    password: string;
-    imageUrl: string;
-    title: string;
-  };
-  showNewDialog: boolean;
+  showNewAlbumDialog: boolean;
   showHeaderMenu: boolean;
+  buttonLoading: boolean;
+  loginInput: LoginInput;
+  createNewAlbumInput: CreateNewAlbumInput;
 };
+
 const initialState = (): State => ({
   showLoginDialog: false,
-  buttonLoading: false,
-  input: {
-    email: "",
-    password: "",
-    imageUrl: "",
-    title: "",
-  },
-  showNewDialog: false,
+  showNewAlbumDialog: false,
   showHeaderMenu: false,
+  buttonLoading: false,
+  loginInput: defaultLoginInput(),
+  createNewAlbumInput: defaultCreateNewAlbumInput(),
 });
 const state = reactive<State>(initialState());
 
@@ -56,8 +56,8 @@ const onLogin = async () => {
   state.buttonLoading = true;
   try {
     await onLoginStore({
-      email: state.input.email,
-      password: state.input.password,
+      email: state.loginInput.email,
+      password: state.loginInput.password,
     });
     state.showLoginDialog = false;
   } catch (error) {
@@ -69,16 +69,25 @@ const onLogin = async () => {
 };
 const loginValidation = () => {
   return (
-    state.input.email.trim() !== "" &&
-    checkEmailVal(state.input.email) &&
-    state.input.password.trim() !== "" &&
-    isPasswordLengthValid(state.input.password)
+    state.loginInput.email.trim() !== "" &&
+    checkEmailVal(state.loginInput.email) &&
+    state.loginInput.password.trim() !== "" &&
+    isPasswordLengthValid(state.loginInput.password)
   );
 };
 
-const onInput = (item: { name: keyof Input; value: string }) => {
-  state.input = {
-    ...state.input,
+const onLoginInput = (item: { name: keyof LoginInput; value: string }) => {
+  state.loginInput = {
+    ...state.loginInput,
+    [item.name]: item.value,
+  };
+};
+const onCreateNewAlbumInput = (item: {
+  name: keyof CreateNewAlbumInput;
+  value: string;
+}) => {
+  state.createNewAlbumInput = {
+    ...state.createNewAlbumInput,
     [item.name]: item.value,
   };
 };
@@ -91,30 +100,20 @@ const onFileChange = (e: Event) => {
     const reader = new FileReader();
     reader.onload = (event) => {
       const imageUrl = event.target?.result as string;
-      onInput({ name: "imageUrl", value: imageUrl });
+      onCreateNewAlbumInput({ name: "imageUrl", value: imageUrl });
     };
     reader.readAsDataURL(file);
   }
 };
+
 const onCreateNewAlbum = async () => {
   state.buttonLoading = true;
-  const params = {
-    image: state.input.imageUrl,
-    title: state.input.title,
-  };
-
   try {
-    const response = await fetch(`${config.public.API_URL}/album`, {
-      method: "POST",
-      headers: h(csrfToken.value),
-      body: JSON.stringify(params),
-      credentials: "include",
+    await createNewAlbum({
+      title: state.createNewAlbumInput.title,
+      imageUrl: state.createNewAlbumInput.imageUrl,
     });
-    if (!response.ok) return;
-
-    const data = await response.json();
-    console.log(data, "res");
-    state.showNewDialog = false;
+    state.showNewAlbumDialog = false;
   } catch (error) {
     console.error(error);
     alert(`エラーが発生しました。${error}`);
@@ -122,9 +121,9 @@ const onCreateNewAlbum = async () => {
     state.buttonLoading = false;
   }
 };
-const onCloseshowNewDialog = () => {
-  state.showNewDialog = false;
-  onInput({ name: "imageUrl", value: "" });
+const onCloseNewAlbumDialog = () => {
+  state.showNewAlbumDialog = false;
+  onCreateNewAlbumInput({ name: "imageUrl", value: "" });
 };
 </script>
 
@@ -137,23 +136,23 @@ const onCloseshowNewDialog = () => {
       />
     </template>
     <LoginDialog
-      :showLoginDialog="state.showLoginDialog"
-      :closeLoginDialog="() => (state.showLoginDialog = false)"
-      :onInput="onInput"
-      :onLogin="onLogin"
-      :buttonLoading="state.buttonLoading"
-      :loginValidation="loginValidation"
+      :show-login-dialog="state.showLoginDialog"
+      :close-login-dialog="() => (state.showLoginDialog = false)"
+      :on-input="onLoginInput"
+      :on-login="onLogin"
+      :button-loading="state.buttonLoading"
+      :login-validation="loginValidation"
     />
     <NewAlbumDialog
-      :showNewDialog="state.showNewDialog"
-      :onCloseshowNewDialog="onCloseshowNewDialog"
-      :onCreateNewAlbum="onCreateNewAlbum"
-      :onInput="onInput"
-      :imageUrl="state.input.imageUrl"
-      :onFileChange="onFileChange"
-      :buttonLoading="state.buttonLoading"
+      :show-new-album-dialog="state.showNewAlbumDialog"
+      :on-close-new-album-dialog="onCloseNewAlbumDialog"
+      :on-create-new-album="onCreateNewAlbum"
+      :on-input="onCreateNewAlbumInput"
+      :image-url="state.createNewAlbumInput.imageUrl"
+      :on-file-change="onFileChange"
+      :button-loading="state.buttonLoading"
     />
-    <header class="bg-white theme__dark">
+    <header class="theme__dark bg-white">
       <nav
         class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global"
@@ -161,15 +160,15 @@ const onCloseshowNewDialog = () => {
         <div class="flex lg:flex-1">
           <HeaderChangeMode />
         </div>
-        <div class="hidden lg:flex lg:gap-x-4"></div>
+        <div class="hidden lg:flex lg:gap-x-4" />
         <div class="lg:flex lg:flex-1 lg:justify-end">
           <HeaderMenu
-            :showHeaderMenu="state.showHeaderMenu"
-            :onOpenshowHeaderMenu="() => (state.showHeaderMenu = true)"
-            :onCloseshowHeaderMenu="() => (state.showHeaderMenu = false)"
-            :onShowNewDialog="() => (state.showNewDialog = true)"
-            :onShowLoginDialog="() => (state.showLoginDialog = true)"
-            :isLogin="isLogin"
+            :show-header-menu="state.showHeaderMenu"
+            :on-openshow-header-menu="() => (state.showHeaderMenu = true)"
+            :on-closeshow-header-menu="() => (state.showHeaderMenu = false)"
+            :on-show-new-album-dialog="() => (state.showNewAlbumDialog = true)"
+            :on-show-login-dialog="() => (state.showLoginDialog = true)"
+            :is-login="isLogin"
           />
         </div>
       </nav>
@@ -177,8 +176,8 @@ const onCloseshowNewDialog = () => {
     <div class="theme__dark">
       <NuxtPage />
     </div>
-    <footer class="bg-yellow-100 theme__dark shadow">
-      <div class="flex justify-between w-11/12 pr-2">
+    <footer class="theme__dark bg-yellow-100 shadow">
+      <div class="flex w-11/12 justify-between pr-2">
         <img
           class="wcb-chan"
           loading="lazy"
@@ -189,7 +188,7 @@ const onCloseshowNewDialog = () => {
           height="100"
         />
         <img
-          v-show="nuxtApp.$colorMode.value === 'light'"
+          v-show="nuxtApp.$colorMode.value === m.MODE_LIGHT"
           class="image"
           loading="lazy"
           decoding="async"
@@ -199,7 +198,7 @@ const onCloseshowNewDialog = () => {
           height="50"
         />
         <img
-          v-show="nuxtApp.$colorMode.value === 'dark'"
+          v-show="nuxtApp.$colorMode.value === m.MODE_DARK"
           class="image"
           loading="lazy"
           decoding="async"
@@ -209,8 +208,8 @@ const onCloseshowNewDialog = () => {
           height="50"
         />
       </div>
-      <div class="bg-lime-300 dark:bg-lime-800 font-bold w-full mx-auto p-3">
-        <span class="text-white block text-sm sm:text-center"
+      <div class="mx-auto w-full bg-lime-300 p-3 font-bold dark:bg-lime-800">
+        <span class="block text-sm text-white sm:text-center"
           >© LGTM-kinako</span
         >
       </div>
