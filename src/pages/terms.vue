@@ -1,46 +1,33 @@
 <script setup lang="ts">
 import { useHead } from "@/.nuxt/imports";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 import { setSeo } from "@/lib/seo";
-const pageSeo = setSeo("利用規約");
+const pageSeo = setSeo("プライバシーポリシー");
 useHead(pageSeo);
 </script>
 
 <template>
   <div class="mx-auto max-w-5xl px-4 pb-10 leading-8 sm:px-6 lg:px-8">
-    <h1 class="text-xl">利用規約</h1>
-    <p>
-      LGTM-kinako（以下、"サイト"と称します）を利用する前に、以下の利用規約をよくお読みいただき、これに同意する必要があります。本サイトを利用することで、以下の規約に同意したものとみなされます。
-    </p>
-    <h2 class="mt-8 text-lg">第1条（コンテンツの使用）</h2>
-    <p>
-      本サイト上に掲載されているコンテンツ（画像、テキスト、ロゴなど）は、知的財産権に保護されている場合があります。これらのコンテンツのコピー、複製、再配布、改変、商業目的での使用など、許可されていない利用は禁止されています。
-      サイト上の画像の中に含まれる "LGTM"
-      などのテキストは、当サイトのコンセプトに従って愛犬の画像に加工されています。これらの画像のコピーまたは使用は個人的な目的で許可されていますが、商業利用または他の不適切な目的での使用は禁止されています。
-    </p>
-    <h2 class="mt-8 text-lg">第2条（免責事項）</h2>
-    <p>
-      当サイトの内容は情報提供を目的としており、情報の正確性、完全性、適時性について保証をするものではありません。本サイトの利用に関連して発生した問題や損害について、サイト運営者は一切の責任を負いません。
-    </p>
-    <h2 class="mt-8 text-lg">第3条（プライバシー）</h2>
-    <p>
-      当サイトは、ユーザーのプライバシーを尊重します。サイトのプライバシーポリシーをよくお読みいただき、ご理解いただき、同意の上で本サイトを利用してください。
-    </p>
-    <h2 class="mt-8 text-lg">第4条（法令と規制の遵守）</h2>
-    <p>
-      本サイトの利用者は、適用される法令と規制を遵守する責任を負います。違法な活動や不適切なコンテンツの投稿・共有は禁止されています。
-    </p>
-    <h2 class="mt-8 text-lg">第5条（変更と更新）</h2>
-    <p>
-      当利用規約は、サイト運営者の裁量により変更または更新されることがあります。変更が行われた場合、最新の利用規約に同意したものとみなされます。
-    </p>
-    <h2 class="mt-8 text-lg">第6条（問い合わせ先）</h2>
-    <p>
-      利用規約に関するご質問、ご意見、お問い合わせは、以下の連絡先までお願いいたします。
-    </p>
-    <ul>
-      <li>Email: lgtm.kinako@gmail.com</li>
-    </ul>
+    <h1 class="text-xl">{{ t("$terms.title") }}</h1>
+    <p>{{ t("$terms.content.introduction") }}</p>
+    <h2 class="mt-8 text-lg">{{ t("$terms.content.section1.title") }}</h2>
+    <p>{{ t("$terms.content.section1.content") }}</p>
+    <h2 class="mt-8 text-lg">{{ t("$terms.content.section2.title") }}</h2>
+    <p>{{ t("$terms.content.section2.content") }}</p>
+    <h2 class="mt-8 text-lg">{{ t("$terms.content.section3.title") }}</h2>
+    <p>{{ t("$terms.content.section3.content") }}</p>
+    <h2 class="mt-8 text-lg">{{ t("$terms.content.section4.title") }}</h2>
+    <p>{{ t("$terms.content.section4.content") }}</p>
+    <h2 class="mt-8 text-lg">{{ t("$terms.content.section5.title") }}</h2>
+    <p>{{ t("$terms.content.section5.content") }}</p>
+    <h2 class="mt-8 text-lg">{{ t("$terms.content.section6.title") }}</h2>
+    <p>{{ t("$terms.content.section6.content") }}</p>
+    <p>Email: lgtm.kinako@gmail.com</p>
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+/* ここにスタイルを追加 */
+</style>

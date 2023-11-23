@@ -55,14 +55,14 @@ const props = withDefaults(defineProps<Props>(), {
           </button>
           <div class="p-6 lg:px-8">
             <h3 class="mb-4 text-xl font-medium text-gray-800 dark:text-white">
-              ログイン
+              Login
             </h3>
             <div class="space-y-6">
               <div>
                 <label
                   for="email"
                   class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                  >メールアドレス</label
+                  >Email</label
                 >
                 <input
                   type="email"
@@ -79,7 +79,7 @@ const props = withDefaults(defineProps<Props>(), {
                 <label
                   for="password"
                   class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                  >パスワード</label
+                  >Password</label
                 >
                 <input
                   type="password"
@@ -96,7 +96,7 @@ const props = withDefaults(defineProps<Props>(), {
                 v-if="!props.buttonLoading"
                 class="font-bold focus:outline-none focus:ring-4"
                 color="primary"
-                text="ログインする"
+                text="login"
                 size="full"
                 text-color="white"
                 :disabled="!props.loginValidation()"
