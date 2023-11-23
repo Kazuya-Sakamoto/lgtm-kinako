@@ -1,0 +1,85 @@
+{
+  "$top": {
+    "title": "Kinako's LGTM images",
+    "sub_title": "Clicking on the image copies the Markdown",
+    "load_button": "View Other Kinako",
+    "loading": "Loading..."
+  },
+  "$headers": {
+    "top": "View Kinako",
+    "terms": "Terms of Use",
+    "policy": "Privacy Policy",
+    "upload": "Upload Image",
+    "all": "All Kinako",
+    "login": "LogIn",
+    "language": "change to japanese"
+  },
+  "$terms": {
+    "title": "Terms of Use",
+    "content": {
+      "introduction": "Before using LGTM-kinako (hereinafter referred to as 'the Site'), please read the following terms of use carefully and agree to them. By using this site, you are deemed to have agreed to these terms.",
+      "section1": {
+        "title": "Article 1 (Use of Content)",
+        "content": "The content (images, text, logos, etc.) posted on this site may be protected by intellectual property rights. Unauthorized use, such as copying, reproduction, redistribution, modification, or commercial use of these contents is prohibited. Texts like 'LGTM' included in the images on the site are processed with images of the pet dog according to the concept of the site. Copying or using these images is permitted for personal purposes, but commercial use or other inappropriate purposes are prohibited."
+      },
+      "section2": {
+        "title": "Article 2 (Disclaimer)",
+        "content": "The content of this site is intended for information purposes only and does not guarantee the accuracy, completeness, or timeliness of the information. The site operators are not responsible for any problems or damages arising in connection with the use of this site."
+      },
+      "section3": {
+        "title": "Article 3 (Privacy)",
+        "content": "The Site respects the privacy of its users. Please read, understand, and agree to the site's privacy policy before using the site."
+      },
+      "section4": {
+        "title": "Article 4 (Compliance with Laws and Regulations)",
+        "content": "Users of the site are responsible for complying with applicable laws and regulations. Illegal activities and posting or sharing inappropriate content are prohibited."
+      },
+      "section5": {
+        "title": "Article 5 (Changes and Updates)",
+        "content": "These terms of use may be changed or updated at the discretion of the site operators. If changes are made, you are deemed to have agreed to the latest terms of use."
+      },
+      "section6": {
+        "title": "Article 6 (Contact Information)",
+        "content": "For questions, comments, or inquiries about the terms of use, please contact the following address."
+      }
+    }
+  },
+  "$privacy": {
+    "title": "Privacy Policy",
+    "content": {
+      "introduction": "This Privacy Policy explains the information collected by [LGTM-kinako] (hereinafter referred to as 'this site') and how that information is used. By using this site, you agree to the following Privacy Policy.",
+      "section1": {
+        "title": "Article 1 (Information Collected)",
+        "content": "This site may collect information such as IP addresses, browser information, and cookies when users visit the site. This information is used for the normal operation of the site and for security measures."
+      },
+      "section2": {
+        "title": "Article 2 (User Content)",
+        "content": "This site may collect and display content provided by users (photos, text, and other information) on the site. However, personal information of users (such as names and contact information) is not collected."
+      },
+      "section3": {
+        "title": "Article 3 (Use of Cookies)",
+        "content": "This site uses cookies to enhance the user experience. Users can refuse the use of cookies, but this may limit some functionalities. For more details, please refer to the Cookie Policy."
+      },
+      "section4": {
+        "title": "Article 4 (Information Sharing)",
+        "content": "This site does not share user information with third parties."
+      },
+      "section5": {
+        "title": "Article 5 (Protection of Privacy)",
+        "content": "This site takes appropriate measures to protect user information and prevent unauthorized access and information leakage."
+      },
+      "section6": {
+        "title": "Article 6 (Privacy of Minors)",
+        "content": "This site does not collect personal information from minors. Minors require the consent of a guardian."
+      },
+      "section7": {
+        "title": "Article 7 (Changes to the Privacy Policy)",
+        "content": "This site may change its Privacy Policy. In case of changes, the details will be posted and the effective date of the changes will be notified."
+      },
+      "section8": {
+        "title": "Article 8 (Inquiries)",
+        "content": "For questions or inquiries regarding the Privacy Policy, please contact us at the following address"
+      }
+    }
+  }
+}

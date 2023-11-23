@@ -10,11 +10,22 @@ import { checkEmailVal, isPasswordLengthValid } from "@/lib/validation";
 import { useNuxtApp } from "@/.nuxt/imports";
 import { useCreateAlbum } from "@/hooks/useCreateAlbum";
 import { m } from "@/master";
+import { useI18n } from "vue-i18n";
+import { useLocaleStore } from "@/store/localeStore";
+
+const nuxtApp = useNuxtApp();
 
 const loginStore = useLoginStore();
 const { onLoginStore, isLogin } = loginStore;
 const { createNewAlbum } = useCreateAlbum();
-const nuxtApp = useNuxtApp();
+const { locale } = useI18n();
+const localeStore = useLocaleStore();
+const { setLocale, locale: localeStoreValue } = localeStore;
+
+(() => {
+  // ストレージに保存されているlocaleを取得し、設定する
+  locale.value = localeStoreValue;
+})();
 
 export type LoginInput = {
   email: string;
@@ -125,6 +136,11 @@ const onCloseNewAlbumDialog = () => {
   state.showNewAlbumDialog = false;
   onCreateNewAlbumInput({ name: "imageUrl", value: "" });
 };
+
+const changeLocale = async (e: string) => {
+  locale.value = e;
+  await setLocale(locale.value);
+};
 </script>
 
 <template>
@@ -169,6 +185,8 @@ const onCloseNewAlbumDialog = () => {
             :on-show-new-album-dialog="() => (state.showNewAlbumDialog = true)"
             :on-show-login-dialog="() => (state.showLoginDialog = true)"
             :is-login="isLogin"
+            :locale="locale"
+            :change-locale="changeLocale"
           />
         </div>
       </nav>

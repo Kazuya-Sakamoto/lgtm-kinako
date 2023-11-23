@@ -2,6 +2,7 @@
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  ssr: false,
   app: {
     head: {
       title: "LGTM-kinako きなこ（犬）のLGTM画像",
@@ -53,6 +54,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
     "@nuxtjs/color-mode",
+    "@intlify/nuxt3",
   ],
   colorMode: {
     classSuffix: "",
@@ -84,6 +86,14 @@ export default defineNuxtConfig({
     apiKey: "",
     public: {
       API_URL: "",
+      persistedState: {
+        storage: "localStorage",
+        debug: false,
+      },
     },
+  },
+  intlify: {
+    locale: "ja",
+    fallbackLocale: "ja",
   },
 });

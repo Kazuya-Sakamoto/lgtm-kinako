@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { useHead } from "@/.nuxt/imports";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 import { setSeo } from "@/lib/seo";
 const pageSeo = setSeo("プライバシーポリシー");
 useHead(pageSeo);
@@ -7,43 +10,25 @@ useHead(pageSeo);
 
 <template>
   <div class="mx-auto max-w-5xl px-4 pb-10 leading-8 sm:px-6 lg:px-8">
-    <h1 class="text-xl">プライバシーポリシー</h1>
-    <p>
-      このプライバシーポリシーは、[LGTM-kinako]（以下「当サイト」といいます）が収集する情報とその情報の使用について説明します。当サイトを利用することで、以下のプライバシーポリシーに同意したものとみなされます。
-    </p>
-    <h2 class="mt-8 text-lg">第1条（収集する情報）</h2>
-    <p>
-      当サイトは、ユーザーが当サイトを訪れる際に、IPアドレス、ブラウザ情報、クッキーなどの情報を収集する場合があります。これらの情報は、サイトの正常な運営とセキュリティ対策のために使用されます。
-    </p>
-    <h2 class="mt-8 text-lg">第2条（ユーザーのコンテンツ）</h2>
-    <p>
-      当サイトは、ユーザーが提供したコンテンツ（写真、テキスト、その他の情報）を収集し、サイト上で表示することがあります。ただし、ユーザーの個人情報（氏名、連絡先情報など）は収集しません。
-    </p>
-    <h2 class="mt-8 text-lg">第3条（Cookieの使用）</h2>
-    <p>
-      当サイトはCookieを使用してユーザーエクスペリエンスを向上させます。ユーザーはCookieの使用を拒否することもできますが、一部の機能が制限される可能性があります。詳細については、Cookieポリシーをご参照ください。
-    </p>
-    <h2 class="mt-8 text-lg">第4条（情報の共有）</h2>
-    <p>当サイトはユーザーの情報を第三者と共有することはありません。</p>
-    <h2 class="mt-8 text-lg">第5条（プライバシーの保護）</h2>
-    <p>
-      当サイトはユーザーの情報を適切に保護し、不正アクセスや情報漏洩を防ぐためにセキュリティ対策を講じています。
-    </p>
-    <h2 class="mt-8 text-lg">第6条（未成年者のプライバシー）</h2>
-    <p>
-      当サイトは未成年者の個人情報を収集することはありません。未成年者は保護者の同意が必要です。
-    </p>
-    <h2 class="mt-8 text-lg">第6条（プライバシーポリシーの変更）</h2>
-    <p>
-      当サイトはプライバシーポリシーを変更する場合があります。変更がある場合、変更内容を掲示し、変更が有効になる日付を通知します。
-    </p>
-    <h2 class="mt-8 text-lg">第7条（お問い合わせ）</h2>
-    <p>
-      プライバシーポリシーに関する質問やお問い合わせは、以下の連絡先までお願いいたします。
-    </p>
-    <ul>
-      <li>Email: lgtm.kinako@gmail.com</li>
-    </ul>
+    <h1 class="text-xl">{{ t("$privacy.title") }}</h1>
+    <p>{{ t("$privacy.content.introduction") }}</p>
+    <h2 class="mt-8 text-lg">{{ t("$privacy.content.section1.title") }}</h2>
+    <p>{{ t("$privacy.content.section1.content") }}</p>
+    <h2 class="mt-8 text-lg">{{ t("$privacy.content.section2.title") }}</h2>
+    <p>{{ t("$privacy.content.section2.content") }}</p>
+    <h2 class="mt-8 text-lg">{{ t("$privacy.content.section3.title") }}</h2>
+    <p>{{ t("$privacy.content.section3.content") }}</p>
+    <h2 class="mt-8 text-lg">{{ t("$privacy.content.section4.title") }}</h2>
+    <p>{{ t("$privacy.content.section4.content") }}</p>
+    <h2 class="mt-8 text-lg">{{ t("$privacy.content.section5.title") }}</h2>
+    <p>{{ t("$privacy.content.section5.content") }}</p>
+    <h2 class="mt-8 text-lg">{{ t("$privacy.content.section6.title") }}</h2>
+    <p>{{ t("$privacy.content.section6.content") }}</p>
+    <h2 class="mt-8 text-lg">{{ t("$privacy.content.section7.title") }}</h2>
+    <p>{{ t("$privacy.content.section7.content") }}</p>
+    <h2 class="mt-8 text-lg">{{ t("$privacy.content.section8.title") }}</h2>
+    <p>{{ t("$privacy.content.section8.content") }}</p>
+    <p>Email: lgtm.kinako@gmail.com</p>
   </div>
 </template>
 

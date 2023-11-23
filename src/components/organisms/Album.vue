@@ -31,6 +31,21 @@ const props = defineProps<Props>();
         v-if="props.showClipboardMap[album.id]"
         class="absolute inset-0 flex items-center justify-center rounded border-2 border-yellow-300 bg-slate-900 bg-opacity-75 font-bold text-white"
       >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2.2"
+          stroke="currentColor"
+          class="w-7 h-7 text-yellow-400 font-bold"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+
         リンクをコピーしました
       </div>
     </div>
