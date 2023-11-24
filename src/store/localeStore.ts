@@ -1,18 +1,18 @@
-import { defineStore } from "pinia";
-import { ref } from "vue";
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
 export const useLocaleStore = defineStore(
-  "localeStore",
+  'localeStore',
   () => {
-    const locale = ref<string>("ja");
+    const locale = ref<string>('ja')
 
     const setLocale = (newLocale: string) => {
-      locale.value = newLocale;
-    };
+      locale.value = newLocale
+    }
 
-    return { locale, setLocale };
+    return { locale, setLocale }
   },
   {
     persist: true,
   }
-);
+)

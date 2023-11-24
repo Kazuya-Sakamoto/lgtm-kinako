@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { Album as AlbumQuery } from "@/hooks/useAlbums";
+import { Album as AlbumQuery } from '@/hooks/useAlbums'
 
 type Props = {
-  album: AlbumQuery;
-  showClipboardMap: Record<string, boolean>;
-  onCopyImageUrl: (album: AlbumQuery) => void;
-};
-const props = defineProps<Props>();
+  album: AlbumQuery
+  showClipboardMap: Record<string, boolean>
+  onCopyImageUrl: (album: AlbumQuery) => void
+}
+const props = defineProps<Props>()
 </script>
 
 <template>

@@ -5,43 +5,43 @@ export default defineNuxtConfig({
   ssr: false,
   app: {
     head: {
-      title: "LGTM-kinako きなこ（犬）のLGTM画像",
+      title: 'LGTM-kinako きなこ（犬）のLGTM画像',
       meta: [
-        { charset: "utf-8" },
+        { charset: 'utf-8' },
         {
-          name: "description",
+          name: 'description',
           content:
-            "LGTM-kinakoは、きなこ、犬、わんこ、わんちゃんのLGTM画像を自由にダウンロードして使用できるサービスです。GitHubでプルリクエストをレビューした際にLooks Good To Meの略でLGTMと書くことがあります。このLGTM画像にきなこの画像を使ってみてください。LGTM-kinakoは、様々なエンジニアたちがLGTMを送り合うことができます。",
+            'LGTM-kinakoは、きなこ、犬、わんこ、わんちゃんのLGTM画像を自由にダウンロードして使用できるサービスです。GitHubでプルリクエストをレビューした際にLooks Good To Meの略でLGTMと書くことがあります。このLGTM画像にきなこの画像を使ってみてください。LGTM-kinakoは、様々なエンジニアたちがLGTMを送り合うことができます。',
         },
-        { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { property: "og:type", content: "website" },
-        { property: "og:site_name", content: "LGTM-kinako" },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:site_name', content: 'LGTM-kinako' },
         {
-          property: "og:image",
-          content: "https://d18g0hf2wnz3gs.cloudfront.net/favicon.jpg",
+          property: 'og:image',
+          content: 'https://d18g0hf2wnz3gs.cloudfront.net/favicon.jpg',
         },
         {
-          property: "og:url",
-          hid: "og:url",
-          content: "https://lgtm-kinako.com/",
+          property: 'og:url',
+          hid: 'og:url',
+          content: 'https://lgtm-kinako.com/',
         },
-        { hid: "og:title", property: "og:title", content: "LGTM-kinako" },
+        { hid: 'og:title', property: 'og:title', content: 'LGTM-kinako' },
         {
-          property: "og:description",
+          property: 'og:description',
           content:
-            "LGTM-kinakoは、きなこ、犬、わんこ、わんちゃんのLGTM画像を自由にダウンロードして使用できるサービスです。GitHubでプルリクエストをレビューした際にLooks Good To Meの略でLGTMと書くことがあります。このLGTM画像にきなこの画像を使ってみてください。LGTM-kinakoは、様々なエンジニアたちがLGTMを送り合うことができます。",
+            'LGTM-kinakoは、きなこ、犬、わんこ、わんちゃんのLGTM画像を自由にダウンロードして使用できるサービスです。GitHubでプルリクエストをレビューした際にLooks Good To Meの略でLGTMと書くことがあります。このLGTM画像にきなこの画像を使ってみてください。LGTM-kinakoは、様々なエンジニアたちがLGTMを送り合うことができます。',
         },
-        { name: "twitter:card", content: "summary" },
+        { name: 'twitter:card', content: 'summary' },
         {
-          name: "keywords",
+          name: 'keywords',
           content:
-            "LGTM,犬,わんこ,わんちゃん,きなこ,動物,生き物,かわいい,いきもの",
+            'LGTM,犬,わんこ,わんちゃん,きなこ,動物,生き物,かわいい,いきもの',
         },
       ],
-      link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
+      link: [{ rel: 'icon', type: 'image/png', href: '/favicon.png' }],
     },
   },
-  plugins: ["~/plugins/google-analytics.client.mjs"],
+  plugins: ['~/plugins/google-analytics.client.mjs'],
   typescript: {
     shim: false,
     strict: true,
@@ -51,23 +51,23 @@ export default defineNuxtConfig({
     // "@src": path.resolve(__dirname, "../src"),
   },
   modules: [
-    "@pinia/nuxt",
-    "@pinia-plugin-persistedstate/nuxt",
-    "@nuxtjs/color-mode",
-    "@intlify/nuxt3",
+    '@pinia/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
+    '@nuxtjs/color-mode',
+    '@intlify/nuxt3',
   ],
   colorMode: {
-    classSuffix: "",
+    classSuffix: '',
   },
   components: [
     {
-      path: "@/components",
+      path: '@/components',
       pathPrefix: false,
     },
   ],
-  css: ["~/assets/css/main.css"],
+  css: ['~/assets/css/main.css'],
   vite: {
-    assetsInclude: ["**/*.MP4"],
+    assetsInclude: ['**/*.MP4'],
     css: {
       preprocessorOptions: {
         scss: {
@@ -83,17 +83,17 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
-    apiKey: "",
+    apiKey: '',
     public: {
-      API_URL: "",
+      API_URL: '',
       persistedState: {
-        storage: "localStorage",
+        storage: 'localStorage',
         debug: false,
       },
     },
   },
   intlify: {
-    locale: "ja",
-    fallbackLocale: "ja",
+    locale: 'ja',
+    fallbackLocale: 'ja',
   },
-});
+})

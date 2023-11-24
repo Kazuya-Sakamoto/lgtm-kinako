@@ -1,40 +1,40 @@
 <script setup lang="ts">
-import { useHead } from "@/.nuxt/imports";
-import { reactive } from "vue";
-import TheTemplate from "@/components/templates/albums/index.vue";
-import { useAlbums, Album as AlbumQuery } from "@/hooks/useAlbums";
-import { setSeo } from "@/lib/seo";
-import { useWelcomeDialogStore } from "@/store/welcomeDialog";
+import { useHead } from '@/.nuxt/imports'
+import { reactive } from 'vue'
+import TheTemplate from '@/components/templates/albums/index.vue'
+import { useAlbums, Album as AlbumQuery } from '@/hooks/useAlbums'
+import { setSeo } from '@/lib/seo'
+import { useWelcomeDialogStore } from '@/store/welcomeDialog'
 
-const welcomeDialogStore = useWelcomeDialogStore();
+const welcomeDialogStore = useWelcomeDialogStore()
 
-const pageSeo = setSeo("きなこ（犬）のLGTM画像");
-useHead(pageSeo);
+const pageSeo = setSeo('きなこ（犬）のLGTM画像')
+useHead(pageSeo)
 
 type State = {
-  showClipboardMap: Record<string, boolean>;
-};
+  showClipboardMap: Record<string, boolean>
+}
 const initialState = (): State => ({
   showClipboardMap: {},
-});
-const state = reactive<State>(initialState());
+})
+const state = reactive<State>(initialState())
 
-const { albums, albumLoading, fetchAlbums, refetch } = useAlbums();
+const { albums, albumLoading, fetchAlbums, refetch } = useAlbums()
 
-(async () => {
-  welcomeDialogStore.openDialog();
-  await fetchAlbums();
-})();
+;(async () => {
+  welcomeDialogStore.openDialog()
+  await fetchAlbums()
+})()
 
 const onCopyImageUrl = (album: AlbumQuery) => {
-  const url = `![LGTM](${album.image})`;
+  const url = `![LGTM](${album.image})`
   window.navigator.clipboard.writeText(url).then(() => {
-    state.showClipboardMap[album.id] = true;
-  });
+    state.showClipboardMap[album.id] = true
+  })
   setTimeout(() => {
-    state.showClipboardMap[album.id] = false;
-  }, 2000);
-};
+    state.showClipboardMap[album.id] = false
+  }, 2000)
+}
 </script>
 
 <template>

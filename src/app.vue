@@ -1,57 +1,57 @@
 <script setup lang="ts">
-import { reactive } from "vue";
-import { useLoginStore } from "@/store/login";
-import LoginDialog from "@/components/organisms/LoginDialog.vue";
-import NewAlbumDialog from "@/components/organisms/NewAlbumDialog.vue";
-import HeaderMenu from "@/components/organisms/HeaderMenu.vue";
-import HeaderChangeMode from "@/components/organisms/HeaderChangeMode.vue";
-import BaseAlert from "@/components/molecules/BaseAlert.vue";
-import { checkEmailVal, isPasswordLengthValid } from "@/lib/validation";
-import { useNuxtApp } from "@/.nuxt/imports";
-import { useCreateAlbum } from "@/hooks/useCreateAlbum";
-import { m } from "@/master";
-import { useI18n } from "vue-i18n";
-import { useLocaleStore } from "@/store/localeStore";
+import { reactive } from 'vue'
+import { useLoginStore } from '@/store/login'
+import LoginDialog from '@/components/organisms/LoginDialog.vue'
+import NewAlbumDialog from '@/components/organisms/NewAlbumDialog.vue'
+import HeaderMenu from '@/components/organisms/HeaderMenu.vue'
+import HeaderChangeMode from '@/components/organisms/HeaderChangeMode.vue'
+import BaseAlert from '@/components/molecules/BaseAlert.vue'
+import { checkEmailVal, isPasswordLengthValid } from '@/lib/validation'
+import { useNuxtApp } from '@/.nuxt/imports'
+import { useCreateAlbum } from '@/hooks/useCreateAlbum'
+import { m } from '@/master'
+import { useI18n } from 'vue-i18n'
+import { useLocaleStore } from '@/store/localeStore'
 
-const nuxtApp = useNuxtApp();
+const nuxtApp = useNuxtApp()
 
-const loginStore = useLoginStore();
-const { onLoginStore, isLogin } = loginStore;
-const { createNewAlbum } = useCreateAlbum();
-const { locale } = useI18n();
-const localeStore = useLocaleStore();
-const { setLocale, locale: localeStoreValue } = localeStore;
+const loginStore = useLoginStore()
+const { onLoginStore, isLogin } = loginStore
+const { createNewAlbum } = useCreateAlbum()
+const { locale } = useI18n()
+const localeStore = useLocaleStore()
+const { setLocale, locale: localeStoreValue } = localeStore
 
-(() => {
+;(() => {
   // ストレージに保存されているlocaleを取得し、設定する
-  locale.value = localeStoreValue;
-})();
+  locale.value = localeStoreValue
+})()
 
 export type LoginInput = {
-  email: string;
-  password: string;
-};
+  email: string
+  password: string
+}
 export type CreateNewAlbumInput = {
-  imageUrl: string;
-  title: string;
-};
+  imageUrl: string
+  title: string
+}
 const defaultLoginInput = (): LoginInput => ({
-  email: "",
-  password: "",
-});
+  email: '',
+  password: '',
+})
 const defaultCreateNewAlbumInput = (): CreateNewAlbumInput => ({
-  imageUrl: "",
-  title: "",
-});
+  imageUrl: '',
+  title: '',
+})
 
 type State = {
-  showLoginDialog: boolean;
-  showNewAlbumDialog: boolean;
-  showHeaderMenu: boolean;
-  buttonLoading: boolean;
-  loginInput: LoginInput;
-  createNewAlbumInput: CreateNewAlbumInput;
-};
+  showLoginDialog: boolean
+  showNewAlbumDialog: boolean
+  showHeaderMenu: boolean
+  buttonLoading: boolean
+  loginInput: LoginInput
+  createNewAlbumInput: CreateNewAlbumInput
+}
 
 const initialState = (): State => ({
   showLoginDialog: false,
@@ -60,87 +60,87 @@ const initialState = (): State => ({
   buttonLoading: false,
   loginInput: defaultLoginInput(),
   createNewAlbumInput: defaultCreateNewAlbumInput(),
-});
-const state = reactive<State>(initialState());
+})
+const state = reactive<State>(initialState())
 
 const onLogin = async () => {
-  state.buttonLoading = true;
+  state.buttonLoading = true
   try {
     await onLoginStore({
       email: state.loginInput.email,
       password: state.loginInput.password,
-    });
-    state.showLoginDialog = false;
+    })
+    state.showLoginDialog = false
   } catch (error) {
-    console.error(error);
-    alert(`エラーが発生しました。${error}`);
+    console.error(error)
+    alert(`エラーが発生しました。${error}`)
   } finally {
-    state.buttonLoading = false;
+    state.buttonLoading = false
   }
-};
+}
 const loginValidation = () => {
   return (
-    state.loginInput.email.trim() !== "" &&
+    state.loginInput.email.trim() !== '' &&
     checkEmailVal(state.loginInput.email) &&
-    state.loginInput.password.trim() !== "" &&
+    state.loginInput.password.trim() !== '' &&
     isPasswordLengthValid(state.loginInput.password)
-  );
-};
+  )
+}
 
 const onLoginInput = (item: { name: keyof LoginInput; value: string }) => {
   state.loginInput = {
     ...state.loginInput,
     [item.name]: item.value,
-  };
-};
+  }
+}
 const onCreateNewAlbumInput = (item: {
-  name: keyof CreateNewAlbumInput;
-  value: string;
+  name: keyof CreateNewAlbumInput
+  value: string
 }) => {
   state.createNewAlbumInput = {
     ...state.createNewAlbumInput,
     [item.name]: item.value,
-  };
-};
+  }
+}
 
 const onFileChange = (e: Event) => {
-  const target = e.target as HTMLInputElement;
-  const file = target.files?.[0];
+  const target = e.target as HTMLInputElement
+  const file = target.files?.[0]
 
   if (file) {
-    const reader = new FileReader();
+    const reader = new FileReader()
     reader.onload = (event) => {
-      const imageUrl = event.target?.result as string;
-      onCreateNewAlbumInput({ name: "imageUrl", value: imageUrl });
-    };
-    reader.readAsDataURL(file);
+      const imageUrl = event.target?.result as string
+      onCreateNewAlbumInput({ name: 'imageUrl', value: imageUrl })
+    }
+    reader.readAsDataURL(file)
   }
-};
+}
 
 const onCreateNewAlbum = async () => {
-  state.buttonLoading = true;
+  state.buttonLoading = true
   try {
     await createNewAlbum({
       title: state.createNewAlbumInput.title,
       imageUrl: state.createNewAlbumInput.imageUrl,
-    });
-    state.showNewAlbumDialog = false;
+    })
+    state.showNewAlbumDialog = false
   } catch (error) {
-    console.error(error);
-    alert(`エラーが発生しました。${error}`);
+    console.error(error)
+    alert(`エラーが発生しました。${error}`)
   } finally {
-    state.buttonLoading = false;
+    state.buttonLoading = false
   }
-};
+}
 const onCloseNewAlbumDialog = () => {
-  state.showNewAlbumDialog = false;
-  onCreateNewAlbumInput({ name: "imageUrl", value: "" });
-};
+  state.showNewAlbumDialog = false
+  onCreateNewAlbumInput({ name: 'imageUrl', value: '' })
+}
 
 const changeLocale = async (e: string) => {
-  locale.value = e;
-  await setLocale(locale.value);
-};
+  locale.value = e
+  await setLocale(locale.value)
+}
 </script>
 
 <template>

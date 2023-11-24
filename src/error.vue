@@ -78,7 +78,7 @@ $booFaceColor: #9b9b9b;
   padding-bottom: $size;
 
   &::after {
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     left: calc(-#{$size} / 1.7);
@@ -106,7 +106,7 @@ body {
 }
 
 .container {
-  font-family: "Varela Round", sans-serif;
+  font-family: 'Varela Round', sans-serif;
   color: $booFaceColor;
   position: relative;
   height: 100vh;
@@ -156,7 +156,7 @@ body {
 
     &::before,
     &::after {
-      content: "";
+      content: '';
       display: block;
       width: calc(#{$booFaceSize} / 4);
       height: calc(#{$booFaceSize} / 4);

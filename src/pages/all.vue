@@ -1,52 +1,52 @@
 <script setup lang="ts">
-import { useHead, useRouter } from "@/.nuxt/imports";
-import { reactive, onMounted } from "vue";
-import TheTemplate from "@/components/templates/albums/index.vue";
-import { useAlbums, Album as AlbumQuery } from "@/hooks/useAlbums";
-import { useLoginStore } from "@/store/login";
-import { storeToRefs } from "pinia";
+import { useHead, useRouter } from '@/.nuxt/imports'
+import { reactive, onMounted } from 'vue'
+import TheTemplate from '@/components/templates/albums/index.vue'
+import { useAlbums, Album as AlbumQuery } from '@/hooks/useAlbums'
+import { useLoginStore } from '@/store/login'
+import { storeToRefs } from 'pinia'
 
-const loginStore = useLoginStore();
-const { isLogin } = loginStore;
-const { csrfToken } = storeToRefs(loginStore);
+const loginStore = useLoginStore()
+const { isLogin } = loginStore
+const { csrfToken } = storeToRefs(loginStore)
 
-const router = useRouter();
+const router = useRouter()
 
 useHead({
   meta: [
     {
-      name: "robots",
-      content: "noindex",
+      name: 'robots',
+      content: 'noindex',
     },
   ],
-});
+})
 
 type State = {
-  id: number;
-};
+  id: number
+}
 const initialState = (): State => ({
   id: 0,
-});
-const state = reactive<State>(initialState());
+})
+const state = reactive<State>(initialState())
 
-const { albums, albumLoading, fetchAllAlbums } = useAlbums();
+const { albums, albumLoading, fetchAllAlbums } = useAlbums()
 
 onMounted(async () => {
   if (!isLogin()) {
-    alert("ログインが必要です");
-    return router.push("/");
+    alert('ログインが必要です')
+    return router.push('/')
   }
-  await fetchAllAlbums(csrfToken.value);
-});
+  await fetchAllAlbums(csrfToken.value)
+})
 
 const fetchData = async () => {
-  await fetchAllAlbums(csrfToken.value);
-};
+  await fetchAllAlbums(csrfToken.value)
+}
 
 const onCopyAlbumID = (album: AlbumQuery) => {
-  state.id = album.id;
-  console.log(`album.id: ${state.id}`);
-};
+  state.id = album.id
+  console.log(`album.id: ${state.id}`)
+}
 </script>
 
 <template>
