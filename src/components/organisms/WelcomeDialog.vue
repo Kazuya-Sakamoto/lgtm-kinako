@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref } from 'vue'
 type Props = {
-  show: boolean;
-  closeDialog: () => void;
-};
-const props = withDefaults(defineProps<Props>(), {});
+  show: boolean
+  closeDialog: () => void
+}
+const props = withDefaults(defineProps<Props>(), {})
 
-const videoLoaded = ref(false);
+const videoLoaded = ref(false)
 const onVideoLoaded = () => {
-  videoLoaded.value = true;
-};
+  videoLoaded.value = true
+}
 </script>
 
 <template>

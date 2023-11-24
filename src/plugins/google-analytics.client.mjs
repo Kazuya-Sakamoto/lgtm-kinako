@@ -1,14 +1,14 @@
-import VueGtag from "vue-gtag";
+import VueGtag from 'vue-gtag'
 
 export default defineNuxtPlugin((nuxtApp) => {
-  const router = useRouter();
+  const router = useRouter()
   nuxtApp.vueApp.use(
     VueGtag,
     {
-      appName: "lgtm-kinako",
+      appName: 'lgtm-kinako',
       pageTrackerScreenviewEnabled: true,
       config: { id: `G-TJ0G7F77QG` },
     },
     router
-  );
-});
+  )
+})

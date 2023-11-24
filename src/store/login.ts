@@ -1,64 +1,64 @@
-import { useRuntimeConfig } from "@/.nuxt/imports";
-import { ref } from "vue";
-import { defineStore } from "pinia";
-import { h } from "@/lib/headers";
+import { useRuntimeConfig } from '@/.nuxt/imports'
+import { ref } from 'vue'
+import { defineStore } from 'pinia'
+import { h } from '@/lib/headers'
 
 type LoginParams = {
-  email: string;
-  password: string;
-};
+  email: string
+  password: string
+}
 
 export const useLoginStore = defineStore(
-  "login",
+  'login',
   () => {
-    const config = useRuntimeConfig();
-    const csrfToken = ref<string>("");
-    const token = ref<string>("");
+    const config = useRuntimeConfig()
+    const csrfToken = ref<string>('')
+    const token = ref<string>('')
 
     const fetchCsrfToken = async () => {
       try {
         const response = await fetch(`${config.public.API_URL}/csrf`, {
-          method: "GET",
-          credentials: "include",
-        });
-        if (!response.ok) return;
+          method: 'GET',
+          credentials: 'include',
+        })
+        if (!response.ok) return
 
-        const data = await response.json();
-        csrfToken.value = data.csrf_token;
+        const data = await response.json()
+        csrfToken.value = data.csrf_token
       } catch (error) {
-        console.error(error);
-        alert(`エラーが発生しました。${error}`);
+        console.error(error)
+        alert(`エラーが発生しました。${error}`)
       }
-    };
+    }
 
     const onLoginStore = async ({ email, password }: LoginParams) => {
-      await fetchCsrfToken();
-      const params = { email, password };
+      await fetchCsrfToken()
+      const params = { email, password }
 
       try {
         const response = await fetch(`${config.public.API_URL}/login`, {
-          method: "POST",
+          method: 'POST',
           headers: h(csrfToken.value),
           body: JSON.stringify({ ...params }),
-          credentials: "include",
-        });
-        if (!response.ok) return;
+          credentials: 'include',
+        })
+        if (!response.ok) return
 
-        const data = await response.json();
-        token.value = data;
+        const data = await response.json()
+        token.value = data
       } catch (error) {
-        console.error(error);
-        alert(`エラーが発生しました。${error}`);
+        console.error(error)
+        alert(`エラーが発生しました。${error}`)
       }
-    };
+    }
 
     const isLogin = () => {
-      return !!token.value;
-    };
+      return !!token.value
+    }
 
-    return { csrfToken, token, onLoginStore, isLogin };
+    return { csrfToken, token, onLoginStore, isLogin }
   },
   {
     persist: true,
   }
-);
+)

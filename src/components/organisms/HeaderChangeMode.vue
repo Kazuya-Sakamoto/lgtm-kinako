@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useNuxtApp } from "@/.nuxt/imports";
-import { m } from "@/master";
+import { useNuxtApp } from '@/.nuxt/imports'
+import { m } from '@/master'
 
-const nuxtApp = useNuxtApp();
+const nuxtApp = useNuxtApp()
 const onChangeMode = (mode: typeof m.MODE_DARK | typeof m.MODE_LIGHT) => {
-  nuxtApp.$colorMode.preference = mode;
-};
+  nuxtApp.$colorMode.preference = mode
+}
 </script>
 
 <template>

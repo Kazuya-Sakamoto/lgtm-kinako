@@ -1,9 +1,9 @@
 <script setup lang="ts">
 type Props = {
-  title: string;
-  description: string;
-};
-const props = withDefaults(defineProps<Props>(), {});
+  title: string
+  description: string
+}
+const props = withDefaults(defineProps<Props>(), {})
 </script>
 
 <template>

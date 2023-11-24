@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import TButton from "@/components/atoms/TButton.vue";
-import BaseButtonLoading from "@/components/molecules/BaseButtonLoading.vue";
-import { LoginInput } from "@/app.vue";
+import TButton from '@/components/atoms/TButton.vue'
+import BaseButtonLoading from '@/components/molecules/BaseButtonLoading.vue'
+import { LoginInput } from '@/app.vue'
 
 type Props = {
-  showLoginDialog: boolean;
-  closeLoginDialog: () => void;
-  onInput: (item: { name: keyof LoginInput; value: string }) => void;
-  onLogin: () => void;
-  buttonLoading: boolean;
-  loginValidation: () => boolean;
-};
+  showLoginDialog: boolean
+  closeLoginDialog: () => void
+  onInput: (item: { name: keyof LoginInput; value: string }) => void
+  onLogin: () => void
+  buttonLoading: boolean
+  loginValidation: () => boolean
+}
 const props = withDefaults(defineProps<Props>(), {
   showLoginDialog: false,
   closeLoginDialog: () => {},
@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<Props>(), {
   onLogin: () => {},
   buttonLoading: false,
   loginValidation: () => false,
-});
+})
 </script>
 
 <template>
@@ -71,8 +71,12 @@ const props = withDefaults(defineProps<Props>(), {
                   placeholder="lgtm.kinako@gmail.com"
                   required
                   @input="
-                    (e) => 
-                      props.onInput({ name: 'email', value: (e.target as HTMLInputElement)?.value || '' })"
+                    (e) =>
+                      props.onInput({
+                        name: 'email',
+                        value: (e.target as HTMLInputElement)?.value || '',
+                      })
+                  "
                 />
               </div>
               <div>
@@ -88,8 +92,12 @@ const props = withDefaults(defineProps<Props>(), {
                   placeholder="••••••••"
                   required
                   @input="
-                    (e) => 
-                      props.onInput({ name: 'password', value: (e.target as HTMLInputElement)?.value || '' })"
+                    (e) =>
+                      props.onInput({
+                        name: 'password',
+                        value: (e.target as HTMLInputElement)?.value || '',
+                      })
+                  "
                 />
               </div>
               <TButton

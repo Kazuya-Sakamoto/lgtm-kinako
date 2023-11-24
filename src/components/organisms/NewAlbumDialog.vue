@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import TButton from "@/components/atoms/TButton.vue";
-import BaseButtonLoading from "@/components/molecules/BaseButtonLoading.vue";
-import { CreateNewAlbumInput } from "@/app.vue";
+import TButton from '@/components/atoms/TButton.vue'
+import BaseButtonLoading from '@/components/molecules/BaseButtonLoading.vue'
+import { CreateNewAlbumInput } from '@/app.vue'
 
 type Props = {
-  showNewAlbumDialog: boolean;
-  onCloseNewAlbumDialog: () => void;
-  onCreateNewAlbum: () => void;
-  onInput: (item: { name: keyof CreateNewAlbumInput; value: string }) => void;
-  imageUrl: string;
-  onFileChange: (e: Event) => void;
-  buttonLoading: boolean;
-};
+  showNewAlbumDialog: boolean
+  onCloseNewAlbumDialog: () => void
+  onCreateNewAlbum: () => void
+  onInput: (item: { name: keyof CreateNewAlbumInput; value: string }) => void
+  imageUrl: string
+  onFileChange: (e: Event) => void
+  buttonLoading: boolean
+}
 const props = withDefaults(defineProps<Props>(), {
   showNewAlbumDialog: false,
   onCloseNewAlbumDialog: () => {},
   onCreateNewAlbum: () => {},
   onInput: () => {},
-  imageUrl: "",
+  imageUrl: '',
   onFileChange: () => {},
   buttonLoading: false,
-});
+})
 </script>
 
 <template>
@@ -118,7 +118,10 @@ const props = withDefaults(defineProps<Props>(), {
                   required
                   @input="
                     (e) =>
-                      props.onInput({ name: 'title', value: (e.target as HTMLInputElement)?.value || '' })
+                      props.onInput({
+                        name: 'title',
+                        value: (e.target as HTMLInputElement)?.value || '',
+                      })
                   "
                 />
               </div>

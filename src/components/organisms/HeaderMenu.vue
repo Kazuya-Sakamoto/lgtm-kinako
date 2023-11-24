@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
-const { t } = useI18n();
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 type Props = {
-  showHeaderMenu: boolean;
-  onOpenshowHeaderMenu: () => void;
-  onCloseshowHeaderMenu: () => void;
-  onShowNewAlbumDialog: () => void;
-  onShowLoginDialog: () => void;
-  isLogin: () => boolean;
-  locale: string;
-  changeLocale: (locale: string) => void;
-};
+  showHeaderMenu: boolean
+  onOpenshowHeaderMenu: () => void
+  onCloseshowHeaderMenu: () => void
+  onShowNewAlbumDialog: () => void
+  onShowLoginDialog: () => void
+  isLogin: () => boolean
+  locale: string
+  changeLocale: (locale: string) => void
+}
 const props = withDefaults(defineProps<Props>(), {
   showHeaderMenu: false,
   onOpenshowHeaderMenu: () => {},
@@ -20,17 +20,17 @@ const props = withDefaults(defineProps<Props>(), {
   onShowLoginDialog: () => {},
   isLogin: () => false,
   changeLocale: () => {},
-});
+})
 
 const toggleHeaderMenu = () => {
   props.showHeaderMenu
     ? props.onCloseshowHeaderMenu()
-    : props.onOpenshowHeaderMenu();
-};
+    : props.onOpenshowHeaderMenu()
+}
 
 const changeLocale = () => {
-  props.locale === "ja" ? props.changeLocale("en") : props.changeLocale("ja");
-};
+  props.locale === 'ja' ? props.changeLocale('en') : props.changeLocale('ja')
+}
 </script>
 
 <template>
@@ -88,7 +88,7 @@ const changeLocale = () => {
               />
             </svg>
 
-            <span class="ml-3">{{ t("$headers.top") }}</span>
+            <span class="ml-3">{{ t('$headers.top') }}</span>
           </nuxt-link>
         </button>
         <button
@@ -112,7 +112,7 @@ const changeLocale = () => {
                 d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
               />
             </svg>
-            <span class="ml-3">{{ t("$headers.terms") }}</span>
+            <span class="ml-3">{{ t('$headers.terms') }}</span>
           </nuxt-link>
         </button>
         <button
@@ -137,7 +137,7 @@ const changeLocale = () => {
               />
             </svg>
 
-            <span class="ml-3">{{ t("$headers.policy") }}</span>
+            <span class="ml-3">{{ t('$headers.policy') }}</span>
           </nuxt-link>
         </button>
         <button
@@ -162,7 +162,7 @@ const changeLocale = () => {
             />
           </svg>
           <span class="ml-3">
-            {{ t("$headers.upload") }}
+            {{ t('$headers.upload') }}
           </span>
         </button>
         <button
@@ -187,7 +187,7 @@ const changeLocale = () => {
                 d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
               />
             </svg>
-            <span class="ml-3">{{ t("$headers.all") }}</span>
+            <span class="ml-3">{{ t('$headers.all') }}</span>
           </nuxt-link>
         </button>
         <button
@@ -213,7 +213,7 @@ const changeLocale = () => {
             />
           </svg>
           <span class="ml-3">
-            {{ t("$headers.login") }}
+            {{ t('$headers.login') }}
           </span>
         </button>
         <button
@@ -239,7 +239,7 @@ const changeLocale = () => {
             />
           </svg>
           <span class="ml-3">
-            {{ t("$headers.language") }}
+            {{ t('$headers.language') }}
           </span>
         </button>
       </div>
