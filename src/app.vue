@@ -168,7 +168,7 @@ const changeLocale = async (e: string) => {
       :on-file-change="onFileChange"
       :button-loading="state.buttonLoading"
     />
-    <header class="theme__dark bg-white">
+    <header class="transition duration-500 ease-in-out theme__dark bg-white">
       <nav
         class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global"
@@ -191,10 +191,12 @@ const changeLocale = async (e: string) => {
         </div>
       </nav>
     </header>
-    <div class="theme__dark">
+    <div class="transition duration-500 ease-in-out theme__dark">
       <NuxtPage />
     </div>
-    <footer class="theme__dark bg-yellow-100 shadow">
+    <footer
+      class="transition duration-500 ease-in-out theme__dark bg-yellow-100 shadow"
+    >
       <div class="flex w-11/12 justify-between pr-2">
         <img
           class="wcb-chan"

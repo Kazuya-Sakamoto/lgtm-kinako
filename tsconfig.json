@@ -11,7 +11,6 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "node": "current",
     "target": "ES2020",
     "module": "ESNext",
     "moduleResolution": "Node",
@@ -25,7 +24,8 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["src/components/*"],
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@/.nuxt/imports": ["src/.nuxt/imports.d.ts"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue", "src/**/*.tsx"],

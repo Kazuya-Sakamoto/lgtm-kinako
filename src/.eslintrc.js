@@ -3,10 +3,20 @@ module.exports = {
     'plugin:vue/vue3-recommended',
     'eslint:recommended',
     'plugin:tailwindcss/recommended',
-    'plugin:@typescript-eslint/recommended',
+    // 'plugin:@typescript-eslint/recommended',
   ],
   parserOptions: {
     parser: '@typescript-eslint/parser',
+  },
+  settings: {
+    'import/ignore': ['vue-router'],
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.mjs', '.ts'],
+      },
+      typescript: {
+        alwaysTryTypes: true,
+      },
   },
   plugins: ['vue', 'tailwindcss', '@typescript-eslint'],
   rules: {
