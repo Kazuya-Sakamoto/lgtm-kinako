@@ -57,122 +57,97 @@ const changeLocale = () => {
         </svg>
       </button>
     </div>
-    <div
-      v-if="props.showHeaderMenu"
-      class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-neutral-900 dark:text-white"
-      role="menu"
-      aria-orientation="vertical"
-      aria-labelledby="menu-button"
-      tabindex="-1"
-    >
-      <div class="py-1" role="none" @click="toggleHeaderMenu()">
-        <button
-          id="menu-item-2"
-          class="flex items-center w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-yellow-100 dark:text-white dark:hover:bg-neutral-900 dark:hover:opacity-30"
-          role="menuitem"
-          tabindex="-1"
-        >
-          <nuxt-link to="/" class="flex items-center w-full">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-5 h-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-              />
-            </svg>
+    <transition name="menu-fade">
+      <div
+        v-if="props.showHeaderMenu"
+        class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-neutral-900 dark:text-white"
+        role="menu"
+        aria-orientation="vertical"
+        aria-labelledby="menu-button"
+        tabindex="-1"
+      >
+        <div class="py-1" role="none" @click="toggleHeaderMenu()">
+          <button
+            id="menu-item-2"
+            class="flex items-center w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-yellow-100 dark:text-white dark:hover:bg-neutral-900 dark:hover:opacity-30"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <nuxt-link to="/" class="flex items-center w-full">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                />
+              </svg>
 
-            <span class="ml-3">{{ t('$headers.top') }}</span>
-          </nuxt-link>
-        </button>
-        <button
-          id="menu-item-2"
-          class="flex items-center w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-yellow-100 dark:text-white dark:hover:bg-neutral-900 dark:hover:opacity-30"
-          role="menuitem"
-          tabindex="-1"
-        >
-          <nuxt-link to="/terms" class="flex items-center w-full">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-5 h-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
-              />
-            </svg>
-            <span class="ml-3">{{ t('$headers.terms') }}</span>
-          </nuxt-link>
-        </button>
-        <button
-          id="menu-item-2"
-          class="flex items-center w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-yellow-100 dark:text-white dark:hover:bg-neutral-900 dark:hover:opacity-30"
-          role="menuitem"
-          tabindex="-1"
-        >
-          <nuxt-link to="/privacy" class="flex items-center w-full">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-5 h-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"
-              />
-            </svg>
+              <span class="ml-3">{{ t('$headers.top') }}</span>
+            </nuxt-link>
+          </button>
+          <button
+            id="menu-item-2"
+            class="flex items-center w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-yellow-100 dark:text-white dark:hover:bg-neutral-900 dark:hover:opacity-30"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <nuxt-link to="/terms" class="flex items-center w-full">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+                />
+              </svg>
+              <span class="ml-3">{{ t('$headers.terms') }}</span>
+            </nuxt-link>
+          </button>
+          <button
+            id="menu-item-2"
+            class="flex items-center w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-yellow-100 dark:text-white dark:hover:bg-neutral-900 dark:hover:opacity-30"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <nuxt-link to="/privacy" class="flex items-center w-full">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"
+                />
+              </svg>
 
-            <span class="ml-3">{{ t('$headers.policy') }}</span>
-          </nuxt-link>
-        </button>
-        <button
-          v-if="props.isLogin()"
-          class="flex items-center w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-yellow-100 dark:text-white dark:hover:bg-neutral-900 dark:hover:opacity-30"
-          role="menuitem"
-          tabindex="-1"
-          @click="props.onShowNewAlbumDialog()"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-5 h-5"
+              <span class="ml-3">{{ t('$headers.policy') }}</span>
+            </nuxt-link>
+          </button>
+          <button
+            v-if="props.isLogin()"
+            class="flex items-center w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-yellow-100 dark:text-white dark:hover:bg-neutral-900 dark:hover:opacity-30"
+            role="menuitem"
+            tabindex="-1"
+            @click="props.onShowNewAlbumDialog()"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
-            />
-          </svg>
-          <span class="ml-3">
-            {{ t('$headers.upload') }}
-          </span>
-        </button>
-        <button
-          v-if="props.isLogin()"
-          id="menu-item-2"
-          class="flex items-center w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-yellow-100 dark:text-white dark:hover:bg-neutral-900 dark:hover:opacity-30"
-          role="menuitem"
-          tabindex="-1"
-        >
-          <nuxt-link to="/all" class="flex items-center w-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -184,67 +159,108 @@ const changeLocale = () => {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+                d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
               />
             </svg>
-            <span class="ml-3">{{ t('$headers.all') }}</span>
-          </nuxt-link>
-        </button>
-        <button
-          id="menu-item-3"
-          type="button"
-          class="flex items-center w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-yellow-100 dark:text-white dark:hover:bg-neutral-900 dark:hover:opacity-30"
-          role="menuitem"
-          tabindex="-1"
-          @click="props.onShowLoginDialog()"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-5 h-5"
+            <span class="ml-3">
+              {{ t('$headers.upload') }}
+            </span>
+          </button>
+          <button
+            v-if="props.isLogin()"
+            id="menu-item-2"
+            class="flex items-center w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-yellow-100 dark:text-white dark:hover:bg-neutral-900 dark:hover:opacity-30"
+            role="menuitem"
+            tabindex="-1"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
-            />
-          </svg>
-          <span class="ml-3">
-            {{ t('$headers.login') }}
-          </span>
-        </button>
-        <button
-          id="menu-item-3"
-          type="button"
-          class="flex items-center w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-yellow-100 dark:text-white dark:hover:bg-neutral-900 dark:hover:opacity-30"
-          role="menuitem"
-          tabindex="-1"
-          @click="changeLocale()"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-5 h-5"
+            <nuxt-link to="/all" class="flex items-center w-full">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+                />
+              </svg>
+              <span class="ml-3">{{ t('$headers.all') }}</span>
+            </nuxt-link>
+          </button>
+          <button
+            id="menu-item-3"
+            type="button"
+            class="flex items-center w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-yellow-100 dark:text-white dark:hover:bg-neutral-900 dark:hover:opacity-30"
+            role="menuitem"
+            tabindex="-1"
+            @click="props.onShowLoginDialog()"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802"
-            />
-          </svg>
-          <span class="ml-3">
-            {{ t('$headers.language') }}
-          </span>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
+              />
+            </svg>
+            <span class="ml-3">
+              {{ t('$headers.login') }}
+            </span>
+          </button>
+          <button
+            id="menu-item-3"
+            type="button"
+            class="flex items-center w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-yellow-100 dark:text-white dark:hover:bg-neutral-900 dark:hover:opacity-30"
+            role="menuitem"
+            tabindex="-1"
+            @click="changeLocale()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802"
+              />
+            </svg>
+            <span class="ml-3">
+              {{ t('$headers.language') }}
+            </span>
+          </button>
+        </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
-<style></style>
+<style scoped lang="scss">
+.menu-fade-enter-active,
+.menu-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.menu-fade-enter-from,
+.menu-fade-leave-to {
+  opacity: 0;
+}
+
+.menu-fade-enter-to {
+  opacity: 1;
+}
+</style>

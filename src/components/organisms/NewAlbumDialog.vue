@@ -24,7 +24,7 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <div>
+  <transition name="fade">
     <div
       v-if="props.showNewAlbumDialog"
       tabindex="-1"
@@ -140,7 +140,20 @@ const props = withDefaults(defineProps<Props>(), {
         </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
-<style></style>
+<style lang="scss" scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+</style>

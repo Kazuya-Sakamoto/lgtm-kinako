@@ -7,13 +7,10 @@ import HeaderMenu from '@/components/organisms/HeaderMenu.vue'
 import HeaderChangeMode from '@/components/organisms/HeaderChangeMode.vue'
 import BaseAlert from '@/components/molecules/BaseAlert.vue'
 import { checkEmailVal, isPasswordLengthValid } from '@/lib/validation'
-import { useNuxtApp } from '@/.nuxt/imports'
 import { useCreateAlbum } from '@/hooks/useCreateAlbum'
-import { m } from '@/master'
 import { useI18n } from 'vue-i18n'
 import { useLocaleStore } from '@/store/localeStore'
-
-const nuxtApp = useNuxtApp()
+import Footer from '@/components/organisms/Footer.vue'
 
 const loginStore = useLoginStore()
 const { onLoginStore, isLogin } = loginStore
@@ -145,12 +142,6 @@ const changeLocale = async (e: string) => {
 
 <template>
   <div class="font-sans">
-    <template v-if="isLogin()">
-      <BaseAlert
-        title="ログイン中"
-        description="ログイン中なので作業に気をつけてください"
-      />
-    </template>
     <LoginDialog
       :show-login-dialog="state.showLoginDialog"
       :close-login-dialog="() => (state.showLoginDialog = false)"
@@ -168,7 +159,12 @@ const changeLocale = async (e: string) => {
       :on-file-change="onFileChange"
       :button-loading="state.buttonLoading"
     />
-    <header class="transition duration-500 ease-in-out theme__dark bg-white">
+    <BaseAlert
+      v-if="isLogin()"
+      title="ログイン中"
+      description="ログイン中なので作業に気をつけてください"
+    />
+    <header class="transition duration-300 ease-in-out theme__dark bg-white">
       <nav
         class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global"
@@ -191,68 +187,23 @@ const changeLocale = async (e: string) => {
         </div>
       </nav>
     </header>
-    <div class="transition duration-500 ease-in-out theme__dark">
+    <div class="transition duration-300 ease-in-out theme__dark">
       <NuxtPage />
     </div>
-    <footer
-      class="transition duration-500 ease-in-out theme__dark bg-yellow-100 shadow"
-    >
-      <div class="flex w-11/12 justify-between pr-2">
-        <img
-          class="wcb-chan"
-          loading="lazy"
-          decoding="async"
-          src="https://d18g0hf2wnz3gs.cloudfront.net/favicon.jpg"
-          alt="LGTM-kinako 可愛い動物の画像。かわいい動物の画像。"
-          width="100"
-          height="100"
-        />
-        <img
-          v-show="nuxtApp.$colorMode.value === m.MODE_LIGHT"
-          class="image"
-          loading="lazy"
-          decoding="async"
-          src="@/assets/img/sun.png"
-          alt="LGTM-kinako 可愛い動物の画像。かわいい動物の画像。"
-          width="50"
-          height="50"
-        />
-        <img
-          v-show="nuxtApp.$colorMode.value === m.MODE_DARK"
-          class="image"
-          loading="lazy"
-          decoding="async"
-          src="@/assets/img/moon.png"
-          alt="LGTM-kinako 可愛い動物の画像。かわいい動物の画像。"
-          width="50"
-          height="50"
-        />
-      </div>
-      <div class="mx-auto w-full bg-lime-300 p-3 font-bold dark:bg-lime-800">
-        <span class="block text-sm text-white sm:text-center"
-          >© LGTM-kinako</span
-        >
-      </div>
-    </footer>
+    <Footer />
   </div>
 </template>
-<style scoped lang="scss">
-.image-filter {
-  filter: blur(3px);
+
+<style lang="scss">
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.3s ease-in-out;
 }
-.image {
-  width: 50px;
-  height: 50px;
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
 }
-.wcb-chan {
-  animation: img-move 6s steps(6, start) infinite;
-}
-.wcb-chan-nostep {
-  animation: img-move 6s infinite;
-}
-@keyframes img-move {
-  to {
-    transform: translateX(300px);
-  }
+.page-enter-to {
+  opacity: 1;
 }
 </style>

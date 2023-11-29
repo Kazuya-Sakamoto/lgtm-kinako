@@ -22,7 +22,7 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <div>
+  <transition name="fade">
     <div
       v-if="props.showLoginDialog"
       tabindex="-1"
@@ -67,7 +67,7 @@ const props = withDefaults(defineProps<Props>(), {
                 <input
                   type="email"
                   name="email"
-                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-800 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-600"
+                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-800 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-600 dark:text-white"
                   placeholder="lgtm.kinako@gmail.com"
                   required
                   @input="
@@ -88,7 +88,7 @@ const props = withDefaults(defineProps<Props>(), {
                 <input
                   type="password"
                   name="password"
-                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-800 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-600"
+                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-800 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-600 dark:text-white"
                   placeholder="••••••••"
                   required
                   @input="
@@ -116,7 +116,20 @@ const props = withDefaults(defineProps<Props>(), {
         </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
-<style></style>
+<style lang="scss" scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+</style>

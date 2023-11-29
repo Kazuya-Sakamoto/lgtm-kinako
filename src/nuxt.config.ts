@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
   app: {
+    pageTransition: { name: 'page', mode: 'in-out' },
     head: {
       title: 'LGTM-kinako きなこ（犬）のLGTM画像',
       meta: [
