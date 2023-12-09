@@ -4,7 +4,7 @@ const common = {
   Connection: 'keep-alive',
 }
 
-export const h = (csrfToken?: string) => {
+const h = (csrfToken?: string) => {
   return csrfToken
     ? {
         ...common,
@@ -12,3 +12,5 @@ export const h = (csrfToken?: string) => {
       }
     : common
 }
+
+export { h }

@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { useRuntimeConfig } from '@/.nuxt/imports'
 import { h } from '@/lib/headers'
+import { sendGtagEvent } from '@/lib/gtagEvent'
 
 export type Album = {
   image: string
@@ -58,7 +59,14 @@ export const useAlbums = () => {
     albums,
     albumLoading,
     fetchAlbums,
-    refetch: fetchAlbums,
+    refetch: () => {
+      fetchAlbums()
+      sendGtagEvent('refetch_images', {
+        event_category: 'actions',
+        event_action: 'refetch_images',
+        event_label: 'Refetch Images',
+      })
+    },
     fetchAllAlbums,
   }
 }

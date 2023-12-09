@@ -5,6 +5,7 @@ import TheTemplate from '@/components/templates/albums/index.vue'
 import { useAlbums, Album as AlbumQuery } from '@/hooks/useAlbums'
 import { setSeo } from '@/lib/seo'
 import { useWelcomeDialogStore } from '@/store/welcomeDialog'
+import { sendGtagEvent } from '@/lib/gtagEvent'
 
 const welcomeDialogStore = useWelcomeDialogStore()
 
@@ -27,6 +28,11 @@ const { albums, albumLoading, fetchAlbums, refetch } = useAlbums()
 })()
 
 const onCopyImageUrl = (album: AlbumQuery) => {
+  sendGtagEvent('copy_image_url', {
+    event_category: 'actions',
+    event_label: `Album ID: ${album.id}`,
+    value: album.id,
+  })
   const url = `![LGTM](${album.image})`
   window.navigator.clipboard.writeText(url).then(() => {
     state.showClipboardMap[album.id] = true

@@ -13,7 +13,7 @@ type Props = {
   albumLoading: boolean
   onCopyImageUrl: (album: AlbumQuery) => void
   showClipboardMap: Record<string, boolean>
-  refetch: () => Promise<void>
+  refetch: () => void
   isAll?: boolean
   show: boolean
   closeDialog: () => void
