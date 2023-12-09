@@ -28,6 +28,4 @@ useHead(pageSeo)
   </div>
 </template>
 
-<style scoped lang="scss">
-/* ここにスタイルを追加 */
-</style>
+<style scoped lang="scss"></style>

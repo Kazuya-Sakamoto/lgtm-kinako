@@ -27,7 +27,14 @@ const props = withDefaults(defineProps<Props>(), {
   <div>
     <WelcomeDialog :show="show" :close-dialog="closeDialog" />
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div v-if="!props.isAll" class="flex flex-col items-center">
+      <div v-if="props.isAll">
+        <BaseAlert
+          title="管理画面"
+          description="管理用で全てのきなこを表示しています"
+        />
+        <p class="mt-2 lg:text-xl">合計数: {{ props.albums.length }}枚</p>
+      </div>
+      <div v-else class="flex flex-col items-center">
         <h1 class="lg:text-xl">{{ t('$top.title') }}</h1>
         <div
           class="mt-2 flex flex-col items-center text-sm sm:mt-4 lg:mt-6 lg:text-lg"
@@ -38,7 +45,7 @@ const props = withDefaults(defineProps<Props>(), {
             class="font-dm mt-8 inline-flex items-center justify-center rounded-lg bg-yellow-500 px-6 py-3 text-base font-medium text-white shadow-xl shadow-yellow-400/75 transition-transform duration-200 ease-in-out hover:scale-[1.02]"
             @click="props.refetch()"
           >
-            <div v-if="props.albumLoading">
+            <div v-show="props.albumLoading">
               <svg
                 aria-hidden="true"
                 role="status"
@@ -58,7 +65,7 @@ const props = withDefaults(defineProps<Props>(), {
               </svg>
               <span>{{ t('$top.loading') }}</span>
             </div>
-            <div v-else>
+            <div v-show="!props.albumLoading">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -78,19 +85,12 @@ const props = withDefaults(defineProps<Props>(), {
           </button>
         </div>
       </div>
-      <div v-else>
-        <BaseAlert
-          title="管理画面"
-          description="管理用で全てのきなこを表示しています"
-        />
-        <p class="mt-2 lg:text-xl">合計数: {{ props.albums.length }}枚</p>
-      </div>
       <div class="custom-py mx-auto max-w-2xl sm:py-5 sm:pb-20 lg:max-w-none">
-        <template v-if="props.albumLoading">
+        <div v-show="props.albumLoading">
           <AlbumLoading />
-        </template>
+        </div>
         <div
-          v-else
+          v-show="!props.albumLoading"
           class="mt-6 space-y-4"
           :class="{
             'lg:grid lg:grid-cols-4 lg:gap-x-2 lg:space-y-0': !props.isAll,

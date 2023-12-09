@@ -28,7 +28,7 @@ const props = defineProps<Props>()
         class="h-full w-full cursor-pointer object-cover object-center"
       />
       <div
-        v-if="props.showClipboardMap[album.id]"
+        v-show="props.showClipboardMap[album.id]"
         class="absolute inset-0 flex items-center justify-center rounded border-2 border-yellow-300 bg-slate-900 bg-opacity-75 font-bold text-white"
       >
         <svg

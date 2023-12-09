@@ -126,7 +126,7 @@ const props = withDefaults(defineProps<Props>(), {
                 />
               </div>
               <TButton
-                v-if="!props.buttonLoading"
+                v-show="!props.buttonLoading"
                 class="font-bold focus:outline-none focus:ring-4"
                 color="primary"
                 text="アップロードする"
@@ -134,7 +134,7 @@ const props = withDefaults(defineProps<Props>(), {
                 text-color="white"
                 @click="props.onCreateNewAlbum()"
               />
-              <BaseButtonLoading v-else />
+              <BaseButtonLoading v-show="props.buttonLoading" />
             </div>
           </div>
         </div>
