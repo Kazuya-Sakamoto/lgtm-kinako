@@ -86,5 +86,3 @@ const onVideoLoaded = () => {
     </div>
   </div>
 </template>
-
-<style></style>
