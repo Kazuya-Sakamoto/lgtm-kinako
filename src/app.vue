@@ -11,6 +11,7 @@ import { useCreateAlbum } from '@/hooks/useCreateAlbum'
 import { useI18n } from 'vue-i18n'
 import { useLocaleStore } from '@/store/localeStore'
 import Footer from '@/components/organisms/Footer.vue'
+import { CreateNewAlbumParams, LoginParams } from '@/hooks/types'
 
 const loginStore = useLoginStore()
 const { onLoginStore, isLogin } = loginStore
@@ -24,19 +25,11 @@ const { setLocale, locale: localeStoreValue } = localeStore
   locale.value = localeStoreValue
 })()
 
-export type LoginInput = {
-  email: string
-  password: string
-}
-export type CreateNewAlbumInput = {
-  imageUrl: string
-  title: string
-}
-const defaultLoginInput = (): LoginInput => ({
+const defaultLoginInput = (): LoginParams => ({
   email: '',
   password: '',
 })
-const defaultCreateNewAlbumInput = (): CreateNewAlbumInput => ({
+const defaultCreateNewAlbumInput = (): CreateNewAlbumParams => ({
   imageUrl: '',
   title: '',
 })
@@ -46,8 +39,8 @@ type State = {
   showNewAlbumDialog: boolean
   showHeaderMenu: boolean
   buttonLoading: boolean
-  loginInput: LoginInput
-  createNewAlbumInput: CreateNewAlbumInput
+  loginInput: LoginParams
+  createNewAlbumInput: CreateNewAlbumParams
 }
 
 const initialState = (): State => ({
@@ -84,14 +77,14 @@ const loginValidation = () => {
   )
 }
 
-const onLoginInput = (item: { name: keyof LoginInput; value: string }) => {
+const onLoginInput = (item: { name: keyof LoginParams; value: string }) => {
   state.loginInput = {
     ...state.loginInput,
     [item.name]: item.value,
   }
 }
 const onCreateNewAlbumInput = (item: {
-  name: keyof CreateNewAlbumInput
+  name: keyof CreateNewAlbumParams
   value: string
 }) => {
   state.createNewAlbumInput = {

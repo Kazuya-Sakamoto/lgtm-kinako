@@ -2,10 +2,11 @@
 import { useHead } from '@/.nuxt/imports'
 import { reactive } from 'vue'
 import TheTemplate from '@/components/templates/albums/index.vue'
-import { useAlbums, Album as AlbumQuery } from '@/hooks/useAlbums'
+import { useFetchAlbums } from '@/hooks/useFetchAlbums'
 import { setSeo } from '@/lib/seo'
 import { useWelcomeDialogStore } from '@/store/welcomeDialog'
 import { sendGtagEvent } from '@/lib/gtagEvent'
+import { Album as AlbumQuery } from '@/hooks/types'
 
 const welcomeDialogStore = useWelcomeDialogStore()
 
@@ -20,7 +21,7 @@ const initialState = (): State => ({
 })
 const state = reactive<State>(initialState())
 
-const { albums, albumLoading, fetchAlbums, refetch } = useAlbums()
+const { albums, albumLoading, fetchAlbums, refetch } = useFetchAlbums()
 
 ;(async () => {
   welcomeDialogStore.openDialog()

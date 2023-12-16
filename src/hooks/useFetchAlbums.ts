@@ -2,14 +2,9 @@ import { ref } from 'vue'
 import { useRuntimeConfig } from '@/.nuxt/imports'
 import { h } from '@/lib/headers'
 import { sendGtagEvent } from '@/lib/gtagEvent'
+import { Album } from '@/hooks/types'
 
-export type Album = {
-  image: string
-  id: number
-  title: string
-}
-
-export const useAlbums = () => {
+export const useFetchAlbums = () => {
   const config = useRuntimeConfig()
   const albums = ref<Album[]>([])
   const albumLoading = ref(false)
@@ -36,25 +31,6 @@ export const useAlbums = () => {
     }
   }
 
-  const fetchAllAlbums = async (csrfToken: string) => {
-    try {
-      albumLoading.value = true
-      const response: Response = await fetch(`${config.public.API_URL}/album`, {
-        method: 'GET',
-        headers: h(csrfToken),
-        credentials: 'include',
-      })
-      if (!response.ok) return
-
-      const data: Album[] = await response.json()
-      albums.value = data
-    } catch (error) {
-      console.error(error)
-    } finally {
-      albumLoading.value = false
-    }
-  }
-
   return {
     albums,
     albumLoading,
@@ -67,6 +43,5 @@ export const useAlbums = () => {
         event_label: 'Refetch Images',
       })
     },
-    fetchAllAlbums,
   }
 }

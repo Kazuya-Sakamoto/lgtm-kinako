@@ -2,10 +2,13 @@ import { useRuntimeConfig } from '@/.nuxt/imports'
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { h } from '@/lib/headers'
+import { LoginParams } from '@/hooks/types'
 
-type LoginParams = {
-  email: string
-  password: string
+type CsrfResponse = {
+  csrf_token: string
+}
+type LoginResponse = {
+  token: string
 }
 
 export const useLoginStore = defineStore(
@@ -23,7 +26,7 @@ export const useLoginStore = defineStore(
         })
         if (!response.ok) return
 
-        const data = await response.json()
+        const data: CsrfResponse = await response.json()
         csrfToken.value = data.csrf_token
       } catch (error) {
         console.error(error)
@@ -44,8 +47,8 @@ export const useLoginStore = defineStore(
         })
         if (!response.ok) return
 
-        const data = await response.json()
-        token.value = data
+        const data: LoginResponse = await response.json()
+        token.value = data.token
       } catch (error) {
         console.error(error)
         alert(`エラーが発生しました。${error}`)
