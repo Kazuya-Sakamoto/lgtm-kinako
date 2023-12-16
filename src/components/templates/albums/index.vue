@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Album from '@/components/organisms/Album.vue'
-import { Album as AlbumQuery } from '@/hooks/useAlbums'
+import { Album as AlbumQuery } from '@/hooks/types'
 import AlbumLoading from '@/components/organisms/AlbumLoading.vue'
 import BaseAlert from '@/components/molecules/BaseAlert.vue'
 import WelcomeDialog from '@/components/organisms/WelcomeDialog.vue'

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import TButton from '@/components/atoms/TButton.vue'
 import BaseButtonLoading from '@/components/molecules/BaseButtonLoading.vue'
-import { LoginInput } from '@/app.vue'
+import { LoginParams } from '@/hooks/types'
 
 type Props = {
   showLoginDialog: boolean
   closeLoginDialog: () => void
-  onInput: (item: { name: keyof LoginInput; value: string }) => void
+  onInput: (item: { name: keyof LoginParams; value: string }) => void
   onLogin: () => void
   buttonLoading: boolean
   loginValidation: () => boolean

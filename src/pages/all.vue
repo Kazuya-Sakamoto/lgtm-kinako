@@ -2,7 +2,8 @@
 import { useHead, useRouter } from '@/.nuxt/imports'
 import { reactive, onMounted } from 'vue'
 import TheTemplate from '@/components/templates/albums/index.vue'
-import { useAlbums, Album as AlbumQuery } from '@/hooks/useAlbums'
+import { useFetchAllAlbums } from '@/hooks/useFetchAllAlbums'
+import { Album as AlbumQuery } from '@/hooks/types'
 import { useLoginStore } from '@/store/login'
 import { storeToRefs } from 'pinia'
 
@@ -29,7 +30,7 @@ const initialState = (): State => ({
 })
 const state = reactive<State>(initialState())
 
-const { albums, albumLoading, fetchAllAlbums } = useAlbums()
+const { albums, albumLoading, fetchAllAlbums } = useFetchAllAlbums()
 
 onMounted(async () => {
   if (!isLogin()) {

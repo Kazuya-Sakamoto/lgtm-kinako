@@ -2,11 +2,7 @@ import { useRuntimeConfig } from '@/.nuxt/imports'
 import { storeToRefs } from 'pinia'
 import { useLoginStore } from '@/store/login'
 import { h } from '@/lib/headers'
-
-type CreateNewAlbumParams = {
-  title: string
-  imageUrl: string
-}
+import { CreateNewAlbumParams } from '@/hooks/types'
 
 export const useCreateAlbum = () => {
   const config = useRuntimeConfig()

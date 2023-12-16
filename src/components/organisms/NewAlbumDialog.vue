@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import TButton from '@/components/atoms/TButton.vue'
 import BaseButtonLoading from '@/components/molecules/BaseButtonLoading.vue'
-import { CreateNewAlbumInput } from '@/app.vue'
+import { CreateNewAlbumParams } from '@/hooks/types'
 
 type Props = {
   showNewAlbumDialog: boolean
   onCloseNewAlbumDialog: () => void
   onCreateNewAlbum: () => void
-  onInput: (item: { name: keyof CreateNewAlbumInput; value: string }) => void
+  onInput: (item: { name: keyof CreateNewAlbumParams; value: string }) => void
   imageUrl: string
   onFileChange: (e: Event) => void
   buttonLoading: boolean

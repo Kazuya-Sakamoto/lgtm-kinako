@@ -8,8 +8,9 @@ export const useWelcomeDialogStore = defineStore('welcomeDialog', {
   }),
   actions: {
     openDialog() {
-      if (this.done) return
-      // TODO: 初回アクセスユーザーの体験を害いかねないので、一旦コメントアウト
+      // TODO: 現状インフラ整備のため、常に表示する
+      this.show = true
+      // if (this.done) return
       // 計測の目処とかが立ったら、再度検討する
       // https://github.com/Kazuya-Sakamoto/lgtm-kinako/issues/25
       // this.show = true;
