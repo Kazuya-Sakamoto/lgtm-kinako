@@ -4,13 +4,6 @@ import { defineStore } from 'pinia'
 import { h } from '@/lib/headers'
 import { LoginParams } from '@/hooks/types'
 
-type CsrfResponse = {
-  csrf_token: string
-}
-type LoginResponse = {
-  token: string
-}
-
 export const useLoginStore = defineStore(
   'login',
   () => {
@@ -26,7 +19,7 @@ export const useLoginStore = defineStore(
         })
         if (!response.ok) return
 
-        const data: CsrfResponse = await response.json()
+        const data = await response.json()
         csrfToken.value = data.csrf_token
       } catch (error) {
         console.error(error)
@@ -47,8 +40,8 @@ export const useLoginStore = defineStore(
         })
         if (!response.ok) return
 
-        const data: LoginResponse = await response.json()
-        token.value = data.token
+        const data = await response.json()
+        token.value = data
       } catch (error) {
         console.error(error)
         alert(`エラーが発生しました。${error}`)

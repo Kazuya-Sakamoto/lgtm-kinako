@@ -3,7 +3,7 @@ import Album from '@/components/organisms/Album.vue'
 import { Album as AlbumQuery } from '@/hooks/types'
 import AlbumLoading from '@/components/organisms/AlbumLoading.vue'
 import BaseAlert from '@/components/molecules/BaseAlert.vue'
-import WelcomeDialog from '@/components/organisms/WelcomeDialog.vue'
+// import WelcomeDialog from '@/components/organisms/WelcomeDialog.vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -25,7 +25,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <div>
-    <WelcomeDialog :show="show" :close-dialog="closeDialog" />
+    <!-- <WelcomeDialog :show="show" :close-dialog="closeDialog" /> -->
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div v-if="props.isAll">
         <BaseAlert
