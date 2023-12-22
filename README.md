@@ -16,6 +16,12 @@
 - TypeScript v5.2.2
 - Tailwind CSS v3.3.5
 
+## その他環境
+
+- MONITORING: [Google Analytics](https://analytics.google.com/analytics/web/#/p287815666/reports/dashboard?params=_u..nav%3Dmaui&r=lifecycle-engagement-overview&ruid=lifecycle-engagement-overview,life-cycle,engagement&collectionId=life-cycle)
+- HOSTING: [Vercel](https://vercel.com/dashboard)
+- ICON: [Heroicons](https://heroicons.com/)
+
 ## 環境構築
 
 - コンテナ起動
@@ -41,18 +47,3 @@ $ docker-compose exec app sh
 ```
 /src # npm run dev
 ```
-
-## 使用ツール
-
-### monitoring
-
-- [Google Analytics](https://analytics.google.com/analytics/web/#/p287815666/reports/dashboard?params=_u..nav%3Dmaui&r=lifecycle-engagement-overview&ruid=lifecycle-engagement-overview,life-cycle,engagement&collectionId=life-cycle)
-
-### hosting
-
-- [Vercel](https://vercel.com/dashboard)
-
-### design
-
-- icon
-  - [Heroicons](https://heroicons.com/)

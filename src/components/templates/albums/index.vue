@@ -3,7 +3,7 @@ import Album from '@/components/organisms/Album.vue'
 import { Album as AlbumQuery } from '@/hooks/types'
 import AlbumLoading from '@/components/organisms/AlbumLoading.vue'
 import BaseAlert from '@/components/molecules/BaseAlert.vue'
-// import WelcomeDialog from '@/components/organisms/WelcomeDialog.vue'
+// import MaintenanceDialog from '@/components/organisms/MaintenanceDialog.vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -25,7 +25,8 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <div>
-    <!-- <WelcomeDialog :show="show" :close-dialog="closeDialog" /> -->
+    <!-- TODO: メンテナンスダイアログを表示する際にopenにする -->
+    <!-- <MaintenanceDialog :show="show" :close-dialog="closeDialog" /> -->
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div v-if="props.isAll">
         <BaseAlert
@@ -86,12 +87,12 @@ const props = withDefaults(defineProps<Props>(), {
         </div>
       </div>
       <div class="custom-py mx-auto max-w-2xl sm:py-5 sm:pb-20 lg:max-w-none">
-        <div v-show="props.albumLoading">
+        <div v-show="props.albumLoading" class="mt-3">
           <AlbumLoading />
         </div>
         <div
           v-show="!props.albumLoading"
-          class="mt-6 space-y-4"
+          class="mt-3"
           :class="{
             'lg:grid lg:grid-cols-4 lg:gap-x-2 lg:space-y-0': !props.isAll,
             'lg:grid lg:grid-cols-5 lg:gap-x-1 lg:space-y-0': props.isAll,
