@@ -10,24 +10,6 @@ import { Album as AlbumQuery } from '@/hooks/types'
 
 const maintenanceStore = useMaintenanceStore()
 
-const pageSeo = setSeo('きなこ（犬）のLGTM画像')
-const json = {
-  '@context': 'https://schema.org',
-  '@type': 'ImageGallery',
-  name: 'きなこ（犬）のLGTM画像ギャラリー',
-  description:
-    'LGTM-kinakoは、きなこ、犬、わんこ、わんちゃんのLGTM画像を集めたギャラリーです。',
-}
-useHead({
-  ...pageSeo,
-  script: [
-    {
-      type: 'application/ld+json',
-      children: JSON.stringify(json),
-    },
-  ],
-})
-
 type State = {
   showClipboardMap: Record<string, boolean>
 }
@@ -57,6 +39,29 @@ const onCopyImageUrl = (album: AlbumQuery) => {
     state.showClipboardMap[album.id] = false
   }, 2000)
 }
+
+const json = {
+  '@context': 'https://schema.org',
+  '@type': 'ImageGallery',
+  name: 'きなこ（犬）のLGTM画像ギャラリー',
+  description:
+    'LGTM-kinakoは、きなこ、犬、わんこ、わんちゃんのLGTM画像を集めたギャラリーです。',
+  image: albums.value.map((album) => ({
+    '@type': 'ImageObject',
+    url: album.image,
+    caption: album.title,
+  })),
+}
+const pageSeo = setSeo('きなこ（犬）のLGTM画像')
+useHead({
+  ...pageSeo,
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify(json),
+    },
+  ],
+})
 </script>
 
 <template>
