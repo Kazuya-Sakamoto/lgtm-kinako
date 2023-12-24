@@ -18,9 +18,9 @@
 
 ## その他環境
 
-- MONITORING: [Google Analytics](https://analytics.google.com/analytics/web/#/p287815666/reports/dashboard?params=_u..nav%3Dmaui&r=lifecycle-engagement-overview&ruid=lifecycle-engagement-overview,life-cycle,engagement&collectionId=life-cycle)
-- HOSTING: [Vercel](https://vercel.com/dashboard)
-- ICON: [Heroicons](https://heroicons.com/)
+- Monitaring: [Google Analytics](https://analytics.google.com/analytics/web/#/p287815666/reports/dashboard?params=_u..nav%3Dmaui&r=lifecycle-engagement-overview&ruid=lifecycle-engagement-overview,life-cycle,engagement&collectionId=life-cycle)
+- Hosting: [Vercel](https://vercel.com/dashboard)
+- Icon: [Heroicons](https://heroicons.com/)
 
 ## 環境構築
 
