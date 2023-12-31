@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["vue"],
     "noImplicitAny": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
@@ -13,7 +14,7 @@
     "noFallthroughCasesInSwitch": true,
     "target": "ES2020",
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,

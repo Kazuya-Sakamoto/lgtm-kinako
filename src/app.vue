@@ -157,7 +157,7 @@ const changeLocale = async (e: string) => {
       title="ログイン中"
       description="ログイン中なので作業に気をつけてください"
     />
-    <header class="transition duration-300 ease-in-out theme__dark bg-white">
+    <header class="transition duration-300 ease-in-out dark:theme__dark">
       <nav
         class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global"
