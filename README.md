@@ -13,6 +13,8 @@
 
 - Node.js v18.18.0
 - Nuxt.js v3.6.5
+- Vue.js v3.2.36
+- pnpm v8.13.1
 - TypeScript v5.2.2
 - Tailwind CSS v3.3.5
 

@@ -117,8 +117,8 @@ const props = withDefaults(defineProps<Props>(), {
                   placeholder="可愛すぎでした"
                   required
                   @input="
-                    (e) =>
-                      props.onInput({
+                    (e: InputEvent) =>
+                      onInput({
                         name: 'title',
                         value: (e.target as HTMLInputElement)?.value || '',
                       })

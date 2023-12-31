@@ -71,7 +71,7 @@ const props = withDefaults(defineProps<Props>(), {
                   placeholder="lgtm.kinako@gmail.com"
                   required
                   @input="
-                    (e) =>
+                    (e: InputEvent) =>
                       props.onInput({
                         name: 'email',
                         value: (e.target as HTMLInputElement)?.value || '',
@@ -92,7 +92,7 @@ const props = withDefaults(defineProps<Props>(), {
                   placeholder="••••••••"
                   required
                   @input="
-                    (e) =>
+                    (e: InputEvent) =>
                       props.onInput({
                         name: 'password',
                         value: (e.target as HTMLInputElement)?.value || '',

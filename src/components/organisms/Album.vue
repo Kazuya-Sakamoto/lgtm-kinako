@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Album as AlbumQuery } from '@/hooks/useAlbums'
+import { Album as AlbumQuery } from '@/hooks/types'
 
 type Props = {
   album: AlbumQuery
