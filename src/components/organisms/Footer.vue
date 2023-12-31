@@ -7,7 +7,7 @@ const nuxtApp = useNuxtApp()
 
 <template>
   <footer
-    class="transition duration-300 ease-in-out theme__dark bg-yellow-50 shadow pt-5"
+    class="transition duration-300 ease-in-out bg-yellow-50 dark:theme__dark shadow pt-5"
   >
     <div class="flex w-11/12 justify-between pr-2">
       <img

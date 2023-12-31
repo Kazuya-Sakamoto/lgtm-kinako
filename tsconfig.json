@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["vue"],
     "noImplicitAny": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,

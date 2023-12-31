@@ -29,7 +29,7 @@ const props = withDefaults(defineProps<Props>(), {
       class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 o verflow-x-hidden fixed inset-x-0 top-0 z-50 flex h-[calc(100%)] max-h-full w-full items-center justify-center overflow-y-auto bg-gray-800 bg-opacity-70 p-4 md:inset-0"
     >
       <div class="relative max-h-full w-full max-w-md">
-        <div class="theme__dark relative rounded-lg bg-white shadow">
+        <div class="dark:theme__dark relative rounded-lg bg-white shadow">
           <button
             type="button"
             class="absolute right-2.5 top-3 ml-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-800"
