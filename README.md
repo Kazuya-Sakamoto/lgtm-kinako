@@ -27,7 +27,7 @@
 - コンテナ起動
 
 ```
-$ docker compose up -d
+$ docker-compose up -d --build
 ```
 
 - アプリケーションコンテナ内へ移動
@@ -39,11 +39,11 @@ $ docker-compose exec app sh
 - 初期設定
 
 ```
-/src # npm i
+/src # pnpm install
 ```
 
 - 起動
 
 ```
-/src # npm run dev
+/src # pnpm dev
 ```

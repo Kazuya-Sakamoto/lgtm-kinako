@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   app:
@@ -12,9 +12,9 @@ services:
       - "24678:24678" # HMR用のポートを追加
     tty: true
     environment:
-    - HOST=0.0.0.0
-    - port=3000
-    - CHOKIDAR_USEPOLLING=true
+      - HOST=0.0.0.0
+      - port=3000
+      - CHOKIDAR_USEPOLLING=true
 
 volumes:
   node_modules:
