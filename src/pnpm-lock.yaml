@@ -20,6 +20,9 @@ dependencies:
   '@types/node':
     specifier: ^20.5.9
     version: 20.10.6
+  '@types/vue-i18n':
+    specifier: ^7.0.0
+    version: 7.0.0(vue@3.4.3)
   pinia:
     specifier: ^2.1.7
     version: 2.1.7(typescript@5.3.3)(vue@3.4.3)
@@ -29,6 +32,9 @@ dependencies:
   vue-gtag:
     specifier: ^2.0.1
     version: 2.0.1(vue@3.4.3)
+  vue-i18n:
+    specifier: ^9.8.0
+    version: 9.8.0(vue@3.4.3)
 
 devDependencies:
   '@nuxt/devtools':
@@ -1743,6 +1749,15 @@ packages:
   /@types/semver@7.5.6:
     resolution: {integrity: sha512-dn1l8LaMea/IjDoHNd9J52uBbInB796CDffS6VdIxvqYCPSG0V0DzHp76GpaWnlhg88uYyPbXCDIowa86ybd5A==}
     dev: true
+
+  /@types/vue-i18n@7.0.0(vue@3.4.3):
+    resolution: {integrity: sha512-4e3EvN4k+B6eTq1qWDFW1wpzCgz+8nNCn6LAQTkcRoGJx9rVO5iYzyEogFTi9RwBJ588+Rx0nUwRFjKUYPe/BQ==}
+    deprecated: This is a stub types definition for vue-i18n (https://github.com/kazupon/vue-i18n). vue-i18n provides its own type definitions, so you don't need @types/vue-i18n installed!
+    dependencies:
+      vue-i18n: 9.8.0(vue@3.4.3)
+    transitivePeerDependencies:
+      - vue
+    dev: false
 
   /@typescript-eslint/eslint-plugin@6.16.0(@typescript-eslint/parser@6.16.0)(eslint@8.56.0)(typescript@5.3.3):
     resolution: {integrity: sha512-O5f7Kv5o4dLWQtPX4ywPPa+v9G+1q1x8mz0Kr0pXUtKsevo+gIJHLkGc8RxaZWtP8RrhwhSNIWThnW42K9/0rQ==}
