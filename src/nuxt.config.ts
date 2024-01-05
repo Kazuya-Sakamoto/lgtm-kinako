@@ -97,4 +97,7 @@ export default defineNuxtConfig({
     locale: 'ja',
     fallbackLocale: 'ja',
   },
+  nitro: {
+    compressPublicAssets: true,
+  },
 })
