@@ -68,6 +68,9 @@ export default defineNuxtConfig({
   ],
   css: ['~/assets/css/main.css'],
   vite: {
+    build: {
+      minify: 'terser',
+    },
     assetsInclude: ['**/*.MP4'],
     css: {
       preprocessorOptions: {
