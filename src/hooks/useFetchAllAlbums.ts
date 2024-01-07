@@ -18,8 +18,7 @@ export const useFetchAllAlbums = () => {
       })
       if (!response.ok) return
 
-      const data: Album[] = await response.json()
-      albums.value = data
+      albums.value = (await response.json()) as Album[]
     } catch (error) {
       console.error(error)
     } finally {

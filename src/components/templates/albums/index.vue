@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import Album from '@/components/organisms/Album.vue'
+import Album from '@/components/organisms/Albums/Album.vue'
 import { Album as AlbumQuery } from '@/hooks/types'
-import AlbumLoading from '@/components/organisms/AlbumLoading.vue'
+import AlbumLoading from '@/components/organisms/Albums/AlbumLoading.vue'
 import BaseAlert from '@/components/molecules/BaseAlert.vue'
-// import MaintenanceDialog from '@/components/organisms/MaintenanceDialog.vue'
+// import MaintenanceDialog from '@/components/organisms/Dialogs/MaintenanceDialog.vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
