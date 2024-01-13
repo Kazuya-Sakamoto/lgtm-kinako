@@ -5,7 +5,7 @@ import LoginDialog from '@/components/organisms/Dialogs/LoginDialog.vue'
 import NewAlbumDialog from '@/components/organisms/Dialogs/NewAlbumDialog.vue'
 import HeaderMenu from '@/components/organisms/Headers/HeaderMenu.vue'
 import HeaderChangeMode from '@/components/organisms/Headers/HeaderChangeMode.vue'
-import BaseAlert from '@/components/molecules/BaseAlert.vue'
+import TAlert from '@/components/atoms/TAlert.vue'
 import { checkEmailVal, isPasswordLengthValid } from '@/lib/validation'
 import { useCreateAlbum } from '@/hooks/useCreateAlbum'
 import { useI18n } from 'vue-i18n'
@@ -60,11 +60,11 @@ const onLogin = async () => {
       email: state.loginInput.email,
       password: state.loginInput.password,
     })
-    state.showLoginDialog = false
   } catch (error) {
     console.error(error)
     alert(`エラーが発生しました。${error}`)
   } finally {
+    state.showLoginDialog = false
     state.buttonLoading = false
   }
 }
@@ -152,12 +152,14 @@ const changeLocale = async (e: string) => {
       :on-file-change="onFileChange"
       :button-loading="state.buttonLoading"
     />
-    <BaseAlert
-      v-if="isLogin()"
-      title="ログイン中"
-      description="ログイン中なので作業に気をつけてください"
-    />
     <header class="transition duration-300 ease-in-out dark:theme__dark">
+      <div>
+        <TAlert
+          v-if="isLogin()"
+          color="green"
+          description="ログインに成功しました"
+        />
+      </div>
       <nav
         class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global"

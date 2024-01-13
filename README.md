@@ -20,7 +20,9 @@
 
 ## その他環境
 
-- Monitoring: [Google Analytics](https://analytics.google.com/analytics/web/#/p287815666/reports/dashboard?params=_u..nav%3Dmaui&r=lifecycle-engagement-overview&ruid=lifecycle-engagement-overview,life-cycle,engagement&collectionId=life-cycle)
+- Monitoring:
+  - [Google Analytics](https://analytics.google.com/analytics/web/#/p287815666/reports/dashboard?params=_u..nav%3Dmaui&r=lifecycle-engagement-overview&ruid=lifecycle-engagement-overview,life-cycle,engagement&collectionId=life-cycle)
+  - [Search Console](https://search.google.com/search-console?resource_id=sc-domain%3Algtm-kinako.com)
 - Hosting: [Vercel](https://vercel.com/dashboard)
 - Icon: [Heroicons](https://heroicons.com/)
 

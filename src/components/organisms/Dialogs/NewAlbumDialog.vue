@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import TButton from '@/components/atoms/TButton.vue'
-import BaseButtonLoading from '@/components/molecules/BaseButtonLoading.vue'
 import { CreateNewAlbumParams } from '@/hooks/types'
 
 type Props = {
@@ -126,15 +125,14 @@ const props = withDefaults(defineProps<Props>(), {
                 />
               </div>
               <TButton
-                v-show="!props.buttonLoading"
-                class="font-bold focus:outline-none focus:ring-4"
-                color="primary"
-                text="アップロードする"
+                class="font-bold"
+                color="yellow"
                 size="full"
                 text-color="white"
+                :loading="props.buttonLoading"
                 @click="props.onCreateNewAlbum()"
-              />
-              <BaseButtonLoading v-show="props.buttonLoading" />
+                >アップロードする</TButton
+              >
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@
 import Album from '@/components/organisms/Albums/Album.vue'
 import { Album as AlbumQuery } from '@/hooks/types'
 import AlbumLoading from '@/components/organisms/Albums/AlbumLoading.vue'
-import BaseAlert from '@/components/molecules/BaseAlert.vue'
+import TAlert from '@/components/atoms/TAlert.vue'
 // import MaintenanceDialog from '@/components/organisms/Dialogs/MaintenanceDialog.vue'
 import { useI18n } from 'vue-i18n'
 
@@ -29,10 +29,7 @@ const props = withDefaults(defineProps<Props>(), {
     <!-- <MaintenanceDialog :show="show" :close-dialog="closeDialog" /> -->
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div v-if="props.isAll">
-        <BaseAlert
-          title="管理画面"
-          description="管理用で全てのきなこを表示しています"
-        />
+        <TAlert description="管理用で全てのきなこを表示しています" />
         <p class="mt-2 lg:text-xl">合計数: {{ props.albums.length }}枚</p>
       </div>
       <div v-else class="flex flex-col items-center">

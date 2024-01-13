@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import TButton from '@/components/atoms/TButton.vue'
-import BaseButtonLoading from '@/components/molecules/BaseButtonLoading.vue'
 import { LoginParams } from '@/hooks/types'
 
 type Props = {
@@ -101,16 +100,15 @@ const props = withDefaults(defineProps<Props>(), {
                 />
               </div>
               <TButton
-                v-if="!props.buttonLoading"
-                class="font-bold focus:outline-none focus:ring-4"
-                color="primary"
-                text="login"
+                class="font-bold"
+                color="yellow"
                 size="full"
                 text-color="white"
                 :disabled="!props.loginValidation()"
+                :loading="props.buttonLoading"
                 @click="props.onLogin()"
-              />
-              <BaseButtonLoading v-else />
+                >ログインする</TButton
+              >
             </div>
           </div>
         </div>

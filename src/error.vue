@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import TButton from '@/components/atoms/TButton.vue'
+</script>
 
 <template>
   <div class="container">
@@ -13,13 +15,10 @@
         <br />
         URLが間違っている可能性があります。
       </p>
-      <div class="mt-6">
+      <div>
+        <br />
         <nuxt-link to="/">
-          <button
-            class="rounded border border-gray-400 bg-white px-4 py-2 font-semibold text-gray-800 hover:bg-gray-100"
-          >
-            ホームに戻る
-          </button>
+          <TButton class="font-bold">ホームに戻る</TButton>
         </nuxt-link>
       </div>
     </div>
