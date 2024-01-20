@@ -48,11 +48,18 @@ export const useLoginStore = defineStore(
       }
     }
 
-    const isLogin = () => {
-      return !!token.value
+    return {
+      csrfToken,
+      token,
+      onLoginStore,
+      isLogin: () => {
+        return !!token.value
+      },
+      clearToken: () => {
+        csrfToken.value = ''
+        token.value = ''
+      },
     }
-
-    return { csrfToken, token, onLoginStore, isLogin }
   },
   {
     persist: true,

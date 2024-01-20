@@ -3,7 +3,7 @@
     "title": "きなこのLGTM画像を共有出来るサービスです",
     "sub_title": "画像をクリックするとMarkdownがコピーされます",
     "load_button": "他のきなこをみる",
-    "loading": "よみこみちゅう..."
+    "loading": "よみこみちゅう...."
   },
   "$headers": {
     "top": "きなこをみる",

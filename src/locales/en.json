@@ -2,7 +2,7 @@
   "$top": {
     "title": "Kinako's LGTM images",
     "sub_title": "Clicking on the image copies the Markdown",
-    "load_button": "View Other Kinako",
+    "load_button": "See More Kinako",
     "loading": "Now Loading......"
   },
   "$headers": {

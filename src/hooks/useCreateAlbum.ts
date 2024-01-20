@@ -2,12 +2,14 @@ import { useRuntimeConfig } from '@/.nuxt/imports'
 import { storeToRefs } from 'pinia'
 import { useLoginStore } from '@/store/login'
 import { h } from '@/lib/headers'
+import { useErrorHandler } from '@/hooks/useErrorHandler'
 import { CreateNewAlbumParams } from '@/hooks/types'
 
 export const useCreateAlbum = () => {
   const config = useRuntimeConfig()
   const loginStore = useLoginStore()
   const { csrfToken } = storeToRefs(loginStore)
+  const { handleUnauthorizedError } = useErrorHandler()
 
   const createNewAlbum = async ({ title, imageUrl }: CreateNewAlbumParams) => {
     const params = { image: imageUrl, title }
@@ -17,7 +19,8 @@ export const useCreateAlbum = () => {
       body: JSON.stringify(params),
       credentials: 'include',
     })
-    if (!response.ok) throw new Error('Failed to create album')
+    if (!response.ok) handleUnauthorizedError(response.status)
+
     return response.json()
   }
 

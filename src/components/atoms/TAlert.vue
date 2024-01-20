@@ -3,11 +3,11 @@ import { computed } from 'vue'
 type Color = 'default' | 'yellow' | 'red' | 'green'
 
 type Props = {
-  title: string
   description: string
-  color: Color
+  color?: Color
 }
 const props = withDefaults(defineProps<Props>(), {
+  description: '',
   color: 'default',
 })
 
