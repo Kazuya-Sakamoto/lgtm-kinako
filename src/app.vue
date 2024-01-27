@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
 import { useLoginStore } from '@/store/login'
 import LoginDialog from '@/components/organisms/Dialogs/LoginDialog.vue'
 import NewAlbumDialog from '@/components/organisms/Dialogs/NewAlbumDialog.vue'
@@ -53,6 +53,28 @@ const initialState = (): State => ({
 })
 const state = reactive<State>(initialState())
 
+const changeLocale = async (e: string) => {
+  locale.value = e
+  await setLocale(locale.value)
+}
+
+/**
+ * ログインダイアログ
+ */
+const onLoginInput = (item: { name: keyof LoginParams; value: string }) => {
+  state.loginInput = {
+    ...state.loginInput,
+    [item.name]: item.value,
+  }
+}
+const loginValidation = computed(() => {
+  return (
+    state.loginInput.email.trim() !== '' &&
+    checkEmailVal(state.loginInput.email) &&
+    state.loginInput.password.trim() !== '' &&
+    isPasswordLengthValid(state.loginInput.password)
+  )
+})
 const onLogin = async () => {
   state.buttonLoading = true
   try {
@@ -68,21 +90,9 @@ const onLogin = async () => {
     state.buttonLoading = false
   }
 }
-const loginValidation = () => {
-  return (
-    state.loginInput.email.trim() !== '' &&
-    checkEmailVal(state.loginInput.email) &&
-    state.loginInput.password.trim() !== '' &&
-    isPasswordLengthValid(state.loginInput.password)
-  )
-}
-
-const onLoginInput = (item: { name: keyof LoginParams; value: string }) => {
-  state.loginInput = {
-    ...state.loginInput,
-    [item.name]: item.value,
-  }
-}
+/**
+ * アルバム作成ダイアログ
+ */
 const onCreateNewAlbumInput = (item: {
   name: keyof CreateNewAlbumParams
   value: string
@@ -92,11 +102,9 @@ const onCreateNewAlbumInput = (item: {
     [item.name]: item.value,
   }
 }
-
 const onFileChange = (e: Event) => {
   const target = e.target as HTMLInputElement
   const file = target.files?.[0]
-
   if (file) {
     const reader = new FileReader()
     reader.onload = (event) => {
@@ -106,7 +114,6 @@ const onFileChange = (e: Event) => {
     reader.readAsDataURL(file)
   }
 }
-
 const onCreateNewAlbum = async () => {
   state.buttonLoading = true
   try {
@@ -114,22 +121,18 @@ const onCreateNewAlbum = async () => {
       title: state.createNewAlbumInput.title,
       imageUrl: state.createNewAlbumInput.imageUrl,
     })
-    state.showNewAlbumDialog = false
   } catch (error) {
     console.error(error)
     alert(`エラーが発生しました。${error}`)
   } finally {
+    onCloseNewAlbumDialog()
     state.buttonLoading = false
   }
 }
 const onCloseNewAlbumDialog = () => {
   state.showNewAlbumDialog = false
   onCreateNewAlbumInput({ name: 'imageUrl', value: '' })
-}
-
-const changeLocale = async (e: string) => {
-  locale.value = e
-  await setLocale(locale.value)
+  onCreateNewAlbumInput({ name: 'title', value: '' })
 }
 </script>
 

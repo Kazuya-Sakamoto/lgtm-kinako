@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import TButton from '@/components/atoms/TButton.vue'
 import { LoginParams } from '@/hooks/types'
+import { computed, ComputedRef } from 'vue'
 
 type Props = {
   showLoginDialog: boolean
@@ -8,7 +9,7 @@ type Props = {
   onInput: (item: { name: keyof LoginParams; value: string }) => void
   onLogin: () => void
   buttonLoading: boolean
-  loginValidation: () => boolean
+  loginValidation: () => ComputedRef<boolean>
 }
 const props = withDefaults(defineProps<Props>(), {
   showLoginDialog: false,
@@ -16,7 +17,7 @@ const props = withDefaults(defineProps<Props>(), {
   onInput: () => {},
   onLogin: () => {},
   buttonLoading: false,
-  loginValidation: () => false,
+  loginValidation: () => computed(() => false),
 })
 </script>
 
@@ -104,7 +105,7 @@ const props = withDefaults(defineProps<Props>(), {
                 color="yellow"
                 size="full"
                 text-color="white"
-                :disabled="!props.loginValidation()"
+                :disabled="!props.loginValidation"
                 :loading="props.buttonLoading"
                 @click="props.onLogin()"
                 >ログインする</TButton
