@@ -13,11 +13,14 @@ export const useFetchAllAlbums = () => {
   const fetchAllAlbums = async (csrfToken: string) => {
     try {
       albumLoading.value = true
-      const response: Response = await fetch(`${config.public.API_URL}/album`, {
-        method: 'GET',
-        headers: h(csrfToken),
-        credentials: 'include',
-      })
+      const response: Response = await fetch(
+        `${config.public.API_URL}/album/all`,
+        {
+          method: 'GET',
+          headers: h(csrfToken),
+          credentials: 'include',
+        }
+      )
       if (!response.ok) handleUnauthorizedError(response.status)
 
       albums.value = (await response.json()) as Album[]
