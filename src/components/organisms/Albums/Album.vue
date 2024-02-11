@@ -16,7 +16,7 @@ const props = defineProps<Props>()
     @click="() => props.onCopyImageUrl(props.album)"
   >
     <div
-      class="main__shadow sm:aspect-h-1 relative mt-2 h-96 w-full overflow-hidden rounded bg-white group-hover:opacity-75 border-none"
+      class="main__shadow sm:aspect-h-1 relative mt-4 h-96 w-full overflow-hidden rounded bg-white group-hover:opacity-75 border-none"
     >
       <img
         :src="album.image"
@@ -49,15 +49,29 @@ const props = defineProps<Props>()
         リンクをコピーしました
       </div>
     </div>
-    <h3 class="mb-2 mt-1 text-sm text-gray-500 dark:text-white">
-      <span class="absolute inset-0" />
+    <div class="gradient-filter absolute bottom-0 left-0 right-0 h-1/3" />
+    <h3
+      class="absolute bottom-0 mb-2 text-sm text-white left-0 text-center ml-2 pb-2"
+    >
       {{ album.title }}
     </h3>
+    <div class="absolute bottom-0 left-0 ml-2 mb-8 flex flex-wrap">
+      <div v-for="(tag, i) in album.tags" :key="i" class="mr-2 mb-2">
+        <span
+          class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20"
+        >
+          {{ tag.name }}
+        </span>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 .image-filter {
   filter: blur(3px);
+}
+.gradient-filter {
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
 }
 </style>
