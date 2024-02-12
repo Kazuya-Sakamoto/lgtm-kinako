@@ -91,7 +91,7 @@ const props = withDefaults(defineProps<Props>(), {
           <span
             @click="navigateWithTag(tag.id)"
             :class="[
-              'inline-flex items-center cursor-pointer rounded-md px-4 py-3 text-xs font-medium ring-1 ring-inset ring-yellow-600/20',
+              'tag inline-flex items-center cursor-pointer rounded-md px-4 py-3 text-xs font-medium ring-1 ring-inset ring-yellow-600/20',
               tag.id == props.currentTag
                 ? 'bg-yellow-400 text-white'
                 : 'bg-yellow-50 text-yellow-800',
@@ -145,6 +145,16 @@ const props = withDefaults(defineProps<Props>(), {
 @media (max-width: 640px) {
   .custom-py {
     padding-bottom: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .tag {
+    padding: 6px 8px;
+    .w-6.h-6 {
+      width: 1rem;
+      height: 1.5rem;
+    }
   }
 }
 </style>
