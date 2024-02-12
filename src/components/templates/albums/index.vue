@@ -20,6 +20,7 @@ type Props = {
   tags: TagQuery[]
   navigateWithTag: (tagId: number) => void
   currentTag: any
+  tagLoading: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   isAll: false,
@@ -86,12 +87,12 @@ const props = withDefaults(defineProps<Props>(), {
           </button>
         </div>
       </div>
-      <div class="mt-6 flex flex-wrap">
+      <div v-show="!props.tagLoading" class="mt-6 flex flex-wrap">
         <div v-for="(tag, i) in props.tags" :key="i" class="mr-2 mb-2">
           <span
             @click="navigateWithTag(tag.id)"
             :class="[
-              'tag inline-flex items-center cursor-pointer rounded-md px-4 py-3 text-xs font-medium ring-1 ring-inset ring-yellow-600/20',
+              'tag inline-flex items-center cursor-pointer rounded-md px-4 py-3 text-xs font-medium ring-1 ring-inset ring-yellow-600/20 shadow-xl shadow-yellow-600/35',
               tag.id == props.currentTag
                 ? 'bg-yellow-400 text-white'
                 : 'bg-yellow-50 text-yellow-800',
@@ -114,6 +115,15 @@ const props = withDefaults(defineProps<Props>(), {
 
             {{ tag.name }}
           </span>
+        </div>
+      </div>
+      <div v-show="props.tagLoading">
+        <div class="animate-pulse flex w-full">
+          <div v-for="index in 4" :key="index" class="w-32">
+            <div
+              class="aspect-h-1 relative mt-6 h-14 overflow-hidden rounded border-inherit bg-gray-300 dark:bg-neutral-800 group-hover:opacity-75 mx-1"
+            />
+          </div>
         </div>
       </div>
       <div class="custom-py mx-auto max-w-2xl sm:py-5 sm:pb-20 lg:max-w-none">

@@ -37,7 +37,7 @@ const initialState = (): State => ({
 const state = reactive<State>(initialState())
 
 const { albums, albumLoading, fetchAlbums, refetch } = useFetchAlbums()
-const { tags, fetchTags } = useFetchTags()
+const { tags, loading: tagLoading, fetchTags } = useFetchTags()
 
 ;(async () => {
   await Promise.all([fetchAlbums(route.query.tag), fetchTags()])
@@ -97,6 +97,7 @@ useHead({
       :tags="tags"
       :navigateWithTag="navigateWithTag"
       :current-tag="currentTag"
+      :tag-loading="tagLoading"
     />
   </div>
 </template>
