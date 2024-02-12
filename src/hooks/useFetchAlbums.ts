@@ -1,25 +1,26 @@
-import { ref } from 'vue'
-import { useRuntimeConfig } from '@/.nuxt/imports'
+import { ref, watch } from 'vue'
+import { useRuntimeConfig, useRoute } from '@/.nuxt/imports'
 import { h } from '@/lib/headers'
 import { sendGtagEvent } from '@/lib/gtagEvent'
 import { Album } from '@/hooks/types'
 
 export const useFetchAlbums = () => {
   const config = useRuntimeConfig()
+  const route = useRoute()
   const albums = ref<Album[]>([])
   const albumLoading = ref(false)
 
-  const fetchAlbums = async () => {
+  const fetchAlbums = async (tag?: string) => {
     try {
       albumLoading.value = true
-      const response: Response = await fetch(
-        `${config.public.API_URL}/album/random`,
-        {
-          method: 'GET',
-          headers: h(),
-          credentials: 'include',
-        }
-      )
+      const url = tag
+        ? `${config.public.API_URL}/album?tag=${tag}`
+        : `${config.public.API_URL}/album`
+      const response: Response = await fetch(url, {
+        method: 'GET',
+        headers: h(),
+        credentials: 'include',
+      })
       if (!response.ok) return
 
       albums.value = (await response.json()) as Album[]
@@ -30,12 +31,19 @@ export const useFetchAlbums = () => {
     }
   }
 
+  watch(
+    () => route.query.tag,
+    (newTag) => {
+      fetchAlbums(newTag)
+    }
+  )
+
   return {
     albums,
     albumLoading,
     fetchAlbums,
     refetch: () => {
-      fetchAlbums()
+      fetchAlbums(route.query.tag)
       sendGtagEvent('refetch_images', {
         event_category: 'actions',
         event_action: 'refetch_images',

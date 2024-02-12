@@ -1,14 +1,32 @@
 <script setup lang="ts">
-import { useHead } from '@/.nuxt/imports'
-import { reactive } from 'vue'
+import { useHead, useRouter, useRoute } from '@/.nuxt/imports'
+import { reactive, ref, watch } from 'vue'
 import TheTemplate from '@/components/templates/albums/index.vue'
 import { useFetchAlbums } from '@/hooks/useFetchAlbums'
+import { useFetchTags } from '@/hooks/useFetchTags'
 import { setSeo } from '@/lib/seo'
 import { useMaintenanceStore } from '@/store/maintenance'
 import { sendGtagEvent } from '@/lib/gtagEvent'
 import { Album as AlbumQuery } from '@/hooks/types'
 
 const maintenanceStore = useMaintenanceStore()
+const route = useRoute()
+const router = useRouter()
+
+const currentTag = ref(route.query.tag)
+watch(
+  () => route.query.tag,
+  (newTag) => {
+    currentTag.value = newTag
+  }
+)
+const navigateWithTag = (tagId: number) => {
+  if (currentTag.value === tagId.toString()) {
+    router.push({ path: '/' })
+  } else {
+    router.push({ path: '/', query: { tag: tagId.toString() } })
+  }
+}
 
 type State = {
   showClipboardMap: Record<string, boolean>
@@ -19,10 +37,12 @@ const initialState = (): State => ({
 const state = reactive<State>(initialState())
 
 const { albums, albumLoading, fetchAlbums, refetch } = useFetchAlbums()
+const { tags, fetchTags } = useFetchTags()
 
 ;(async () => {
+  await Promise.all([fetchAlbums(route.query.tag), fetchTags()])
+
   maintenanceStore.openDialog()
-  await fetchAlbums()
 })()
 
 const onCopyImageUrl = (album: AlbumQuery) => {
@@ -74,6 +94,9 @@ useHead({
       :refetch="refetch"
       :show="maintenanceStore.show"
       :close-dialog="maintenanceStore.closeDialog"
+      :tags="tags"
+      :navigateWithTag="navigateWithTag"
+      :current-tag="currentTag"
     />
   </div>
 </template>

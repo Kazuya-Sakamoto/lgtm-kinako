@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Album from '@/components/organisms/Albums/Album.vue'
-import { Album as AlbumQuery } from '@/hooks/types'
+import { Album as AlbumQuery, Tag as TagQuery } from '@/hooks/types'
 import AlbumLoading from '@/components/organisms/Albums/AlbumLoading.vue'
 import TAlert from '@/components/atoms/TAlert.vue'
 // import MaintenanceDialog from '@/components/organisms/Dialogs/MaintenanceDialog.vue'
@@ -17,6 +17,9 @@ type Props = {
   isAll?: boolean
   show: boolean
   closeDialog: () => void
+  tags: TagQuery[]
+  navigateWithTag: (tagId: number) => void
+  currentTag: any
 }
 const props = withDefaults(defineProps<Props>(), {
   isAll: false,
@@ -83,6 +86,36 @@ const props = withDefaults(defineProps<Props>(), {
           </button>
         </div>
       </div>
+      <div class="mt-6 flex flex-wrap">
+        <div v-for="(tag, i) in props.tags" :key="i" class="mr-2 mb-2">
+          <span
+            @click="navigateWithTag(tag.id)"
+            :class="[
+              'inline-flex items-center cursor-pointer rounded-md px-4 py-3 text-xs font-medium ring-1 ring-inset ring-yellow-600/20',
+              tag.id == props.currentTag
+                ? 'bg-yellow-400 text-white'
+                : 'bg-yellow-50 text-yellow-800',
+            ]"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6 pr-1"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+              />
+            </svg>
+
+            {{ tag.name }}
+          </span>
+        </div>
+      </div>
       <div class="custom-py mx-auto max-w-2xl sm:py-5 sm:pb-20 lg:max-w-none">
         <div v-show="props.albumLoading" class="mt-3">
           <AlbumLoading />
@@ -111,7 +144,6 @@ const props = withDefaults(defineProps<Props>(), {
 <style scoped lang="scss">
 @media (max-width: 640px) {
   .custom-py {
-    padding-top: 2rem;
     padding-bottom: 2rem;
   }
 }
