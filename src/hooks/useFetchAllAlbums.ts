@@ -14,7 +14,7 @@ export const useFetchAllAlbums = () => {
     try {
       albumLoading.value = true
       const response: Response = await fetch(
-        `${config.public.API_URL}/album/all`,
+        `${config.public.API_URL}/albums/all`,
         {
           method: 'GET',
           headers: h(csrfToken),

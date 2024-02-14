@@ -14,8 +14,8 @@ export const useFetchAlbums = () => {
     try {
       albumLoading.value = true
       const url = tag
-        ? `${config.public.API_URL}/album?tag=${tag}`
-        : `${config.public.API_URL}/album`
+        ? `${config.public.API_URL}/albums?tag=${tag}`
+        : `${config.public.API_URL}/albums`
       const response: Response = await fetch(url, {
         method: 'GET',
         headers: h(),

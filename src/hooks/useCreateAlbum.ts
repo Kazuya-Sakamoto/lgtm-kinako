@@ -13,7 +13,7 @@ export const useCreateAlbum = () => {
 
   const createNewAlbum = async ({ title, imageUrl }: CreateNewAlbumParams) => {
     const params = { image: imageUrl, title }
-    const response = await fetch(`${config.public.API_URL}/album`, {
+    const response = await fetch(`${config.public.API_URL}/albums`, {
       method: 'POST',
       headers: h(csrfToken.value),
       body: JSON.stringify(params),
