@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import Album from '@/components/organisms/Albums/Album.vue'
 import { Album as AlbumQuery, Tag as TagQuery } from '@/hooks/types'
-import AlbumLoading from '@/components/organisms/Albums/AlbumLoading.vue'
 import Tags from '@/components/organisms/Tags/Tags.vue'
 import TAlert from '@/components/atoms/TAlert.vue'
+import Albums from '@/components/organisms/Albums/Albums.vue'
 // import MaintenanceDialog from '@/components/organisms/Dialogs/MaintenanceDialog.vue'
 import { useI18n } from 'vue-i18n'
 
@@ -12,16 +11,16 @@ const { t } = useI18n()
 type Props = {
   albums: AlbumQuery[]
   albumLoading: boolean
-  onCopyImageUrl: (album: AlbumQuery) => void
+  onCopyImage: (album: AlbumQuery) => void
   showClipboardMap: Record<string, boolean>
   refetch: () => void
   isAll?: boolean
   show: boolean
   closeDialog: () => void
-  tags: TagQuery[]
-  navigateWithTag: (tagId: number) => void
-  currentTag: any
-  tagLoading: boolean
+  tags?: TagQuery[]
+  navigateWithTag?: (tagId: number) => void
+  currentTag?: any
+  tagLoading?: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   isAll: false,
@@ -88,32 +87,22 @@ const props = withDefaults(defineProps<Props>(), {
           </button>
         </div>
       </div>
-      <Tags
-        :tags="props.tags"
-        :navigate-with-tag="props.navigateWithTag"
-        :current-tag="props.currentTag"
-        :tag-loading="props.tagLoading"
-      />
+      <template v-if="!props.isAll">
+        <Tags
+          :tags="props.tags"
+          :navigate-with-tag="props.navigateWithTag"
+          :current-tag="props.currentTag"
+          :tag-loading="props.tagLoading"
+        />
+      </template>
       <div class="custom-py mx-auto max-w-2xl sm:py-5 sm:pb-20 lg:max-w-none">
-        <div v-show="props.albumLoading" class="mt-3">
-          <AlbumLoading />
-        </div>
-        <div
-          v-show="!props.albumLoading"
-          class="mt-3"
-          :class="{
-            'lg:grid lg:grid-cols-4 lg:gap-x-2 lg:space-y-0': !props.isAll,
-            'lg:grid lg:grid-cols-5 lg:gap-x-1 lg:space-y-0': props.isAll,
-          }"
-        >
-          <div v-for="(album, i) in props.albums" :key="i">
-            <Album
-              :album="album"
-              :show-clipboard-map="showClipboardMap"
-              :on-copy-image-url="onCopyImageUrl"
-            />
-          </div>
-        </div>
+        <Albums
+          :albums="props.albums"
+          :album-loading="props.albumLoading"
+          :is-all="props.isAll"
+          :show-clipboard-map="props.showClipboardMap"
+          :on-copy-image="props.onCopyImage"
+        />
       </div>
     </div>
   </div>

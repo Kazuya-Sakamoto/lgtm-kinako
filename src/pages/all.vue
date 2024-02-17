@@ -55,7 +55,7 @@ const onCopyAlbumID = (album: AlbumQuery) => {
     <TheTemplate
       :albums="albums"
       :album-loading="albumLoading"
-      :on-copy-image-url="onCopyAlbumID"
+      :on-copy-image="onCopyAlbumID"
       :show-clipboard-map="{}"
       :refetch="fetchData"
       :is-all="true"

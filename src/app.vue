@@ -1,21 +1,19 @@
 <script setup lang="ts">
-import { reactive, computed } from 'vue'
+import { reactive } from 'vue'
 import { useLoginStore } from '@/store/login'
 import LoginDialog from '@/components/organisms/Dialogs/LoginDialog.vue'
 import NewAlbumDialog from '@/components/organisms/Dialogs/NewAlbumDialog.vue'
 import HeaderMenu from '@/components/organisms/Headers/HeaderMenu.vue'
 import HeaderChangeMode from '@/components/organisms/Headers/HeaderChangeMode.vue'
 import TAlert from '@/components/atoms/TAlert.vue'
-import { checkEmailVal, isPasswordLengthValid } from '@/lib/validation'
 import { useCreateAlbum } from '@/hooks/useCreateAlbum'
 import { useI18n } from 'vue-i18n'
 import { useLocaleStore } from '@/store/localeStore'
 import Footer from '@/components/organisms/Footer.vue'
-import { CreateNewAlbumParams, LoginParams } from '@/hooks/types'
+import { useLogin } from '@/hooks/useLogin'
 
 const loginStore = useLoginStore()
-const { onLoginStore, isLogin } = loginStore
-const { createNewAlbum } = useCreateAlbum()
+const { isLogin } = loginStore
 const { locale } = useI18n()
 const localeStore = useLocaleStore()
 const { setLocale, locale: localeStoreValue } = localeStore
@@ -25,31 +23,11 @@ const { setLocale, locale: localeStoreValue } = localeStore
   locale.value = localeStoreValue
 })()
 
-const defaultLoginInput = (): LoginParams => ({
-  email: '',
-  password: '',
-})
-const defaultCreateNewAlbumInput = (): CreateNewAlbumParams => ({
-  imageUrl: '',
-  title: '',
-})
-
 type State = {
-  showLoginDialog: boolean
-  showNewAlbumDialog: boolean
   showHeaderMenu: boolean
-  buttonLoading: boolean
-  loginInput: LoginParams
-  createNewAlbumInput: CreateNewAlbumParams
 }
-
 const initialState = (): State => ({
-  showLoginDialog: false,
-  showNewAlbumDialog: false,
   showHeaderMenu: false,
-  buttonLoading: false,
-  loginInput: defaultLoginInput(),
-  createNewAlbumInput: defaultCreateNewAlbumInput(),
 })
 const state = reactive<State>(initialState())
 
@@ -58,102 +36,43 @@ const changeLocale = async (e: string) => {
   await setLocale(locale.value)
 }
 
-/**
- * ログインダイアログ
- */
-const onLoginInput = (item: { name: keyof LoginParams; value: string }) => {
-  state.loginInput = {
-    ...state.loginInput,
-    [item.name]: item.value,
-  }
-}
-const loginValidation = computed(() => {
-  return (
-    state.loginInput.email.trim() !== '' &&
-    checkEmailVal(state.loginInput.email) &&
-    state.loginInput.password.trim() !== '' &&
-    isPasswordLengthValid(state.loginInput.password)
-  )
-})
-const onLogin = async () => {
-  state.buttonLoading = true
-  try {
-    await onLoginStore({
-      email: state.loginInput.email,
-      password: state.loginInput.password,
-    })
-  } catch (error) {
-    console.error(error)
-    alert(`エラーが発生しました。${error}`)
-  } finally {
-    state.showLoginDialog = false
-    state.buttonLoading = false
-  }
-}
-/**
- * アルバム作成ダイアログ
- */
-const onCreateNewAlbumInput = (item: {
-  name: keyof CreateNewAlbumParams
-  value: string
-}) => {
-  state.createNewAlbumInput = {
-    ...state.createNewAlbumInput,
-    [item.name]: item.value,
-  }
-}
-const onFileChange = (e: Event) => {
-  const target = e.target as HTMLInputElement
-  const file = target.files?.[0]
-  if (file) {
-    const reader = new FileReader()
-    reader.onload = (event) => {
-      const imageUrl = event.target?.result as string
-      onCreateNewAlbumInput({ name: 'imageUrl', value: imageUrl })
-    }
-    reader.readAsDataURL(file)
-  }
-}
-const onCreateNewAlbum = async () => {
-  state.buttonLoading = true
-  try {
-    await createNewAlbum({
-      title: state.createNewAlbumInput.title,
-      imageUrl: state.createNewAlbumInput.imageUrl,
-    })
-  } catch (error) {
-    console.error(error)
-    alert(`エラーが発生しました。${error}`)
-  } finally {
-    onCloseNewAlbumDialog()
-    state.buttonLoading = false
-  }
-}
-const onCloseNewAlbumDialog = () => {
-  state.showNewAlbumDialog = false
-  onCreateNewAlbumInput({ name: 'imageUrl', value: '' })
-  onCreateNewAlbumInput({ name: 'title', value: '' })
-}
+const {
+  state: loginState,
+  onInput: onInputForLogin,
+  onLogin,
+  valid: loginValidation,
+  onOpenDialog: onOpenDialogForLogin,
+  onCloseDialog: onCloseDialogForLogin,
+} = useLogin()
+
+const {
+  state: createAlbumState,
+  onInput: onInputForCreateNewAlbum,
+  onCreateNewAlbum,
+  onFileChange,
+  onOpenDialog: onOpenDialogForCreateAlbum,
+  onCloseDialog: onCloseDialogForCreateAlbum,
+} = useCreateAlbum()
 </script>
 
 <template>
   <div class="font-sans">
     <LoginDialog
-      :show-login-dialog="state.showLoginDialog"
-      :close-login-dialog="() => (state.showLoginDialog = false)"
-      :on-input="onLoginInput"
+      :show-login-dialog="loginState.showDialog"
+      :on-close-login-dialog="() => onCloseDialogForLogin()"
       :on-login="onLogin"
-      :button-loading="state.buttonLoading"
+      :on-input="onInputForLogin"
+      :loading="loginState.loading"
       :login-validation="loginValidation"
     />
     <NewAlbumDialog
-      :show-new-album-dialog="state.showNewAlbumDialog"
-      :on-close-new-album-dialog="onCloseNewAlbumDialog"
+      :show-dialog="createAlbumState.showDialog"
+      :on-close-dialog="() => onCloseDialogForCreateAlbum()"
       :on-create-new-album="onCreateNewAlbum"
-      :on-input="onCreateNewAlbumInput"
-      :image-url="state.createNewAlbumInput.imageUrl"
+      :on-input="onInputForCreateNewAlbum"
+      :image="createAlbumState.input.image"
       :on-file-change="onFileChange"
-      :button-loading="state.buttonLoading"
+      :loading="createAlbumState.loading"
     />
     <header class="transition duration-300 ease-in-out dark:theme__dark">
       <div>
@@ -176,8 +95,8 @@ const onCloseNewAlbumDialog = () => {
             :show-header-menu="state.showHeaderMenu"
             :on-openshow-header-menu="() => (state.showHeaderMenu = true)"
             :on-closeshow-header-menu="() => (state.showHeaderMenu = false)"
-            :on-show-new-album-dialog="() => (state.showNewAlbumDialog = true)"
-            :on-show-login-dialog="() => (state.showLoginDialog = true)"
+            :on-show-new-album-dialog="() => onOpenDialogForCreateAlbum()"
+            :on-show-login-dialog="() => onOpenDialogForLogin()"
             :is-login="isLogin"
             :locale="locale"
             :change-locale="changeLocale"

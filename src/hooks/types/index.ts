@@ -5,9 +5,9 @@ export type Album = {
   tags: Tag[]
 }
 
-export type CreateNewAlbumParams = {
+export type CreateAlbumParams = {
   title: string
-  imageUrl: string
+  image: string
 }
 
 export type LoginParams = {

@@ -45,7 +45,7 @@ const { tags, loading: tagLoading, fetchTags } = useFetchTags()
   maintenanceStore.openDialog()
 })()
 
-const onCopyImageUrl = (album: AlbumQuery) => {
+const onCopyImage = (album: AlbumQuery) => {
   sendGtagEvent('copy_image_url', {
     event_category: 'actions',
     event_label: `Album ID: ${album.id}`,
@@ -89,7 +89,7 @@ useHead({
     <TheTemplate
       :albums="albums"
       :album-loading="albumLoading"
-      :on-copy-image-url="onCopyImageUrl"
+      :on-copy-image="onCopyImage"
       :show-clipboard-map="state.showClipboardMap"
       :refetch="refetch"
       :show="maintenanceStore.show"

@@ -1,23 +1,22 @@
 <script setup lang="ts">
 import TButton from '@/components/atoms/TButton.vue'
 import { LoginParams } from '@/hooks/types'
-import { computed, ComputedRef } from 'vue'
 
 type Props = {
   showLoginDialog: boolean
-  closeLoginDialog: () => void
+  onCloseLoginDialog: () => void
   onInput: (item: { name: keyof LoginParams; value: string }) => void
   onLogin: () => void
-  buttonLoading: boolean
-  loginValidation: () => ComputedRef<boolean>
+  loading: boolean
+  loginValidation: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   showLoginDialog: false,
-  closeLoginDialog: () => {},
+  onCloseLoginDialog: () => {},
   onInput: () => {},
   onLogin: () => {},
-  buttonLoading: false,
-  loginValidation: () => computed(() => false),
+  loading: false,
+  loginValidation: false,
 })
 </script>
 
@@ -34,7 +33,7 @@ const props = withDefaults(defineProps<Props>(), {
             type="button"
             class="absolute right-2.5 top-3 ml-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-800"
             data-modal-hide="authentication-modal"
-            @click="props.closeLoginDialog"
+            @click="props.onCloseLoginDialog"
           >
             <svg
               class="h-3 w-3"
@@ -106,7 +105,7 @@ const props = withDefaults(defineProps<Props>(), {
                 size="full"
                 text-color="white"
                 :disabled="!props.loginValidation"
-                :loading="props.buttonLoading"
+                :loading="props.loading"
                 @click="props.onLogin()"
                 >ログインする</TButton
               >

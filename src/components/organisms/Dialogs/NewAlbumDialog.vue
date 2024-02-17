@@ -1,31 +1,31 @@
 <script setup lang="ts">
 import TButton from '@/components/atoms/TButton.vue'
-import { CreateNewAlbumParams } from '@/hooks/types'
+import { CreateAlbumParams } from '@/hooks/types'
 
 type Props = {
-  showNewAlbumDialog: boolean
-  onCloseNewAlbumDialog: () => void
+  showDialog: boolean
+  onCloseDialog: () => void
   onCreateNewAlbum: () => void
-  onInput: (item: { name: keyof CreateNewAlbumParams; value: string }) => void
-  imageUrl: string
+  onInput: (item: { name: keyof CreateAlbumParams; value: string }) => void
+  image: string
   onFileChange: (e: Event) => void
-  buttonLoading: boolean
+  loading: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
-  showNewAlbumDialog: false,
-  onCloseNewAlbumDialog: () => {},
+  showDialog: false,
+  onCloseDialog: () => {},
   onCreateNewAlbum: () => {},
   onInput: () => {},
-  imageUrl: '',
+  image: '',
   onFileChange: () => {},
-  buttonLoading: false,
+  loading: false,
 })
 </script>
 
 <template>
   <transition name="fade">
     <div
-      v-if="props.showNewAlbumDialog"
+      v-if="props.showDialog"
       tabindex="-1"
       class="o verflow-x-hidden fixed inset-x-0 top-0 z-50 flex h-[calc(100%)] max-h-full w-full items-center justify-center overflow-y-auto bg-gray-800 bg-opacity-70 p-4 md:inset-0"
     >
@@ -35,7 +35,7 @@ const props = withDefaults(defineProps<Props>(), {
             type="button"
             class="absolute right-2.5 top-3 ml-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900"
             data-modal-hide="authentication-modal"
-            @click="props.onCloseNewAlbumDialog"
+            @click="props.onCloseDialog"
           >
             <svg
               class="h-3 w-3"
@@ -62,7 +62,7 @@ const props = withDefaults(defineProps<Props>(), {
                   class="file_upload relative rounded-lg border-4 border-dotted border-gray-300 p-5"
                   style="width: 100%"
                 >
-                  <template v-if="!props.imageUrl">
+                  <template v-if="!props.image">
                     <svg
                       class="mx-auto mb-4 w-24 text-gray-600"
                       xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +98,7 @@ const props = withDefaults(defineProps<Props>(), {
                   <img
                     v-else
                     loading="eager"
-                    :src="props.imageUrl"
+                    :src="props.image"
                     alt="アップロードされた きなこ、わんこ、わんちゃん 犬のLGTM画像。"
                   />
                 </div>
@@ -129,7 +129,7 @@ const props = withDefaults(defineProps<Props>(), {
                 color="yellow"
                 size="full"
                 text-color="white"
-                :loading="props.buttonLoading"
+                :loading="props.loading"
                 @click="props.onCreateNewAlbum()"
                 >アップロードする</TButton
               >

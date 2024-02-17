@@ -4,7 +4,7 @@ import { Album as AlbumQuery } from '@/hooks/types'
 type Props = {
   album: AlbumQuery
   showClipboardMap: Record<string, boolean>
-  onCopyImageUrl: (album: AlbumQuery) => void
+  onCopyImage: (album: AlbumQuery) => void
 }
 const props = defineProps<Props>()
 </script>
@@ -13,7 +13,7 @@ const props = defineProps<Props>()
   <div
     class="group relative"
     style="cursor: pointer"
-    @click="() => props.onCopyImageUrl(props.album)"
+    @click="() => props.onCopyImage(props.album)"
   >
     <div
       class="main__shadow sm:aspect-h-1 relative mt-4 h-96 w-full overflow-hidden rounded bg-white group-hover:opacity-75 border-none"
