@@ -45,8 +45,7 @@ const props = defineProps<Props>()
             d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
-
-        リンクをコピーしました
+        Copied as Markdown
       </div>
     </div>
     <div class="gradient-filter absolute bottom-0 left-0 right-0 h-1/3" />

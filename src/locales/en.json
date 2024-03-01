@@ -81,5 +81,11 @@
         "content": "For questions or inquiries regarding the Privacy Policy, please contact us at the following address"
       }
     }
+  },
+  "$login": {
+    "title": "LogIn",
+    "email": "Email",
+    "password": "Password",
+    "button": "LogIn"
   }
 }

@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import TButton from '@/components/atoms/TButton.vue'
 import { LoginParams } from '@/hooks/types'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 type Props = {
   showLoginDialog: boolean
@@ -54,14 +57,14 @@ const props = withDefaults(defineProps<Props>(), {
           </button>
           <div class="p-6 lg:px-8">
             <h3 class="mb-4 text-xl font-medium text-gray-800 dark:text-white">
-              Login
+              {{ t('$login.title') }}
             </h3>
             <div class="space-y-6">
               <div>
                 <label
                   for="email"
                   class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                  >Email</label
+                  >{{ t('$login.email') }}</label
                 >
                 <input
                   type="email"
@@ -82,7 +85,7 @@ const props = withDefaults(defineProps<Props>(), {
                 <label
                   for="password"
                   class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                  >Password</label
+                  >{{ t('$login.password') }}</label
                 >
                 <input
                   type="password"
@@ -107,7 +110,7 @@ const props = withDefaults(defineProps<Props>(), {
                 :disabled="!props.loginValidation"
                 :loading="props.loading"
                 @click="props.onLogin()"
-                >ログインする</TButton
+                >{{ t('$login.button') }}</TButton
               >
             </div>
           </div>
