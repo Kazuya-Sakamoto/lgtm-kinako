@@ -84,8 +84,8 @@
   },
   "$login": {
     "title": "ログイン",
-    "email": "めーるあどれす",
-    "password": "ぱすわーど",
+    "email": "メールアドレス",
+    "password": "パスワード",
     "button": "ログインする"
   }
 }
