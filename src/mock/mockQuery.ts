@@ -1,36 +1,58 @@
-import { Album as AlbumQuery } from '@/hooks/types'
+import { Album as AlbumQuery, Tag as TagQuery } from '@/hooks/types'
 
-export const mockAlbumsQuery = (): AlbumQuery[] => [
+const mockAlbumsQuery = (): AlbumQuery[] => [
   {
     id: 1,
-    title: 'きなこのLGTM初めての投稿',
+    image: 'https://d18g0hf2wnz3gs.cloudfront.net/20230926222306.JPG',
+    title: 'おすわり',
     tags: [
-      {
-        id: 1,
-        name: 'かわいい',
-      },
+      { id: 1, name: 'かわいい' },
+      { id: 2, name: 'へんてこ' },
     ],
-    image: 'https://d18g0hf2wnz3gs.cloudfront.net/20240210220905.JPG',
   },
   {
     id: 2,
-    title: 'いちご',
-    tags: [
-      {
-        id: 1,
-        name: 'かわいい',
-      },
-      {
-        id: 2,
-        name: 'きゅーと',
-      },
-    ],
-    image: 'https://d18g0hf2wnz3gs.cloudfront.net/20240210221016.JPG',
+    image: 'https://d18g0hf2wnz3gs.cloudfront.net/20230926223208.JPG',
+    title: 'ひょっこり',
+    tags: [],
   },
   {
     id: 3,
-    title: 'はじめてのゆき',
-    tags: [],
-    image: 'https://d18g0hf2wnz3gs.cloudfront.net/20240210220957.JPG',
+    image: 'https://d18g0hf2wnz3gs.cloudfront.net/20231118132545.JPG',
+    title: 'おさない',
+    tags: [{ id: 1, name: 'かわいい' }],
+  },
+  {
+    id: 4,
+    image: 'https://d18g0hf2wnz3gs.cloudfront.net/20231017223401.JPG',
+    title: '赤ちゃん',
+    tags: [
+      { id: 1, name: 'かわいい' },
+      { id: 3, name: 'えもい' },
+    ],
+  },
+  {
+    id: 5,
+    image: 'https://d18g0hf2wnz3gs.cloudfront.net/20231010220708.JPG',
+    title: 'しろまリも',
+    tags: [{ id: 1, name: 'かわいい' }],
+  },
+  {
+    id: 6,
+    image: 'https://d18g0hf2wnz3gs.cloudfront.net/20231017223401.JPG',
+    title: '赤ちゃん',
+    tags: [
+      { id: 1, name: 'かわいい' },
+      { id: 3, name: 'えもい' },
+    ],
   },
 ]
+
+const mockTagsQuery = (): TagQuery[] => [
+  { id: 1, name: 'かわいい' },
+  { id: 2, name: 'へんてこ' },
+  { id: 3, name: 'えもい' },
+  { id: 4, name: 'いべんと' },
+]
+
+export { mockAlbumsQuery, mockTagsQuery }

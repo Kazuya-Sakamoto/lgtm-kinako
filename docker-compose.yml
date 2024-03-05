@@ -10,6 +10,7 @@ services:
     ports:
       - "3000:3000"
       - "24678:24678" # HMR用のポートを追加
+      - "6006:6006" # Storybook用のポートを追加
     tty: true
     environment:
       - HOST=0.0.0.0

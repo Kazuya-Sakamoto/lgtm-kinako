@@ -3,7 +3,7 @@ import { Album as AlbumQuery } from '@/hooks/types'
 import AlbumLoading from './AlbumLoading.vue'
 import Album from './Album.vue'
 
-type Props = {
+export type Props = {
   albums: AlbumQuery[]
   showClipboardMap: Record<string, boolean>
   onCopyImage: (album: AlbumQuery) => void

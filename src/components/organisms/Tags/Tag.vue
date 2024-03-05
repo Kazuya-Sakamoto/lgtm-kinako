@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Tag as TagQuery } from '@/hooks/types'
 
-type Props = {
+export type Props = {
   tag: TagQuery
   currentTag: any
   navigateWithTag: (tagId: number) => void

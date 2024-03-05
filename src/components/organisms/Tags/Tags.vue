@@ -2,7 +2,7 @@
 import { Tag as TagQuery } from '@/hooks/types'
 import Tag from './Tag.vue'
 
-type Props = {
+export type Props = {
   tags: TagQuery[]
   navigateWithTag: (tagId: number) => void
   currentTag: any

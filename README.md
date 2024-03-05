@@ -51,6 +51,12 @@ $ docker-compose exec app sh
 /src # pnpm dev
 ```
 
+- storybook の起動
+
+```
+/src # pnpm storybook
+```
+
 ## その他ドキュメント
 
 - [デザインガイドライン](https://www.figma.com/file/Pwurnd9pB47iZ5bz5ymSwF/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%82%AC%E3%82%A4%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3?type=design&node-id=0%3A1&mode=design&t=j2OaREE5iXI9L8k9-1)
