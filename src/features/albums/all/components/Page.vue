@@ -4,7 +4,7 @@ import { storeToRefs } from 'pinia'
 import { useRouter } from '@/.nuxt/imports'
 import { Album as AlbumQuery } from '@/hooks/types'
 import { useLoginStore } from '@/store/login'
-import AlbumPage from '../../components/Page.vue'
+import Layout from '../../components/Layout.vue'
 import { useFetchAllAlbums } from '../hooks/useFetchAllAlbums'
 
 const loginStore = useLoginStore()
@@ -43,7 +43,7 @@ const onCopyAlbumID = (album: AlbumQuery) => {
 
 <template>
   <div>
-    <AlbumPage
+    <Layout
       :albums="albums"
       :album-loading="albumLoading"
       :on-copy-image="onCopyAlbumID"
@@ -54,4 +54,3 @@ const onCopyAlbumID = (album: AlbumQuery) => {
     />
   </div>
 </template>
-@/features/albums/all/hooks/useFetchAllAlbums
