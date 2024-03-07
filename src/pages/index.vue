@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useHead } from '@/.nuxt/imports'
-import ThePages from '@/features/albums/components/ThePages.vue'
+import Page from '@/features/albums/components/Page.vue'
 import { useMaintenanceStore } from '@/store/maintenance'
 import { setSeo } from '@/lib/seo'
 
@@ -32,6 +32,6 @@ useHead({
   <div>
     <!-- TODO: メンテナンスダイアログを表示する際にopenにする -->
     <!-- <MaintenanceDialog :show="show" :close-dialog="closeDialog" /> -->
-    <ThePages />
+    <Page />
   </div>
 </template>
