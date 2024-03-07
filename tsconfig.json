@@ -24,7 +24,7 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["src/components/*"],
+      // "@/components/*": ["src/components/*"],
       "@/*": ["src/*"],
       "@/.nuxt/imports": ["src/.nuxt/imports.d.ts"]
     }

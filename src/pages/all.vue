@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useHead } from '@/.nuxt/imports'
-import Page from '@/features/albums/all/components/Page.vue'
+import ThePage from '@/features/albums/all/components/Page.vue'
 
 useHead({
   meta: [
@@ -14,6 +14,6 @@ useHead({
 
 <template>
   <div>
-    <Page />
+    <ThePage />
   </div>
 </template>

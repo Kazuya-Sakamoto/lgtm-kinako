@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Page from '@/features/privacy/components/Page.vue'
+import ThePage from '@/features/privacy/components/Page.vue'
 import { useHead } from '@/.nuxt/imports'
 
 import { setSeo } from '@/lib/seo'
@@ -9,6 +9,6 @@ useHead(pageSeo)
 
 <template>
   <div>
-    <Page />
+    <ThePage />
   </div>
 </template>
