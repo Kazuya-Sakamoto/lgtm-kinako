@@ -11,12 +11,13 @@
 
 ## 環境
 
-- Node.js v18.18.0
-- Nuxt.js v3.6.5
-- Vue.js v3.2.36
+- node v18.18.0
+- Nuxt v3.6.5
+- vue v3.2.36
 - pnpm v8.13.1
-- TypeScript v5.2.2
-- Tailwind CSS v3.3.5
+- typeScript v5.2.2
+- tailwind css v3.3.5
+- storybook 7.6.17
 
 ## その他環境
 

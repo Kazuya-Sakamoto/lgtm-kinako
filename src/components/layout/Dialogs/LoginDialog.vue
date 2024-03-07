@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TButton from '@/components/atoms/TButton.vue'
+import TButton from '@/components/parts/TButton.vue'
 import { LoginParams } from '@/hooks/types'
 import { useI18n } from 'vue-i18n'
 

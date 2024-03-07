@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import { useLoginStore } from '@/store/login'
-import LoginDialog from '@/components/organisms/Dialogs/LoginDialog.vue'
-import NewAlbumDialog from '@/components/organisms/Dialogs/NewAlbumDialog.vue'
-import HeaderMenu from '@/components/organisms/Headers/HeaderMenu.vue'
-import HeaderChangeMode from '@/components/organisms/Headers/HeaderChangeMode.vue'
-import TAlert from '@/components/atoms/TAlert.vue'
+import LoginDialog from '@/components/layout/Dialogs/LoginDialog.vue'
+import NewAlbumDialog from '@/components/layout/Dialogs/NewAlbumDialog.vue'
+import HeaderMenu from '@/components/layout/Headers/HeaderMenu.vue'
+import HeaderChangeMode from '@/components/layout/Headers/HeaderChangeMode.vue'
+import TAlert from '@/components/parts/TAlert.vue'
 import { useCreateAlbum } from '@/hooks/useCreateAlbum'
 import { useI18n } from 'vue-i18n'
 import { useLocaleStore } from '@/store/localeStore'
-import Footer from '@/components/organisms/Footer.vue'
+import Footer from '@/components/layout/Footers/Footer.vue'
 import { useLogin } from '@/hooks/useLogin'
 
 const loginStore = useLoginStore()

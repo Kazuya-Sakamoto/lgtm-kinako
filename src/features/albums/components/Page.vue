@@ -1,40 +1,81 @@
 <script setup lang="ts">
-import { Album as AlbumQuery, Tag as TagQuery } from '@/hooks/types'
-import Tags from '@/components/organisms/Tags/Tags.vue'
-import TAlert from '@/components/atoms/TAlert.vue'
-import Albums from '@/components/organisms/Albums/Albums.vue'
-// import MaintenanceDialog from '@/components/organisms/Dialogs/MaintenanceDialog.vue'
+import { reactive, ref, watch } from 'vue'
+import { useRouter, useRoute } from '@/.nuxt/imports'
+import { Album as AlbumQuery } from '@/hooks/types'
+import { sendGtagEvent } from '@/lib/gtagEvent'
 import { useI18n } from 'vue-i18n'
-
-const { t } = useI18n()
+import TAlert from '@/components/parts/TAlert.vue'
+import { useFetchAlbums } from '../hooks/useFetchAlbums'
+import { useFetchTags } from '../hooks/useFetchTags'
+import Tags from './Tags/Tags.vue'
+import Albums from './Albums.vue'
 
 type Props = {
-  albums: AlbumQuery[]
-  albumLoading: boolean
-  onCopyImage: (album: AlbumQuery) => void
-  showClipboardMap: Record<string, boolean>
-  refetch: () => void
   isAll?: boolean
-  show: boolean
-  closeDialog: () => void
-  tags?: TagQuery[]
-  navigateWithTag?: (tagId: number) => void
-  currentTag?: any
-  tagLoading?: boolean
+  showMaintenance?: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   isAll: false,
+  showMaintenance: false,
 })
+
+const route = useRoute()
+const router = useRouter()
+
+const currentTag = ref(route.query.tag)
+watch(
+  () => route.query.tag,
+  (newTag) => {
+    currentTag.value = newTag
+  }
+)
+const navigateWithTag = (tagId: number) => {
+  if (currentTag.value === tagId.toString()) {
+    router.push({ path: '/' })
+  } else {
+    router.push({ path: '/', query: { tag: tagId.toString() } })
+  }
+}
+
+type State = {
+  showClipboardMap: Record<string, boolean>
+}
+const initialState = (): State => ({
+  showClipboardMap: {},
+})
+const state = reactive<State>(initialState())
+
+const { albums, albumLoading, fetchAlbums, refetch } = useFetchAlbums()
+const { tags, loading: tagLoading, fetchTags } = useFetchTags()
+
+;(async () => {
+  await Promise.all([fetchAlbums(route.query.tag), fetchTags()])
+})()
+
+const onCopyImage = (album: AlbumQuery) => {
+  sendGtagEvent('copy_image_url', {
+    event_category: 'actions',
+    event_label: `Album ID: ${album.id}`,
+    value: album.id,
+  })
+  const url = `![LGTM](${album.image})`
+  window.navigator.clipboard.writeText(url).then(() => {
+    state.showClipboardMap[album.id] = true
+  })
+  setTimeout(() => {
+    state.showClipboardMap[album.id] = false
+  }, 2000)
+}
+
+const { t } = useI18n()
 </script>
 
 <template>
   <div>
-    <!-- TODO: メンテナンスダイアログを表示する際にopenにする -->
-    <!-- <MaintenanceDialog :show="show" :close-dialog="closeDialog" /> -->
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div v-if="props.isAll">
         <TAlert description="管理用で全てのきなこを表示しています" />
-        <p class="mt-2 lg:text-xl">合計数: {{ props.albums.length }}枚</p>
+        <p class="mt-2 lg:text-xl">合計数: {{ albums.length }}枚</p>
       </div>
       <div v-else class="flex flex-col items-center">
         <h1 class="lg:text-xl">{{ t('$top.title') }}</h1>
@@ -43,11 +84,11 @@ const props = withDefaults(defineProps<Props>(), {
         >
           <div>{{ t('$top.sub_title') }}</div>
           <button
-            :disabled="props.albumLoading"
+            :disabled="albumLoading"
             class="font-dm mt-8 inline-flex items-center justify-center rounded-lg bg-yellow-500 px-6 py-3 text-base font-medium text-white shadow-xl shadow-yellow-400/75 transition-transform duration-200 ease-in-out hover:scale-[1.02]"
-            @click="props.refetch()"
+            @click="refetch()"
           >
-            <div v-show="props.albumLoading">
+            <div v-show="albumLoading">
               <svg
                 aria-hidden="true"
                 role="status"
@@ -67,7 +108,7 @@ const props = withDefaults(defineProps<Props>(), {
               </svg>
               <span>{{ t('$top.loading') }}</span>
             </div>
-            <div v-show="!props.albumLoading">
+            <div v-show="!albumLoading">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -89,19 +130,19 @@ const props = withDefaults(defineProps<Props>(), {
       </div>
       <template v-if="!props.isAll">
         <Tags
-          :tags="props.tags"
-          :navigate-with-tag="props.navigateWithTag"
-          :current-tag="props.currentTag"
-          :tag-loading="props.tagLoading"
+          :tags="tags ?? []"
+          :navigate-with-tag="navigateWithTag ?? (() => {})"
+          :current-tag="currentTag"
+          :tag-loading="tagLoading"
         />
       </template>
       <div class="custom-py mx-auto max-w-2xl sm:py-5 sm:pb-20 lg:max-w-none">
         <Albums
-          :albums="props.albums"
-          :album-loading="props.albumLoading"
+          :albums="albums"
+          :album-loading="albumLoading"
           :is-all="props.isAll"
-          :show-clipboard-map="props.showClipboardMap"
-          :on-copy-image="props.onCopyImage"
+          :show-clipboard-map="state.showClipboardMap"
+          :on-copy-image="onCopyImage"
         />
       </div>
     </div>
@@ -115,3 +156,4 @@ const props = withDefaults(defineProps<Props>(), {
   }
 }
 </style>
+@/features/albums/hooks/useFetchAlbums@/features/albums/hooks/useFetchTags./Albums/Albums.vue./Albums.vue
