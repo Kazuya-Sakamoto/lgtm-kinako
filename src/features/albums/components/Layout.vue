@@ -2,7 +2,7 @@
 import { Album as AlbumQuery, Tag as TagQuery } from '@/hooks/types'
 import { useI18n } from 'vue-i18n'
 import TAlert from '@/components/parts/TAlert.vue'
-import Tags from './Tags/Tags.vue'
+import Tags from '@/components/layout/Tags/Tags.vue'
 import Albums from './Albums.vue'
 
 type Props = {
@@ -109,3 +109,4 @@ const { t } = useI18n()
   }
 }
 </style>
+../../../components/layout/Tags/Tags.vue
