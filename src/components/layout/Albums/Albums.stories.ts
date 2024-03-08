@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/vue3'
-import Albums, { Props } from './Albums.vue'
+import Albums, { Props } from './index.vue'
 import { Album as AlbumQuery } from '@/hooks/types'
 import { mockAlbumsQuery } from '../../../mock/mockQuery'
 
