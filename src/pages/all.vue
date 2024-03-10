@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useHead } from '@/.nuxt/imports'
+import { useHead } from 'nuxt/app'
 import Page from '@/features/all/components/Page.vue'
 
 useHead({

@@ -1,5 +1,5 @@
 import { useLoginStore } from '@/store/login'
-import { useRouter } from '@/.nuxt/imports'
+import { useRouter } from 'nuxt/app'
 
 const HTTP_STATUS_UNAUTHORIZED = 401
 

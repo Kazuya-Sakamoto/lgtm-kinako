@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { useRoute } from '@/.nuxt/imports'
+import { useRoute } from 'nuxt/app'
 import HeaderCheck from './HeaderCheck.vue'
 const { t } = useI18n()
 const route = useRoute()

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useRouter } from '@/.nuxt/imports'
+import { useRouter } from 'nuxt/app'
 import { Album as AlbumQuery } from '@/hooks/types'
 import { useLoginStore } from '@/store/login'
 import { useFetchAllAlbums } from '../hooks/useFetchAllAlbums'

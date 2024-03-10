@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref, watch } from 'vue'
-import { useRouter, useRoute } from '@/.nuxt/imports'
+import { useRouter, useRoute } from 'nuxt/app'
 import { Album as AlbumQuery } from '@/hooks/types'
 import { sendGtagEvent } from '@/lib/gtagEvent'
 import { useFetchAlbums } from '../hooks/useFetchAlbums'

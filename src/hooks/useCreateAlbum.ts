@@ -1,5 +1,5 @@
 import { reactive } from 'vue'
-import { useRuntimeConfig } from '@/.nuxt/imports'
+import { useRuntimeConfig } from 'nuxt/app'
 import { storeToRefs } from 'pinia'
 import { useLoginStore } from '@/store/login'
 import { h } from '@/lib/headers'

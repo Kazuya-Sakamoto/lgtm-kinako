@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { useRuntimeConfig } from '@/.nuxt/imports'
+import { useRuntimeConfig } from 'nuxt/app'
 import { h } from '@/lib/headers'
 import { Tag } from '@/hooks/types'
 

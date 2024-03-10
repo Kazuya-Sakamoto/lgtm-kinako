@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import { useNuxtApp } from '@/.nuxt/imports'
+import { useColorMode } from '@/.nuxt/imports'
 import { m } from '@/master'
 
-const nuxtApp = useNuxtApp()
+const colorMode = useColorMode()
+
 const onChangeMode = (mode: typeof m.MODE_DARK | typeof m.MODE_LIGHT) => {
-  nuxtApp.$colorMode.preference = mode
+  colorMode.preference = mode
 }
 </script>
 
 <template>
   <div>
     <button
-      v-show="nuxtApp.$colorMode.value === m.MODE_DARK"
+      v-show="colorMode.value === m.MODE_DARK"
       type="button"
       aria-expanded="true"
       aria-haspopup="true"
@@ -33,7 +34,7 @@ const onChangeMode = (mode: typeof m.MODE_DARK | typeof m.MODE_LIGHT) => {
       </svg>
     </button>
     <button
-      v-show="nuxtApp.$colorMode.value === m.MODE_LIGHT"
+      v-show="colorMode.value === m.MODE_LIGHT"
       type="button"
       aria-expanded="true"
       aria-haspopup="true"

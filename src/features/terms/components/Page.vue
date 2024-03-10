@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useHead } from '@/.nuxt/imports'
 import { useI18n } from 'vue-i18n'
+import { useHead } from 'nuxt/app'
 
 const { t } = useI18n()
 import { setSeo } from '@/lib/seo'

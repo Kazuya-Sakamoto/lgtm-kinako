@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useHead } from '@/.nuxt/imports'
+import { useHead } from 'nuxt/app'
 import Page from '@/features/albums/components/Page.vue'
 import { useMaintenanceStore } from '@/store/maintenance'
 import { setSeo } from '@/lib/seo'

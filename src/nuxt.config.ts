@@ -3,6 +3,16 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
+  imports: {
+    dirs: [
+      // Scan top-level modules
+      'composables',
+      // ... or scan modules nested one level deep with a specific name and file extension
+      'composables/*/index.{ts,js,mjs,mts}',
+      // ... or scan all modules within given directory
+      'composables/**',
+    ],
+  },
   app: {
     pageTransition: { name: 'page', mode: 'in-out' },
     head: {

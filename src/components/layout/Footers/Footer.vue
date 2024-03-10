@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useNuxtApp } from '@/.nuxt/imports'
+import { useColorMode } from '@/.nuxt/imports'
 import { m } from '@/master'
 
-const nuxtApp = useNuxtApp()
+const colorMode = useColorMode()
 </script>
 
 <template>
@@ -20,7 +20,7 @@ const nuxtApp = useNuxtApp()
         height="100"
       />
       <img
-        v-show="nuxtApp.$colorMode.value === m.MODE_LIGHT"
+        v-show="colorMode.value === m.MODE_LIGHT"
         class="image"
         loading="lazy"
         decoding="async"
@@ -30,7 +30,7 @@ const nuxtApp = useNuxtApp()
         height="50"
       />
       <img
-        v-show="nuxtApp.$colorMode.value === m.MODE_DARK"
+        v-show="colorMode.value === m.MODE_DARK"
         class="image"
         loading="lazy"
         decoding="async"

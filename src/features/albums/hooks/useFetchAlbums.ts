@@ -1,5 +1,5 @@
 import { ref, watch } from 'vue'
-import { useRuntimeConfig, useRoute } from '@/.nuxt/imports'
+import { useRuntimeConfig, useRoute } from 'nuxt/app'
 import { h } from '@/lib/headers'
 import { sendGtagEvent } from '@/lib/gtagEvent'
 import { Album } from '@/hooks/types'
