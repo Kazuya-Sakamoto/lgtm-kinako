@@ -29,7 +29,7 @@ const onVideoLoaded = () => {
               <div v-show="!videoLoaded" class="w-auto animate-pulse">
                 <div>
                   <div
-                    class="main__shadow sm:aspect-h-1 relative mt-2 h-96 w-full overflow-hidden rounded border-inherit bg-gray-200 group-hover:opacity-75"
+                    class="main__shadow relative mt-2 h-96 w-full overflow-hidden rounded border-inherit bg-gray-200 group-hover:opacity-75"
                   />
                 </div>
               </div>
@@ -47,7 +47,7 @@ const onVideoLoaded = () => {
                 <source src="@/assets/movie/welcome.mp4" type="video/mp4" />
               </video>
               <h3
-                class="text-md absolute bottom-5 my-2 px-3 font-bold leading-8 text-white"
+                class="absolute bottom-5 my-2 px-3 font-bold leading-8 text-white"
               >
                 当サイトにアクセスいただきありがとうございます。ただいまメンテナンスを行なっております。ご迷惑おかけしますが、再開までしばらくお待ちください。
               </h3>

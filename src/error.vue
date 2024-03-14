@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TButton from '@/components/parts/TButton.vue'
+import { TButton } from '@/components/parts'
 </script>
 
 <template>

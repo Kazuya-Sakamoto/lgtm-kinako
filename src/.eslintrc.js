@@ -3,6 +3,7 @@ module.exports = {
     'plugin:vue/vue3-recommended',
     'eslint:recommended',
     'plugin:tailwindcss/recommended',
+    'prettier',
     // 'plugin:@typescript-eslint/recommended',
   ],
   parserOptions: {
@@ -17,12 +18,27 @@ module.exports = {
       typescript: {
         alwaysTryTypes: true,
       },
+    },
   },
-  plugins: ['vue', 'tailwindcss', '@typescript-eslint'],
+  plugins: [
+    'vue',
+    'tailwindcss',
+    '@typescript-eslint',
+    'prettier-plugin-tailwindcss',
+  ],
   rules: {
-    'tailwindcss/no-custom-classname': 'warn',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      { varsIgnorePattern: '^_', argsIgnorePattern: '^_' },
+    ],
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+
     'tailwindcss/classnames-order': 'warn',
     'tailwindcss/no-unused-classname': 'off',
+    'tailwindcss/no-unknown-classname': 'off',
     'vue/attribute-hyphenation': [
       'error',
       'always',
@@ -44,6 +60,16 @@ module.exports = {
     'vue/require-slots-as-functions': 'warn',
     'vue/require-toggle-inside-transition': 'warn',
     'vue/valid-v-is': 'error',
+    // 'import/order': [
+    //   'error',
+    //   {
+    //     'newlines-between': 'always',
+    //     alphabetize: {
+    //       order: 'asc',
+    //       caseInsensitive: true,
+    //     },
+    //   },
+    // ],
   },
   overrides: [
     {

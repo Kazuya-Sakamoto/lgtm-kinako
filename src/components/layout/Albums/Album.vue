@@ -16,7 +16,7 @@ const props = defineProps<Props>()
     @click="() => props.onCopyImage(props.album)"
   >
     <div
-      class="main__shadow sm:aspect-h-1 relative mt-4 h-96 w-full overflow-hidden rounded bg-white group-hover:opacity-75 border-none"
+      class="main__shadow sm:aspect-h-1 relative mt-4 h-96 w-full overflow-hidden rounded border-none bg-white group-hover:opacity-75"
     >
       <img
         :src="album.image"
@@ -37,7 +37,7 @@ const props = defineProps<Props>()
           viewBox="0 0 24 24"
           stroke-width="2.2"
           stroke="currentColor"
-          class="w-7 h-7 text-yellow-400 font-bold"
+          class="h-7 w-7 font-bold text-yellow-400"
         >
           <path
             strokeLinecap="round"
@@ -48,14 +48,14 @@ const props = defineProps<Props>()
         Copied as Markdown
       </div>
     </div>
-    <div class="gradient-filter absolute bottom-0 left-0 right-0 h-1/3" />
+    <div class="gradient-filter absolute inset-x-0 bottom-0 h-1/3" />
     <h3
-      class="absolute bottom-0 mb-2 text-sm text-white left-0 text-center ml-2 pb-2"
+      class="absolute bottom-0 left-0 mb-2 ml-2 pb-2 text-center text-sm text-white"
     >
       {{ album.title }}
     </h3>
-    <div class="absolute bottom-0 left-0 ml-2 mb-8 flex flex-wrap">
-      <div v-for="(tag, i) in album.tags" :key="i" class="mr-2 mb-2">
+    <div class="absolute bottom-0 left-0 mb-8 ml-2 flex flex-wrap">
+      <div v-for="(tag, i) in album.tags" :key="i" class="mb-2 mr-2">
         <span
           class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20"
         >

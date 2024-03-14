@@ -7,7 +7,7 @@ const colorMode = useColorMode()
 
 <template>
   <footer
-    class="transition duration-300 ease-in-out bg-yellow-50 dark:theme__dark shadow pt-5"
+    class="dark:theme__dark bg-yellow-50 pt-5 shadow transition duration-300 ease-in-out"
   >
     <div class="flex w-11/12 justify-between pr-2">
       <img

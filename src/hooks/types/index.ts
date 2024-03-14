@@ -1,7 +1,7 @@
 export type Album = {
-  image: string
   id: number
   title: string
+  image: string
   tags: Tag[]
 }
 

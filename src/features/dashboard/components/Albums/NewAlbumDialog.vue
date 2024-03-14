@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import TButton from '@/components/parts/TButton.vue'
+import { TButton } from '@/components/parts'
 import { CreateAlbumParams } from '@/hooks/types'
 
 type Props = {
   showDialog: boolean
   onCloseDialog: () => void
-  onCreateNewAlbum: () => void
+  onCreateAlbum: () => void
   onInput: (item: { name: keyof CreateAlbumParams; value: string }) => void
   image: string
   onFileChange: (e: Event) => void
@@ -14,7 +14,7 @@ type Props = {
 const props = withDefaults(defineProps<Props>(), {
   showDialog: false,
   onCloseDialog: () => {},
-  onCreateNewAlbum: () => {},
+  onCreateAlbum: () => {},
   onInput: () => {},
   image: '',
   onFileChange: () => {},
@@ -27,10 +27,10 @@ const props = withDefaults(defineProps<Props>(), {
     <div
       v-if="props.showDialog"
       tabindex="-1"
-      class="o verflow-x-hidden fixed inset-x-0 top-0 z-50 flex h-[calc(100%)] max-h-full w-full items-center justify-center overflow-y-auto bg-gray-800 bg-opacity-70 p-4 md:inset-0"
+      class="fixed inset-x-0 top-0 z-50 flex h-[calc(100%)] max-h-full w-full items-center justify-center overflow-y-auto bg-gray-800 bg-opacity-70 p-4 md:inset-0"
     >
       <div class="relative max-h-full w-full max-w-md">
-        <div class="relative rounded-lg bg-white shadow dark:bg-white">
+        <div class="dark:theme__dark relative rounded-lg bg-white shadow">
           <button
             type="button"
             class="absolute right-2.5 top-3 ml-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900"
@@ -55,7 +55,9 @@ const props = withDefaults(defineProps<Props>(), {
             <span class="sr-only">Close modal</span>
           </button>
           <div class="p-6 lg:px-8">
-            <h3 class="mb-4 text-xl font-medium text-gray-800">アップロード</h3>
+            <h3 class="mb-4 text-xl font-medium text-gray-800 dark:text-white">
+              アップロード
+            </h3>
             <div class="space-y-6">
               <div>
                 <div
@@ -64,7 +66,7 @@ const props = withDefaults(defineProps<Props>(), {
                 >
                   <template v-if="!props.image">
                     <svg
-                      class="mx-auto mb-4 w-24 text-gray-600"
+                      class="mx-auto mb-4 w-24 text-gray-600 dark:text-white"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -116,7 +118,7 @@ const props = withDefaults(defineProps<Props>(), {
                   placeholder="可愛すぎでした"
                   required
                   @input="
-                    (e: InputEvent) =>
+                    (e: Event) =>
                       onInput({
                         name: 'title',
                         value: (e.target as HTMLInputElement)?.value || '',
@@ -126,11 +128,12 @@ const props = withDefaults(defineProps<Props>(), {
               </div>
               <TButton
                 class="font-bold"
+                :disabled="!props.image"
                 color="yellow"
                 size="full"
                 text-color="white"
                 :loading="props.loading"
-                @click="props.onCreateNewAlbum()"
+                @click="props.onCreateAlbum()"
                 >アップロードする</TButton
               >
             </div>

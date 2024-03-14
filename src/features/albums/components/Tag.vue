@@ -12,13 +12,13 @@ const props = withDefaults(defineProps<Props>(), {})
 <template>
   <div>
     <span
-      @click="props.navigateWithTag(props.tag.id)"
       :class="[
-        'tag-size inline-flex items-center cursor-pointer rounded-md px-4 py-3 text-xs font-medium ring-1 ring-inset ring-yellow-600/20 shadow-xl shadow-yellow-600/35',
+        'tag-size inline-flex cursor-pointer items-center rounded-md px-4 py-3 text-xs font-medium shadow-xl shadow-yellow-600/35 ring-1 ring-inset ring-yellow-600/20',
         props.tag.id == props.currentTag
           ? 'bg-yellow-400 text-white'
           : 'bg-yellow-50 text-yellow-800',
       ]"
+      @click="props.navigateWithTag(props.tag.id)"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,7 @@ const props = withDefaults(defineProps<Props>(), {})
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="currentColor"
-        class="w-6 h-6 pr-1"
+        class="h-6 w-6 pr-1"
       >
         <path
           stroke-linecap="round"

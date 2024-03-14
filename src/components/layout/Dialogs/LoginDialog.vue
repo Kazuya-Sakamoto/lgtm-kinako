@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TButton from '@/components/parts/TButton.vue'
+import { TButton } from '@/components/parts'
 import { LoginParams } from '@/hooks/types'
 import { useI18n } from 'vue-i18n'
 
@@ -73,7 +73,7 @@ const props = withDefaults(defineProps<Props>(), {
                   placeholder="lgtm.kinako@gmail.com"
                   required
                   @input="
-                    (e: InputEvent) =>
+                    (e: Event) =>
                       props.onInput({
                         name: 'email',
                         value: (e.target as HTMLInputElement)?.value || '',
@@ -94,7 +94,7 @@ const props = withDefaults(defineProps<Props>(), {
                   placeholder="••••••••"
                   required
                   @input="
-                    (e: InputEvent) =>
+                    (e: Event) =>
                       props.onInput({
                         name: 'password',
                         value: (e.target as HTMLInputElement)?.value || '',
@@ -110,8 +110,9 @@ const props = withDefaults(defineProps<Props>(), {
                 :disabled="!props.loginValidation"
                 :loading="props.loading"
                 @click="props.onLogin()"
-                >{{ t('$login.button') }}</TButton
               >
+                {{ t('$login.button') }}
+              </TButton>
             </div>
           </div>
         </div>

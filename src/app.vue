@@ -1,16 +1,13 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
-import { useLoginStore } from '@/store/login'
-import LoginDialog from '@/components/layout/Dialogs/LoginDialog.vue'
-import NewAlbumDialog from '@/components/layout/Dialogs/NewAlbumDialog.vue'
-import HeaderMenu from '@/components/layout/Headers/HeaderMenu.vue'
-import HeaderChangeMode from '@/components/layout/Headers/HeaderChangeMode.vue'
-import TAlert from '@/components/parts/TAlert.vue'
-import { useCreateAlbum } from '@/hooks/useCreateAlbum'
 import { useI18n } from 'vue-i18n'
+import { useLoginStore } from '@/store/login'
 import { useLocaleStore } from '@/store/localeStore'
-import Footer from '@/components/layout/Footers/Footer.vue'
 import { useLogin } from '@/hooks/useLogin'
+import LoginDialog from '@/components/layout/Dialogs/LoginDialog.vue'
+import { HeaderMenu, HeaderChangeMode } from '@/components/layout/Headers'
+import { TAlert } from '@/components/parts'
+import Footer from '@/components/layout/Footers/Footer.vue'
 
 const loginStore = useLoginStore()
 const { isLogin } = loginStore
@@ -44,15 +41,6 @@ const {
   onOpenDialog: onOpenDialogForLogin,
   onCloseDialog: onCloseDialogForLogin,
 } = useLogin()
-
-const {
-  state: createAlbumState,
-  onInput: onInputForCreateNewAlbum,
-  onCreateNewAlbum,
-  onFileChange,
-  onOpenDialog: onOpenDialogForCreateAlbum,
-  onCloseDialog: onCloseDialogForCreateAlbum,
-} = useCreateAlbum()
 </script>
 
 <template>
@@ -64,15 +52,6 @@ const {
       :on-input="onInputForLogin"
       :loading="loginState.loading"
       :login-validation="loginValidation"
-    />
-    <NewAlbumDialog
-      :show-dialog="createAlbumState.showDialog"
-      :on-close-dialog="() => onCloseDialogForCreateAlbum()"
-      :on-create-new-album="onCreateNewAlbum"
-      :on-input="onInputForCreateNewAlbum"
-      :image="createAlbumState.input.image"
-      :on-file-change="onFileChange"
-      :loading="createAlbumState.loading"
     />
     <header class="transition duration-300 ease-in-out dark:theme__dark">
       <div>
@@ -95,7 +74,6 @@ const {
             :show-header-menu="state.showHeaderMenu"
             :on-openshow-header-menu="() => (state.showHeaderMenu = true)"
             :on-closeshow-header-menu="() => (state.showHeaderMenu = false)"
-            :on-show-new-album-dialog="() => onOpenDialogForCreateAlbum()"
             :on-show-login-dialog="() => onOpenDialogForLogin()"
             :is-login="isLogin"
             :locale="locale"
