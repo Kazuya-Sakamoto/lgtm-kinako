@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<Props>(), {})
     <div class="border-b-2 border-neutral-100 px-6 py-3 dark:border-gray-600">
       画像一覧
     </div>
-    <div class="relative max-h-[800px] overflow-y-auto shadow-md sm:rounded-lg">
+    <div class="relative shadow-md sm:rounded-lg">
       <table class="w-full text-left text-sm text-gray-500 rtl:text-right">
         <thead
           class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400"
@@ -53,10 +53,10 @@ const props = withDefaults(defineProps<Props>(), {})
               >
                 {{ album.id }}
               </td>
-              <td class="p-2">
+              <td>
                 <img
                   :src="album.image"
-                  class="max-h-full w-16 max-w-full"
+                  class="responsive-w max-h-full w-28 max-w-full"
                   alt="Apple Watch"
                 />
               </td>
@@ -106,3 +106,11 @@ const props = withDefaults(defineProps<Props>(), {})
     </div>
   </div>
 </template>
+
+<style scoped lang="scss">
+@media (max-width: 640px) {
+  .responsive-w {
+    width: 3rem;
+  }
+}
+</style>
