@@ -55,9 +55,9 @@ const props = withDefaults(defineProps<Props>(), {
             <span class="sr-only">Close modal</span>
           </button>
           <div class="p-6 lg:px-8">
-            <h3 class="mb-4 text-xl font-medium text-gray-800 dark:text-white">
+            <h4 class="mb-4 text-xl font-medium text-gray-800 dark:text-white">
               アップロード
-            </h3>
+            </h4>
             <div class="space-y-6">
               <div>
                 <div
@@ -65,20 +65,6 @@ const props = withDefaults(defineProps<Props>(), {
                   style="width: 100%"
                 >
                   <template v-if="!props.image">
-                    <svg
-                      class="mx-auto mb-4 w-24 text-gray-600 dark:text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                      />
-                    </svg>
                     <div
                       class="sm:aspect-h-1 h-26 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 relative w-full overflow-hidden rounded-lg bg-white group-hover:opacity-75"
                     >
@@ -92,7 +78,7 @@ const props = withDefaults(defineProps<Props>(), {
                         <div
                           class="cursor-pointer rounded border border-gray-300 bg-gray-100 px-4 py-2 text-gray-800"
                         >
-                          選択する
+                          ファイルを選択
                         </div>
                       </label>
                     </div>

@@ -1,24 +1,26 @@
 import { reactive } from 'vue'
 import { useRuntimeConfig } from 'nuxt/app'
-import { Tag } from '@/hooks/types'
 import { storeToRefs } from 'pinia'
 import { useLoginStore } from '@/store/login'
 import { h } from '@/lib/headers'
 import { useErrorHandler } from '@/hooks/useErrorHandler'
 
 type State = {
+  input: {
+    albumId: number
+    tagIds: number[]
+  }
   loading: boolean
-  selectDeleteTag: Tag
 }
 const initialState = (): State => ({
-  loading: false,
-  selectDeleteTag: {
-    id: 0,
-    name: '',
+  input: {
+    albumId: 0,
+    tagIds: [],
   },
+  loading: false,
 })
 
-export const useDeleteTag = () => {
+export const useUpdateAlbumTags = () => {
   const config = useRuntimeConfig()
   const loginStore = useLoginStore()
   const { csrfToken } = storeToRefs(loginStore)
@@ -26,14 +28,18 @@ export const useDeleteTag = () => {
 
   const state = reactive<State>(initialState())
 
-  const deleteTag = async () => {
+  const updateAlbumTags = async () => {
+    const params = {
+      ...state.input,
+    }
     state.loading = true
     try {
       const response = await fetch(
-        `${config.public.API_URL}/tags/${state.selectDeleteTag.id}`,
+        `${config.public.API_URL}/albums/tags/update`,
         {
-          method: 'DELETE',
+          method: 'POST',
           headers: h(csrfToken.value),
+          body: JSON.stringify(params),
           credentials: 'include',
         }
       )
@@ -45,12 +51,20 @@ export const useDeleteTag = () => {
       alert(`エラーが発生しました。${error}`)
     } finally {
       state.loading = false
+      state.input = initialState().input
     }
   }
 
+  const addSelectedTagIds = (tagId: number) => state.input.tagIds.push(tagId)
+  const deleteSelectedTagIds = (tagId: number) =>
+    (state.input.tagIds = state.input.tagIds.filter((id) => id !== tagId))
+
   return {
     state,
-    deleteTag,
-    setTag: (tag: Tag) => (state.selectDeleteTag = tag),
+    setAlbumId: (albumId: number) => (state.input.albumId = albumId),
+    updateAlbumTags,
+    addSelectedTagIds,
+    deleteSelectedTagIds,
+    resetInput: () => (state.input = initialState().input),
   }
 }

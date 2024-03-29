@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/vue3'
 import Tags, { Props } from './Tags.vue'
-import { mockTagsQuery } from '../../../mock/mockQuery'
+import { mockTagsQuery } from '../../../../mock/mockQuery'
 
 export default {
   title: 'organisms/Tags',

@@ -4,6 +4,10 @@ import { Album } from '@/hooks/types'
 export type Props = {
   albums: Album[]
   albumLoading: boolean
+  openUpdateAlbumTagsDialog: (
+    albumId: Album['id'],
+    albumTags: Album['tags']
+  ) => void
 }
 const props = withDefaults(defineProps<Props>(), {})
 </script>
@@ -77,6 +81,7 @@ const props = withDefaults(defineProps<Props>(), {})
               <td class="px-6 py-4">
                 <span
                   class="cursor-pointer font-medium text-yellow-600 hover:underline dark:text-yellow-500"
+                  @click="props.openUpdateAlbumTagsDialog(album.id, album.tags)"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

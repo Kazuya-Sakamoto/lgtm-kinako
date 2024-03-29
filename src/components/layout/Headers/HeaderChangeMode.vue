@@ -24,7 +24,7 @@ const onChangeMode = (mode: typeof m.MODE_DARK | typeof m.MODE_LIGHT) => {
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="currentColor"
-        class="h-6 w-6"
+        class="h-7 w-7"
       >
         <path
           stroke-linecap="round"
@@ -46,7 +46,7 @@ const onChangeMode = (mode: typeof m.MODE_DARK | typeof m.MODE_LIGHT) => {
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="currentColor"
-        class="h-6 w-6"
+        class="h-7 w-7"
       >
         <path
           stroke-linecap="round"

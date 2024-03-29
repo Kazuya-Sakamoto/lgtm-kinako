@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<Props>(), {})
 
 <template>
   <div>
-    <div v-show="!props.tagLoading" class="mt-6 flex flex-wrap">
+    <div v-show="!props.tagLoading" class="mt-4 flex flex-wrap">
       <div v-for="(tag, i) in props.tags" :key="i" class="mb-2 mr-2">
         <Tag
           :tag="tag"
@@ -26,7 +26,7 @@ const props = withDefaults(defineProps<Props>(), {})
       <div class="flex w-full animate-pulse">
         <div v-for="index in 4" :key="index" class="w-32">
           <div
-            class="relative mx-1 mt-6 h-12 overflow-hidden rounded border-inherit bg-gray-300 group-hover:opacity-75 dark:bg-neutral-800"
+            class="relative mx-1 mt-4 h-12 overflow-hidden rounded border-inherit bg-gray-300 group-hover:opacity-75 dark:bg-neutral-800"
           />
         </div>
       </div>

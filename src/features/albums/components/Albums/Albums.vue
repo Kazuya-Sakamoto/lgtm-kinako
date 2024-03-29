@@ -22,7 +22,7 @@ const props = defineProps<Props>()
       v-show="!props.albumLoading"
       class="mt-3"
       :class="{
-        'lg:grid lg:grid-cols-4 lg:gap-x-2 lg:space-y-0': !props.isAll,
+        'lg:grid lg:grid-cols-5 lg:gap-x-2 lg:space-y-0': !props.isAll,
         'lg:grid lg:grid-cols-6 ': props.isAll,
       }"
     >

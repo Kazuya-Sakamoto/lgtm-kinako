@@ -62,7 +62,7 @@ const {
         />
       </div>
       <nav
-        class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+        class="mx-auto flex max-w-7xl items-center justify-between px-6 pt-6 pb-4 lg:px-8"
         aria-label="Global"
       >
         <div class="flex lg:flex-1">

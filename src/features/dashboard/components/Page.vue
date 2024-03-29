@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
-import { Tag } from '@/hooks/types'
+import { reactive, toRefs } from 'vue'
+import { Album, Tag } from '@/hooks/types'
 import { useRouter } from 'nuxt/app'
 import { useLoginStore } from '@/store/login'
 import { useFetchTags } from '@/hooks/useFetchTags'
@@ -10,9 +10,10 @@ import {
   useCreateAlbum,
   useCreateTag,
   useDeleteTag,
+  useUpdateAlbumTags,
 } from '../hooks'
 import { TagsTable, DeleteDialog } from './Tags'
-import { AlbumsTable, NewAlbumDialog } from './Albums'
+import { AlbumsTable, NewAlbumDialog, UpdateAlbumTagsDialog } from './Albums'
 import Cards from './Cards.vue'
 
 const loginStore = useLoginStore()
@@ -21,20 +22,17 @@ const router = useRouter()
 
 type State = {
   showDeleteDialog: boolean
-  selectDeleteTag: Tag
+  showUpdateAlbumTagsDialog: boolean
 }
 const initialState = (): State => ({
   showDeleteDialog: false,
-  selectDeleteTag: {
-    id: 0,
-    name: '',
-  },
+  showUpdateAlbumTagsDialog: false,
 })
 const state = reactive<State>(initialState())
 
 const { tags, loading: tagLoading, fetchTags } = useFetchTags()
 const { state: createState, onInput, createTag } = useCreateTag()
-const { state: deleteState, deleteTag } = useDeleteTag()
+const { state: deleteState, deleteTag, setTag } = useDeleteTag()
 const { albums, albumLoading, fetchAllAlbums } = useFetchAllAlbums()
 const {
   state: createAlbumState,
@@ -44,6 +42,14 @@ const {
   onOpenDialog: onOpenDialogForCreateAlbum,
   onCloseDialog: onCloseDialogForCreateAlbum,
 } = useCreateAlbum()
+const {
+  state: updateAlbumTagsState,
+  setAlbumId,
+  updateAlbumTags,
+  addSelectedTagIds,
+  deleteSelectedTagIds,
+  resetInput,
+} = useUpdateAlbumTags()
 
 ;(async () => {
   if (!isLogin()) {
@@ -53,35 +59,60 @@ const {
 
   await Promise.all([fetchAllAlbums(), fetchTags()])
 })()
-
+/**
+ * Tagの作成
+ */
 const onCreateTag = async () => {
   await createTag()
-  await fetchTags()
+  fetchTags()
 }
-const onDeleteTag = async () => {
-  await deleteTag(state.selectDeleteTag.id)
-  await fetchTags()
-  state.showDeleteDialog = false
-}
-const onCreateAlbum = async () => {
-  await createAlbum()
-  await fetchAllAlbums()
-}
+/**
+ * Tagの削除
+ */
 const openDeleteDialog = (tag: Tag) => {
   state.showDeleteDialog = true
-  state.selectDeleteTag = tag
+  setTag(tag)
 }
+const onCloseDeleteDialog = () => (state.showDeleteDialog = false)
+const onDeleteTag = async () => {
+  await deleteTag()
+  fetchTags()
+  onCloseDeleteDialog()
+}
+/**
+ * Albumの作成
+ */
+const onCreateAlbum = async () => {
+  await createAlbum()
+  fetchAllAlbums()
+}
+/**
+ * AlbumTagsの更新
+ */
+const openUpdateAlbumTagsDialog = (
+  albumId: Album['id'],
+  albumTags: Album['tags']
+) => {
+  state.showUpdateAlbumTagsDialog = true
+  updateAlbumTagsState.input.tagIds = albumTags.map((tag) => tag.id)
+  console.log(albumId, '--albumId---')
+  setAlbumId(albumId)
+}
+const onCloseUpdateAlbumTagsDialog = () => {
+  state.showUpdateAlbumTagsDialog = false
+  resetInput()
+}
+const onUpdateAlbumTags = async () => {
+  await updateAlbumTags()
+  fetchAllAlbums()
+  onCloseUpdateAlbumTagsDialog()
+}
+
+const { showDeleteDialog, showUpdateAlbumTagsDialog } = toRefs(state)
 </script>
 
 <template>
   <div>
-    <DeleteDialog
-      :show-delete-dialog="state.showDeleteDialog"
-      :close-dialog="() => (state.showDeleteDialog = false)"
-      :select-delete-tag="state.selectDeleteTag"
-      :delete-loading="deleteState.loading"
-      :on-delete-tag="onDeleteTag"
-    />
     <NewAlbumDialog
       :show-dialog="createAlbumState.showDialog"
       :on-close-dialog="() => onCloseDialogForCreateAlbum()"
@@ -90,6 +121,23 @@ const openDeleteDialog = (tag: Tag) => {
       :image="createAlbumState.input.image"
       :on-file-change="onFileChange"
       :loading="createAlbumState.loading"
+    />
+    <DeleteDialog
+      :show-delete-dialog="showDeleteDialog"
+      :close-dialog="onCloseDeleteDialog"
+      :select-delete-tag="deleteState.selectDeleteTag"
+      :delete-loading="deleteState.loading"
+      :on-delete-tag="onDeleteTag"
+    />
+    <UpdateAlbumTagsDialog
+      :show-update-album-tags-dialog="showUpdateAlbumTagsDialog"
+      :close-dialog="onCloseUpdateAlbumTagsDialog"
+      :update-album-tags-loading="updateAlbumTagsState.loading"
+      :tags="tags"
+      :selected-tag-ids="updateAlbumTagsState.input.tagIds"
+      :add-selected-tag-ids="addSelectedTagIds"
+      :delete-selected-tag-ids="deleteSelectedTagIds"
+      :update-album-tags="onUpdateAlbumTags"
     />
 
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -145,34 +193,38 @@ const openDeleteDialog = (tag: Tag) => {
           :open-delete-dialog="openDeleteDialog"
         />
       </div>
-      <div>
-        <TButton
-          class="inline-flex items-center justify-center"
-          color="yellow"
-          size="medium"
-          text-color="white"
-          :loading="createAlbumState.loading"
-          @click="onOpenDialogForCreateAlbum()"
+
+      <TButton
+        class="inline-flex items-center justify-center font-bold"
+        color="yellow"
+        size="medium"
+        text-color="white"
+        :loading="createAlbumState.loading"
+        @click="onOpenDialogForCreateAlbum()"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="mr-1 h-5 w-5"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="mr-1 h-5 w-5"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
-            />
-          </svg>
-          画像をアップロードする
-        </TButton>
-      </div>
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+          />
+        </svg>
+        画像をアップロードする
+      </TButton>
+
       <div class="pb-10 pt-4">
-        <AlbumsTable :albums="albums" :album-loading="albumLoading" />
+        <AlbumsTable
+          :albums="albums"
+          :album-loading="albumLoading"
+          :open-update-album-tags-dialog="openUpdateAlbumTagsDialog"
+        />
       </div>
     </div>
   </div>

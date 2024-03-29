@@ -16,7 +16,7 @@ const props = defineProps<Props>()
     @click="() => props.onCopyImage(props.album)"
   >
     <div
-      class="main__shadow sm:aspect-h-1 relative mt-4 h-96 w-full overflow-hidden rounded border-none bg-white group-hover:opacity-75"
+      class="main__shadow sm:aspect-h-1 relative mt-4 h-80 w-full overflow-hidden rounded border-none bg-white group-hover:opacity-75"
     >
       <img
         :src="album.image"

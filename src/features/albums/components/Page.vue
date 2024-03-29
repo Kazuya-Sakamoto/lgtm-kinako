@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { reactive, ref, watch } from 'vue'
 import { useRouter, useRoute } from 'nuxt/app'
-import { Album as AlbumQuery } from '@/hooks/types'
-import { sendGtagEvent } from '@/lib/gtagEvent'
-import { useFetchTags } from '@/hooks/useFetchTags'
-import { useFetchAlbums } from '../hooks/useFetchAlbums'
 import { useI18n } from 'vue-i18n'
-import Albums from '@/components/layout/Albums/index.vue'
-import Tags from './Tags.vue'
+import { Album as AlbumQuery } from '@/hooks/types'
+import { useFetchTags } from '@/hooks/useFetchTags'
+import { sendGtagEvent } from '@/lib/gtagEvent'
+import { useFetchAlbums } from '../hooks/useFetchAlbums'
+import { Albums } from './Albums'
+import { Tags } from './Tags'
 
 const route = useRoute()
 const router = useRouter()
@@ -63,13 +63,11 @@ const { t } = useI18n()
   <div>
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col items-center">
-        <h1 class="lg:text-xl">
-          {{ t('$top.title') }}
-        </h1>
+        <h1 class="lg:text-xl">{{ t('$top.title') }}</h1>
         <div
-          class="mt-2 flex flex-col items-center text-sm sm:mt-4 lg:mt-6 lg:text-lg"
+          class="mt-2 flex flex-col items-center text-sm sm:mt-4 lg:mt-2 lg:text-base"
         >
-          <div>{{ t('$top.sub_title') }}</div>
+          <p>{{ t('$top.sub_title') }} <span class="text-xl"> 🐾 </span></p>
           <button
             :disabled="albumLoading"
             class="mt-8 inline-flex items-center justify-center rounded-lg bg-yellow-500 px-6 py-3 text-base font-medium text-white shadow-xl shadow-yellow-400/75 transition-transform duration-200 ease-in-out hover:scale-[1.02]"
@@ -121,7 +119,7 @@ const { t } = useI18n()
         :current-tag="currentTag"
         :tag-loading="tagLoading"
       />
-      <div class="custom-py mx-auto max-w-2xl sm:py-5 sm:pb-20 lg:max-w-none">
+      <div class="custom-py mx-auto max-w-2xl sm:pt-1 sm:pb-24 lg:max-w-none">
         <Albums
           :albums="albums"
           :album-loading="albumLoading"
