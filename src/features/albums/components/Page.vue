@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { reactive, ref, watch } from 'vue'
+import { reactive, ref, watch, computed } from 'vue'
 import { useRouter, useRoute } from 'nuxt/app'
 import { useI18n } from 'vue-i18n'
 import { Album as AlbumQuery } from '@/hooks/types'
 import { useFetchTags } from '@/hooks/useFetchTags'
+import { useFetchAlbumCountsByTag } from '@/hooks/useFetchAlbumCountsByTag'
 import { sendGtagEvent } from '@/lib/gtagEvent'
 import { useFetchAlbums } from '../hooks/useFetchAlbums'
 import { Albums } from './Albums'
@@ -37,10 +38,27 @@ const state = reactive<State>(initialState())
 
 const { albums, albumLoading, fetchAlbums, refetch } = useFetchAlbums()
 const { tags, loading: tagLoading, fetchTags } = useFetchTags()
+const {
+  counts,
+  loading: albumCountsLoading,
+  fetchAlbumCountsByTag,
+} = useFetchAlbumCountsByTag()
 
 ;(async () => {
-  await Promise.all([fetchAlbums(route.query.tag), fetchTags()])
+  await Promise.all([
+    fetchAlbums(route.query.tag),
+    fetchTags(),
+    fetchAlbumCountsByTag(),
+  ])
 })()
+
+const albumTagsCounts = computed(() => {
+  return tags.value.map((tag) => {
+    const count =
+      counts.value.find((count) => count.tag_id === tag.id)?.count || 0
+    return { ...tag, count }
+  })
+})
 
 const onCopyImage = (album: AlbumQuery) => {
   sendGtagEvent('copy_image_url', {
@@ -114,10 +132,10 @@ const { t } = useI18n()
         </div>
       </div>
       <Tags
-        :tags="tags ?? []"
+        :album-tags-counts="albumTagsCounts"
         :navigate-with-tag="navigateWithTag ?? (() => {})"
         :current-tag="currentTag"
-        :tag-loading="tagLoading"
+        :loading="tagLoading || albumCountsLoading"
       />
       <div class="custom-py mx-auto max-w-2xl sm:pt-1 sm:pb-24 lg:max-w-none">
         <Albums

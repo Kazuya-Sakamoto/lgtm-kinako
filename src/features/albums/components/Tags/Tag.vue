@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Tag as TagQuery } from '@/hooks/types'
+import { AlbumTagCounts } from '@/hooks/types'
 
 export type Props = {
-  tag: TagQuery
+  albumTagCounts: AlbumTagCounts
   currentTag: any
   navigateWithTag: (tagId: number) => void
 }
@@ -14,11 +14,11 @@ const props = withDefaults(defineProps<Props>(), {})
     <span
       :class="[
         'tag-size inline-flex cursor-pointer items-center rounded-md px-3 py-2.5 text-xs font-medium shadow-xl shadow-yellow-600/35 ring-1 ring-inset ring-yellow-600/20',
-        props.tag.id == props.currentTag
+        props.albumTagCounts.id == props.currentTag
           ? 'bg-yellow-400 text-white'
           : 'bg-yellow-50 text-yellow-800',
       ]"
-      @click="props.navigateWithTag(props.tag.id)"
+      @click="props.navigateWithTag(props.albumTagCounts.id)"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,7 @@ const props = withDefaults(defineProps<Props>(), {})
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="currentColor"
-        class="h-6 w-6 pr-1"
+        class="h-6 w-4 pr-1"
       >
         <path
           stroke-linecap="round"
@@ -35,7 +35,7 @@ const props = withDefaults(defineProps<Props>(), {})
         />
       </svg>
 
-      {{ props.tag.name }}
+      {{ props.albumTagCounts.name }} ({{ props.albumTagCounts.count }})
     </span>
   </div>
 </template>

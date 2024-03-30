@@ -19,3 +19,9 @@ export type Tag = {
   id: number
   name: string
 }
+
+export type AlbumTagCounts = {
+  count: number
+  id: number
+  name: string
+}

@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { Tag } from '@/hooks/types'
+import { Tag, AlbumTagCounts } from '@/hooks/types'
 
 export type Props = {
-  tags: Tag[]
-  tagLoading: boolean
+  albumTagsCounts: AlbumTagCounts[]
+  loading: boolean
   openDeleteDialog: (tag: Tag) => void
 }
 const props = withDefaults(defineProps<Props>(), {
-  tagLoading: false,
+  loading: false,
 })
 </script>
 
@@ -27,11 +27,12 @@ const props = withDefaults(defineProps<Props>(), {
           <tr>
             <th scope="col" class="px-6 py-3">ID</th>
             <th scope="col" class="px-6 py-3">タグ名</th>
+            <th scope="col" class="px-6 py-3">総数</th>
             <th scope="col" class="px-6 py-3">削除</th>
           </tr>
         </thead>
         <tbody>
-          <template v-if="props.tagLoading">
+          <template v-if="props.loading">
             <tr>
               <td
                 colspan="5"
@@ -43,23 +44,28 @@ const props = withDefaults(defineProps<Props>(), {
           </template>
           <template v-else>
             <tr
-              v-for="(tag, _) in props.tags"
+              v-for="(albumTagCounts, _) in props.albumTagsCounts"
               class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
             >
               <td
                 scope="row"
                 class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
               >
-                {{ tag.id }}
+                {{ albumTagCounts.id }}
               </td>
               <td
                 class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
               >
-                {{ tag.name }}
+                {{ albumTagCounts.name }}
+              </td>
+              <td
+                class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                {{ albumTagCounts.count }}
               </td>
               <td class="px-6 py-4">
                 <span
-                  @click="props.openDeleteDialog(tag)"
+                  @click="props.openDeleteDialog(albumTagCounts)"
                   class="cursor-pointer font-medium text-rose-500 hover:underline"
                   ><svg
                     xmlns="http://www.w3.org/2000/svg"

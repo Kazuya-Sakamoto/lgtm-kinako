@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { reactive, toRefs } from 'vue'
-import { Album, Tag } from '@/hooks/types'
+import { reactive, toRefs, computed } from 'vue'
 import { useRouter } from 'nuxt/app'
 import { useLoginStore } from '@/store/login'
+import { Album, Tag } from '@/hooks/types'
 import { useFetchTags } from '@/hooks/useFetchTags'
+import { useFetchAlbumCountsByTag } from '@/hooks/useFetchAlbumCountsByTag'
 import { TButton } from '@/components/parts'
 import {
   useFetchAllAlbums,
@@ -50,6 +51,11 @@ const {
   deleteSelectedTagIds,
   resetInput,
 } = useUpdateAlbumTags()
+const {
+  counts,
+  loading: countsLoading,
+  fetchAlbumCountsByTag,
+} = useFetchAlbumCountsByTag()
 
 ;(async () => {
   if (!isLogin()) {
@@ -57,7 +63,7 @@ const {
     return router.push('/')
   }
 
-  await Promise.all([fetchAllAlbums(), fetchTags()])
+  await Promise.all([fetchAllAlbums(), fetchTags(), fetchAlbumCountsByTag()])
 })()
 /**
  * Tagの作成
@@ -107,6 +113,14 @@ const onUpdateAlbumTags = async () => {
   fetchAllAlbums()
   onCloseUpdateAlbumTagsDialog()
 }
+
+const albumTagsCounts = computed(() => {
+  return tags.value.map((tag) => {
+    const count =
+      counts.value.find((count) => count.tag_id === tag.id)?.count || 0
+    return { ...tag, count }
+  })
+})
 
 const { showDeleteDialog, showUpdateAlbumTagsDialog } = toRefs(state)
 </script>
@@ -188,8 +202,8 @@ const { showDeleteDialog, showUpdateAlbumTagsDialog } = toRefs(state)
 
       <div class="pb-10">
         <TagsTable
-          :tags="tags"
-          :tag-loading="tagLoading"
+          :album-tags-counts="albumTagsCounts"
+          :loading="tagLoading || countsLoading"
           :open-delete-dialog="openDeleteDialog"
         />
       </div>

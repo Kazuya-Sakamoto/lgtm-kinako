@@ -1,28 +1,32 @@
 <script setup lang="ts">
-import { Tag as TagQuery } from '@/hooks/types'
+import { AlbumTagCounts } from '@/hooks/types'
 import Tag from './Tag.vue'
 
 export type Props = {
-  tags: TagQuery[]
+  albumTagsCounts: AlbumTagCounts[]
   navigateWithTag: (tagId: number) => void
   currentTag: any
-  tagLoading: boolean
+  loading: boolean
 }
 const props = withDefaults(defineProps<Props>(), {})
 </script>
 
 <template>
   <div>
-    <div v-show="!props.tagLoading" class="mt-4 flex flex-wrap">
-      <div v-for="(tag, i) in props.tags" :key="i" class="mb-2 mr-2">
+    <div v-show="!props.loading" class="mt-4 flex flex-wrap">
+      <div
+        v-for="(albumTagCounts, i) in props.albumTagsCounts"
+        :key="i"
+        class="mb-2 mr-2"
+      >
         <Tag
-          :tag="tag"
+          :album-tag-counts="albumTagCounts"
           :current-tag="props.currentTag"
           :navigate-with-tag="props.navigateWithTag"
         />
       </div>
     </div>
-    <div v-show="props.tagLoading">
+    <div v-show="props.loading">
       <div class="flex w-full animate-pulse">
         <div v-for="index in 4" :key="index" class="w-32">
           <div
