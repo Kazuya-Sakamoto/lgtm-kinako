@@ -7,7 +7,6 @@ import { useErrorHandler } from '@/hooks/useErrorHandler'
 import { CreateAlbumParams } from '@/hooks/types'
 
 type State = {
-  showDialog: boolean
   input: {
     image: string
     title: string
@@ -15,7 +14,6 @@ type State = {
   loading: boolean
 }
 const initialState = (): State => ({
-  showDialog: false,
   input: {
     image: '',
     title: '',
@@ -69,14 +67,7 @@ export const useCreateAlbum = () => {
       alert(`エラーが発生しました。${error}`)
     } finally {
       state.loading = false
-      onCloseDialog()
     }
-  }
-
-  const onCloseDialog = () => {
-    state.showDialog = false
-    onInput({ name: 'image', value: '' })
-    onInput({ name: 'title', value: '' })
   }
 
   return {
@@ -84,7 +75,5 @@ export const useCreateAlbum = () => {
     createAlbum,
     onInput,
     onFileChange,
-    onOpenDialog: () => (state.showDialog = true),
-    onCloseDialog,
   }
 }

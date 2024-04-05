@@ -8,7 +8,7 @@ export type Props = {
   showClipboardMap: Record<string, boolean>
   onCopyImage: (album: AlbumQuery) => void
   albumLoading: boolean
-  isAll: boolean
+  loadingCount: number
 }
 const props = defineProps<Props>()
 </script>
@@ -16,15 +16,11 @@ const props = defineProps<Props>()
 <template>
   <div>
     <div v-show="props.albumLoading" class="mt-3">
-      <AlbumLoading />
+      <AlbumLoading :loading-count="loadingCount" />
     </div>
     <div
       v-show="!props.albumLoading"
-      class="mt-3"
-      :class="{
-        'lg:grid lg:grid-cols-5 lg:gap-x-2 lg:space-y-0': !props.isAll,
-        'lg:grid lg:grid-cols-6 ': props.isAll,
-      }"
+      class="lg:grid lg:grid-cols-5 lg:gap-x-2 lg:space-y-0 mt-3"
     >
       <div v-for="(album, i) in props.albums" :key="i">
         <Album

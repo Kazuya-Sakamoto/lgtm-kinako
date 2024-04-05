@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<Props>(), {})
       <div class="flex w-full animate-pulse">
         <div v-for="index in 4" :key="index" class="w-32">
           <div
-            class="relative mx-1 mt-4 h-12 overflow-hidden rounded border-inherit bg-gray-300 group-hover:opacity-75 dark:bg-neutral-800"
+            class="relative mx-1 mt-4 h-11 overflow-hidden rounded border-inherit bg-gray-300 group-hover:opacity-75 dark:bg-neutral-800"
           />
         </div>
       </div>

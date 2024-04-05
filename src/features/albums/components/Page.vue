@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref, watch, computed } from 'vue'
+import { reactive, ref, watch, computed, toRefs } from 'vue'
 import { useRouter, useRoute } from 'nuxt/app'
 import { useI18n } from 'vue-i18n'
 import { Album as AlbumQuery } from '@/hooks/types'
@@ -59,6 +59,9 @@ const albumTagsCounts = computed(() => {
     return { ...tag, count }
   })
 })
+const loadingCount = computed(
+  () => albumTagsCounts.value[currentTag.value - 1]?.count ?? 10
+)
 
 const onCopyImage = (album: AlbumQuery) => {
   sendGtagEvent('copy_image_url', {
@@ -74,7 +77,9 @@ const onCopyImage = (album: AlbumQuery) => {
     state.showClipboardMap[album.id] = false
   }, 2000)
 }
+
 const { t } = useI18n()
+const { showClipboardMap } = toRefs(state)
 </script>
 
 <template>
@@ -142,8 +147,9 @@ const { t } = useI18n()
           :albums="albums"
           :album-loading="albumLoading"
           :is-all="false"
-          :show-clipboard-map="state.showClipboardMap"
+          :show-clipboard-map="showClipboardMap"
           :on-copy-image="onCopyImage"
+          :loading-count="loadingCount"
         />
       </div>
     </div>

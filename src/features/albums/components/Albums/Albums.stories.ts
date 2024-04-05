@@ -18,7 +18,6 @@ export const Default: StoryObj<typeof Albums> = {
     showClipboardMap: Clicked,
     onCopyImage: (album: AlbumQuery) => console.log('Copying image:', album),
     albumLoading: false,
-    isAll: false,
   } as Props,
 }
 
@@ -26,12 +25,5 @@ export const Loading: StoryObj<typeof Albums> = {
   args: {
     ...Default.args,
     albumLoading: true,
-  },
-}
-
-export const IsAll: StoryObj<typeof Albums> = {
-  args: {
-    ...Default.args,
-    isAll: true,
   },
 }

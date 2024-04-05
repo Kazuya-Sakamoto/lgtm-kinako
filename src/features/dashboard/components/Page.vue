@@ -22,35 +22,19 @@ const { isLogin } = loginStore
 const router = useRouter()
 
 type State = {
+  showCreateAlbumDialog: boolean
   showDeleteDialog: boolean
   showUpdateAlbumTagsDialog: boolean
 }
 const initialState = (): State => ({
+  showCreateAlbumDialog: false,
   showDeleteDialog: false,
   showUpdateAlbumTagsDialog: false,
 })
 const state = reactive<State>(initialState())
 
 const { tags, loading: tagLoading, fetchTags } = useFetchTags()
-const { state: createState, onInput, createTag } = useCreateTag()
-const { state: deleteState, deleteTag, setTag } = useDeleteTag()
 const { albums, albumLoading, fetchAllAlbums } = useFetchAllAlbums()
-const {
-  state: createAlbumState,
-  onInput: onInputForCreateNewAlbum,
-  createAlbum,
-  onFileChange,
-  onOpenDialog: onOpenDialogForCreateAlbum,
-  onCloseDialog: onCloseDialogForCreateAlbum,
-} = useCreateAlbum()
-const {
-  state: updateAlbumTagsState,
-  setAlbumId,
-  updateAlbumTags,
-  addSelectedTagIds,
-  deleteSelectedTagIds,
-  resetInput,
-} = useUpdateAlbumTags()
 const {
   counts,
   loading: countsLoading,
@@ -65,16 +49,29 @@ const {
 
   await Promise.all([fetchAllAlbums(), fetchTags(), fetchAlbumCountsByTag()])
 })()
+
+const albumTagsCounts = computed(() => {
+  return tags.value.map((tag) => {
+    const count =
+      counts.value.find((count) => count.tag_id === tag.id)?.count || 0
+    return { ...tag, count }
+  })
+})
+
 /**
- * Tagの作成
+ * * Tagの作成
  */
+const { state: createState, onInput, createTag } = useCreateTag()
+
 const onCreateTag = async () => {
   await createTag()
   fetchTags()
 }
 /**
- * Tagの削除
+ * * Tagの削除
  */
+const { state: deleteState, deleteTag, setTag } = useDeleteTag()
+
 const openDeleteDialog = (tag: Tag) => {
   state.showDeleteDialog = true
   setTag(tag)
@@ -86,22 +83,46 @@ const onDeleteTag = async () => {
   onCloseDeleteDialog()
 }
 /**
- * Albumの作成
+ * * Albumの作成
  */
+const {
+  state: createAlbumState,
+  onInput: onInputForCreateNewAlbum,
+  createAlbum,
+  onFileChange,
+} = useCreateAlbum()
+
+const onOpenDialogForCreateAlbum = () => (state.showCreateAlbumDialog = true)
+const onCloseDialogForCreateAlbum = () => {
+  state.showCreateAlbumDialog = false
+  onInputForCreateNewAlbum({ name: 'image', value: '' })
+  onInputForCreateNewAlbum({ name: 'title', value: '' })
+}
 const onCreateAlbum = async () => {
   await createAlbum()
   fetchAllAlbums()
+  onCloseDialogForCreateAlbum()
 }
 /**
- * AlbumTagsの更新
+ * * AlbumTagsの更新
  */
+const {
+  state: updateAlbumTagsState,
+  setAlbumId,
+  setTagIds,
+  updateAlbumTags,
+  addSelectedTagIds,
+  deleteSelectedTagIds,
+  resetInput,
+} = useUpdateAlbumTags()
+
 const openUpdateAlbumTagsDialog = (
   albumId: Album['id'],
   albumTags: Album['tags']
 ) => {
   state.showUpdateAlbumTagsDialog = true
-  updateAlbumTagsState.input.tagIds = albumTags.map((tag) => tag.id)
-  console.log(albumId, '--albumId---')
+  const tagIds = albumTags.map((tag) => tag.id)
+  setTagIds(tagIds)
   setAlbumId(albumId)
 }
 const onCloseUpdateAlbumTagsDialog = () => {
@@ -110,25 +131,21 @@ const onCloseUpdateAlbumTagsDialog = () => {
 }
 const onUpdateAlbumTags = async () => {
   await updateAlbumTags()
-  fetchAllAlbums()
-  onCloseUpdateAlbumTagsDialog()
+  Promise.all([
+    fetchAllAlbums(),
+    onCloseUpdateAlbumTagsDialog(),
+    fetchAlbumCountsByTag(),
+  ])
 }
 
-const albumTagsCounts = computed(() => {
-  return tags.value.map((tag) => {
-    const count =
-      counts.value.find((count) => count.tag_id === tag.id)?.count || 0
-    return { ...tag, count }
-  })
-})
-
-const { showDeleteDialog, showUpdateAlbumTagsDialog } = toRefs(state)
+const { showCreateAlbumDialog, showDeleteDialog, showUpdateAlbumTagsDialog } =
+  toRefs(state)
 </script>
 
 <template>
   <div>
     <NewAlbumDialog
-      :show-dialog="createAlbumState.showDialog"
+      :show-dialog="showCreateAlbumDialog"
       :on-close-dialog="() => onCloseDialogForCreateAlbum()"
       :on-create-album="onCreateAlbum"
       :on-input="onInputForCreateNewAlbum"

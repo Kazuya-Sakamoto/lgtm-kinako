@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, toRefs } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useLoginStore } from '@/store/login'
 import { useLocaleStore } from '@/store/localeStore'
@@ -41,6 +41,8 @@ const {
   onOpenDialog: onOpenDialogForLogin,
   onCloseDialog: onCloseDialogForLogin,
 } = useLogin()
+
+const { showHeaderMenu } = toRefs(state)
 </script>
 
 <template>
@@ -71,9 +73,9 @@ const {
         <div class="hidden lg:flex lg:gap-x-4" />
         <div class="lg:flex lg:flex-1 lg:justify-end">
           <HeaderMenu
-            :show-header-menu="state.showHeaderMenu"
-            :on-openshow-header-menu="() => (state.showHeaderMenu = true)"
-            :on-closeshow-header-menu="() => (state.showHeaderMenu = false)"
+            :show-header-menu="showHeaderMenu"
+            :on-openshow-header-menu="() => (showHeaderMenu = true)"
+            :on-closeshow-header-menu="() => (showHeaderMenu = false)"
             :on-show-login-dialog="() => onOpenDialogForLogin()"
             :is-login="isLogin"
             :locale="locale"

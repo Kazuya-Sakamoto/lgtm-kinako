@@ -62,6 +62,7 @@ export const useUpdateAlbumTags = () => {
   return {
     state,
     setAlbumId: (albumId: number) => (state.input.albumId = albumId),
+    setTagIds: (tagIds: number[]) => (state.input.tagIds = tagIds),
     updateAlbumTags,
     addSelectedTagIds,
     deleteSelectedTagIds,
