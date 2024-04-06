@@ -10,16 +10,25 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install pnpm and Dependencies
+          name: "Install pnpm"
+          command: "sudo npm install -g pnpm"
+      - run:
+          name: "Install Dependencies"
           command: |
             cd src &&
-            sudo npm install -g pnpm
+            pnpm install
+      - save_cache:
+          key: v1-dependencies-{{ checksum "src/package.json" }}
+          paths:
+            - src/node_modules
 
   build_application:
     docker:
       - image: cimg/node:18.18
     steps:
       - checkout
+      - restore_cache:
+          key: v1-dependencies-{{ checksum "src/package.json" }}
       - run:
           name: "Build Application"
           command: |
