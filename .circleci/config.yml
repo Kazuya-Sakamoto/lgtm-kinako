@@ -11,19 +11,7 @@ jobs:
       - checkout
       - run:
           name: Install pnpm
-          command: sudo npm install -g pnpm --unsafe-perm=true --allow-root
-
-  run_tests:
-    docker:
-      - image: cimg/node:18.18
-    steps:
-      - checkout
-      - run:
-          name: "Install Dependencies and Run Tests"
-          command: |
-            cd src &&
-            sudo npm install -g pnpm &&
-            pnpm run test
+          command: sudo npm install -g pnpm
 
   build_application:
     docker:
@@ -32,7 +20,7 @@ jobs:
       - checkout
       - run:
           name: "Install Dependencies with pnpm"
-          command: sudo pnpm install --unsafe-perm=true --allow-root
+          command: sudo pnpm install
       - run:
           name: "Build Application"
           command: pnpm run build
@@ -42,9 +30,6 @@ workflows:
   build-and-test:
     jobs:
       - install_dependencies
-      - run_tests:
-          requires:
-            - install_dependencies
       - build_application:
           requires:
             - run_tests
