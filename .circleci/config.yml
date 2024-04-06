@@ -10,11 +10,9 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Install pnpm"
-          command: npm install -g pnpm
-      - run:
-          name: "Install Dependencies with pnpm"
-          command: pnpm install
+          name: Install pnpm
+          command: |
+            sudo npm install -g pnpm --unsafe-perm=true --allow-root
 
   run_tests:
     docker:
