@@ -12,9 +12,8 @@ jobs:
       - run:
           name: Install pnpm and Dependencies
           command: |
-            npm install -g pnpm
             cd src &&
-            pnpm install
+            sudo npm install -g pnpm
 
   build_application:
     docker:
