@@ -19,14 +19,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Change directory to src"
-          command: cd src
-      - run:
-          name: "Install Dependencies with pnpm"
-          command: pnpm install
-      - run:
-          name: "Run Tests"
-          command: pnpm run test
+          name: "Install Dependencies and Run Tests"
+          command: |
+            cd src &&
+            sudo npm install -g pnpm &&
+            pnpm run test
 
   build_application:
     docker:
