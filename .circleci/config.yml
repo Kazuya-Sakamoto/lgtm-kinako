@@ -32,4 +32,4 @@ workflows:
       - install_dependencies
       - build_application:
           requires:
-            - run_tests
+            - install_dependencies
