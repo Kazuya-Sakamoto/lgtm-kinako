@@ -10,8 +10,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install pnpm
-          command: sudo npm install -g pnpm
+          name: Install pnpm and Dependencies
+          command: |
+            npm install -g pnpm
+            cd src &&
+            pnpm install
 
   build_application:
     docker:
@@ -19,11 +22,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Install Dependencies with pnpm"
-          command: sudo pnpm install
-      - run:
           name: "Build Application"
-          command: pnpm run build
+          command: |
+            cd src &&
+            pnpm run build
 
 workflows:
   version: 2
