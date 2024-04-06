@@ -20,7 +20,7 @@ jobs:
       - checkout
       - run:
           name: "Install Dependencies with pnpm"
-          command: sudo pnpm install --unsafe-perm=true --allow-root
+          command: pnpm install
       - run:
           name: "Run Tests"
           command: pnpm run test
