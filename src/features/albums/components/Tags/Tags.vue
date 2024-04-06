@@ -13,17 +13,19 @@ const props = withDefaults(defineProps<Props>(), {})
 
 <template>
   <div>
-    <div v-show="!props.loading" class="mt-4 flex flex-wrap">
-      <div
-        v-for="(albumTagCounts, i) in props.albumTagsCounts"
-        :key="i"
-        class="mb-2 mr-2"
-      >
-        <Tag
-          :album-tag-counts="albumTagCounts"
-          :current-tag="props.currentTag"
-          :navigate-with-tag="props.navigateWithTag"
-        />
+    <div v-show="!props.loading" class="mt-4 flex-wrap">
+      <div class="flex overflow-x-auto">
+        <div
+          v-for="(albumTagCounts, i) in props.albumTagsCounts"
+          :key="i"
+          class="mb-2 mr-2 flex-shrink-0 mt-1"
+        >
+          <Tag
+            :album-tag-counts="albumTagCounts"
+            :current-tag="props.currentTag"
+            :navigate-with-tag="props.navigateWithTag"
+          />
+        </div>
       </div>
     </div>
     <div v-show="props.loading">

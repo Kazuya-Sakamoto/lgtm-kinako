@@ -12,11 +12,11 @@ const maintenanceStore = useMaintenanceStore()
 const json = {
   '@context': 'https://schema.org',
   '@type': 'ImageGallery',
-  name: 'きなこ（犬）のLGTM画像ギャラリー',
+  name: 'きなこ, 犬, かわいい動物のLGTM画像ギャラリー',
   description:
-    'LGTM-kinakoは、きなこ、犬、わんこ、わんちゃんのLGTM画像を集めたギャラリーです。',
+    'LGTM-kinakoは、きなこ、犬、わんこ、わんちゃんのかわいい動物のLGTM画像を集めたギャラリーです。',
 }
-const pageSeo = setSeo('きなこ（犬）のLGTM画像')
+const pageSeo = setSeo('きなこ, 犬, かわいい動物のLGTM画像')
 useHead({
   ...pageSeo,
   script: [

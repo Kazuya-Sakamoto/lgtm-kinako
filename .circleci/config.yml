@@ -1,15 +1,47 @@
 version: 2.1
+
+orbs:
+  node: circleci/node@4.7.0
+
 jobs:
-  say-hello:
+  install_dependencies:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/node:18.18
     steps:
       - checkout
+      - node/install-packages:
+          pkg-manager: pnpm
+
+  run_tests:
+    docker:
+      - image:
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: pnpm
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+          name: "Run Tests"
+          command: pnpm run test
+
+  build_application:
+    docker:
+      - image: cimg/node:18.18
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: pnpm
+      - run:
+          name: "Build Application"
+          command: pnpm run build
 
 workflows:
-  say-hello-workflow:
+  version: 2
+  build-and-test:
     jobs:
-      - say-hello
+      - install_dependencies
+      - run_tests:
+          requires:
+            - install_dependencies
+      - build_application:
+          requires:
+            - run_tests

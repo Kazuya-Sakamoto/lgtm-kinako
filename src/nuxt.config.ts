@@ -16,13 +16,13 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: 'page', mode: 'in-out' },
     head: {
-      title: 'LGTM-kinako きなこ（犬）のLGTM画像',
+      title: 'LGTM-kinako | きなこ, 犬, かわいい動物のLGTM画像',
       meta: [
         { charset: 'utf-8' },
         {
           name: 'description',
           content:
-            'LGTM-kinakoは、きなこ、犬、わんこ、わんちゃんのLGTM画像を自由にダウンロードして使用できるサービスです。GitHubでプルリクエストをレビューした際にLooks Good To Meの略でLGTMと書くことがあります。このLGTM画像にかわいい動物の画像を使ってみてください。LGTM-kinakoは、様々なエンジニアたちがLGTMを送り合うことができます。',
+            'LGTM-kinakoは、きなこ、犬、かわいい動物、わんこ、わんちゃんのLGTM画像を自由にダウンロードして使用できるサービスです。GitHubでプルリクエストをレビューした際にLooks Good To Meの略でLGTMと書くことがあります。このLGTM画像にかわいい動物の画像を使ってみてください。LGTM-kinakoは、様々なエンジニアたちがLGTMを送り合うことができます。',
         },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { property: 'og:type', content: 'website' },
