@@ -9,15 +9,24 @@ jobs:
       - image: cimg/node:18.18
     steps:
       - checkout
-      - node/install-packages:
-          pkg-manager: pnpm
+      - run:
+          name: "Install pnpm"
+          command: npm install -g pnpm
+      - run:
+          name: "Install Dependencies with pnpm"
+          command: pnpm install
 
   run_tests:
     docker:
       - image: cimg/node:18.18
     steps:
       - checkout
-      - run: pnpm install
+      - run:
+          name: "Install pnpm"
+          command: npm install -g pnpm
+      - run:
+          name: "Install Dependencies with pnpm"
+          command: pnpm install
       - run:
           name: "Run Tests"
           command: pnpm run test
@@ -27,8 +36,12 @@ jobs:
       - image: cimg/node:18.18
     steps:
       - checkout
-      - node/install-packages:
-          pkg-manager: pnpm
+      - run:
+          name: "Install pnpm"
+          command: npm install -g pnpm
+      - run:
+          name: "Install Dependencies with pnpm"
+          command: pnpm install
       - run:
           name: "Build Application"
           command: pnpm run build
