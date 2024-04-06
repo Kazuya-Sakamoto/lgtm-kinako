@@ -14,11 +14,10 @@ jobs:
 
   run_tests:
     docker:
-      - image:
+      - image: cimg/node:18.18
     steps:
       - checkout
-      - node/install-packages:
-          pkg-manager: pnpm
+      - run: pnpm install
       - run:
           name: "Run Tests"
           command: pnpm run test
