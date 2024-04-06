@@ -19,6 +19,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: "Change directory to src"
+          command: cd src
+      - run:
           name: "Install Dependencies with pnpm"
           command: pnpm install
       - run:
