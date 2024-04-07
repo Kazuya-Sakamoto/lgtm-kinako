@@ -12,7 +12,7 @@
 */
 @layer components {
   .theme__dark {
-    @apply dark:bg-gray-950 dark:bg-gradient-to-l dark:from-neutral-800 dark:text-white;
+    @apply text-neutral-600 dark:bg-gray-950 dark:bg-gradient-to-l dark:from-neutral-800 dark:text-white;
   }
   .main__shadow {
     @apply border drop-shadow-xl border-inherit;

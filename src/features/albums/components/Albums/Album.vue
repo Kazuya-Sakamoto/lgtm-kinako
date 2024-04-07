@@ -48,14 +48,14 @@ const props = defineProps<Props>()
         Copied as Markdown
       </div>
     </div>
-    <div class="gradient-filter absolute inset-x-0 bottom-0 h-1/3" />
+    <div class="rounded gradient-filter absolute inset-x-0 bottom-0 h-1/3" />
     <h3
       class="absolute bottom-0 left-0 mb-2 ml-2 pb-2 text-center text-sm text-white"
     >
       {{ album.title }}
     </h3>
     <div class="absolute bottom-0 left-0 mb-8 ml-2 flex flex-wrap">
-      <div v-for="(tag, i) in album.tags" :key="i" class="mb-2 mr-2">
+      <div v-for="(tag, i) in album.tags" :key="i" class="mb-2 mr-1">
         <span
           class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20"
         >
@@ -71,6 +71,6 @@ const props = defineProps<Props>()
   filter: blur(3px);
 }
 .gradient-filter {
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.958), transparent);
 }
 </style>
