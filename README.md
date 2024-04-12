@@ -1,5 +1,7 @@
 # lgtm-kinako
 
+![LGTM](https://d18g0hf2wnz3gs.cloudfront.net/20240413001214.JPG)
+
 ## 概要
 
 きなこ（愛犬）の LGTM 画像を共有出来るサービスです。画像をクリックすると Markdown がコピーされ使用することができます。
