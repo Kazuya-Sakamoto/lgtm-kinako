@@ -1,14 +1,14 @@
 import { Meta, StoryObj } from '@storybook/vue3'
-import Albums, { Props } from './index.vue'
+import Albums, { Props } from './Albums.vue'
 import { Album as AlbumQuery } from '@/hooks/types'
-import { mockAlbumsQuery } from '../../../mock/mockQuery'
+import { mockAlbumsQuery } from '@/mock/mockQuery'
 
 const Clicked: Record<string, boolean> = {
   '1': true,
 }
 
 export default {
-  title: 'organisms/Albums',
+  title: 'features/albums/components/Albums/Albums',
   component: Albums,
 } as Meta<typeof Albums>
 

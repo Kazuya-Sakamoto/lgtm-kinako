@@ -33,11 +33,4 @@ const props = defineProps<Props>()
   </div>
 </template>
 
-<style scoped lang="scss">
-.image-filter {
-  filter: blur(3px);
-}
-.gradient-filter {
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-}
-</style>
+<style scoped lang="scss"></style>

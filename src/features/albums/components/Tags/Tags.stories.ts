@@ -1,19 +1,19 @@
 import { Meta, StoryObj } from '@storybook/vue3'
 import Tags, { Props } from './Tags.vue'
-import { mockTagsQuery } from '../../../../mock/mockQuery'
+import { mockAlbumTagCounts } from '../../../../mock/mockQuery'
 
 export default {
-  title: 'organisms/Tags',
+  title: 'features/albums/components/Tags/Tags',
   component: Tags,
 } as Meta<typeof Tags>
 
 export const Default: StoryObj<typeof Tags> = {
   args: {
-    tags: mockTagsQuery(),
+    albumTagsCounts: mockAlbumTagCounts(),
     navigateWithTag: (tagId: number) =>
       console.log(`Navigating with tagId: ${tagId}`),
     currentTag: null,
-    tagLoading: false,
+    loading: false,
   } as Props,
 }
 
@@ -27,6 +27,6 @@ export const Clicked: StoryObj<typeof Tags> = {
 export const Loading: StoryObj<typeof Tags> = {
   args: {
     ...Default.args,
-    tagLoading: true,
+    loading: true,
   },
 }
