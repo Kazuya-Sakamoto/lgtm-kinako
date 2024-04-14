@@ -32,31 +32,31 @@
 
 - コンテナ起動
 
-```
+```bash
 $ docker-compose up -d --build
 ```
 
 - アプリケーションコンテナ内へ移動
 
-```
+```bash
 $ docker-compose exec app sh
 ```
 
 - 初期設定
 
-```
+```bash
 /src # pnpm install
 ```
 
 - 起動
 
-```
+```bash
 /src # pnpm dev
 ```
 
 - storybook の起動
 
-```
+```bash
 /src # pnpm storybook
 ```
 
