@@ -66,6 +66,7 @@ export default defineNuxtConfig({
     '@pinia-plugin-persistedstate/nuxt',
     '@nuxtjs/color-mode',
     '@intlify/nuxt3',
+    '@nuxt/test-utils/module',
   ],
   colorMode: {
     classSuffix: '',
