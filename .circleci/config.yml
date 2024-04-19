@@ -22,7 +22,7 @@ jobs:
           paths:
             - src/node_modules
 
-  build_application:
+  build:
     docker:
       - image: cimg/node:18.18
     steps:
@@ -30,16 +30,32 @@ jobs:
       - restore_cache:
           key: v1-dependencies-{{ checksum "src/package.json" }}
       - run:
-          name: "Build Application"
+          name: "Run Build"
           command: |
             cd src &&
             pnpm run build
+
+  test:
+    docker:
+      - image: cimg/node:18.18
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-dependencies-{{ checksum "src/package.json" }}
+      - run:
+          name: "Run Tests"
+          command: |
+            cd src &&
+            pnpm run test
 
 workflows:
   version: 2
   build-and-test:
     jobs:
       - install_dependencies
-      - build_application:
+      - build:
+          requires:
+            - install_dependencies
+      - test:
           requires:
             - install_dependencies
