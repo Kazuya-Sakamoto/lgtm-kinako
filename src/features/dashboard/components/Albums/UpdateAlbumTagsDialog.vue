@@ -30,7 +30,7 @@ const handleTagClick = (tagId: number) => {
     <div
       v-if="props.showUpdateAlbumTagsDialog"
       tabindex="-1"
-      class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 fixed inset-x-0 top-0 z-50 flex h-[calc(100%)] max-h-full w-full items-center justify-center overflow-y-auto bg-gray-800 bg-opacity-70 p-4 md:inset-0"
+      class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 fixed inset-x-0 top-0 z-50 flex h-[calc(100%)] max-h-full w-full items-center justify-center overflow-y-auto bg-black/70 p-4 md:inset-0"
     >
       <div class="relative max-h-full w-full max-w-md p-4">
         <div class="relative rounded-lg bg-white shadow dark:bg-gray-700">
@@ -74,18 +74,18 @@ const handleTagClick = (tagId: number) => {
               />
             </svg>
             <h3
-              class="mb-5 text-md font-normal text-gray-500 dark:text-gray-400"
+              class="text-md mb-5 font-normal text-gray-500 dark:text-gray-400"
             >
               タグを選択してください
             </h3>
-            <div class="flex flex-wrap justify-center mb-8">
+            <div class="mb-8 flex flex-wrap justify-center">
               <div v-for="(tag, i) in props.tags" :key="i" class="mb-2 mr-2">
                 <span
                   :class="[
                     'inline-flex cursor-pointer items-center rounded-md px-4 py-3 text-xs font-medium shadow-xl ring-1 ring-inset ',
                     props.selectedTagIds.includes(tag.id)
-                      ? 'bg-yellow-50 text-yellow-800 font-bold shadow-yellow-600/35 ring-yellow-600/20'
-                      : 'bg-gray-100  hover:bg-gray-200 hover:border-gray-300 text-gray-600 ring-gray-600/20',
+                      ? 'bg-yellow-50 font-bold text-yellow-800 shadow-yellow-600/35 ring-yellow-600/20'
+                      : 'bg-gray-100  text-gray-600 ring-gray-600/20 hover:border-gray-300 hover:bg-gray-200',
                   ]"
                   @click="handleTagClick(tag.id)"
                 >

@@ -20,12 +20,7 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    'vue',
-    'tailwindcss',
-    '@typescript-eslint',
-    'prettier-plugin-tailwindcss',
-  ],
+  plugins: ['vue', 'tailwindcss', '@typescript-eslint'],
   rules: {
     '@typescript-eslint/no-unused-vars': [
       'error',
@@ -39,6 +34,7 @@ module.exports = {
     'tailwindcss/classnames-order': 'warn',
     'tailwindcss/no-unused-classname': 'off',
     'tailwindcss/no-unknown-classname': 'off',
+    'tailwindcss/no-custom-classname': 'off',
     'vue/attribute-hyphenation': [
       'error',
       'always',
@@ -60,16 +56,6 @@ module.exports = {
     'vue/require-slots-as-functions': 'warn',
     'vue/require-toggle-inside-transition': 'warn',
     'vue/valid-v-is': 'error',
-    // 'import/order': [
-    //   'error',
-    //   {
-    //     'newlines-between': 'always',
-    //     alphabetize: {
-    //       order: 'asc',
-    //       caseInsensitive: true,
-    //     },
-    //   },
-    // ],
   },
   overrides: [
     {

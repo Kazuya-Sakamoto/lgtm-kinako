@@ -62,7 +62,7 @@ const isCurrentRoute = (path: string) => route.path === path
     <transition name="menu-fade">
       <div
         v-show="props.showHeaderMenu"
-        class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-neutral-900 dark:text-white"
+        class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-neutral-900 dark:text-white"
         role="menu"
         aria-orientation="vertical"
         aria-labelledby="menu-button"

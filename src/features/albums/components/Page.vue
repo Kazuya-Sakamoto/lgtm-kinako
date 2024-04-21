@@ -142,7 +142,7 @@ const { showClipboardMap } = toRefs(state)
         :current-tag="currentTag"
         :loading="tagLoading || albumCountsLoading"
       />
-      <div class="custom-py mx-auto max-w-2xl sm:pt-1 sm:pb-24 lg:max-w-none">
+      <div class="custom-py mx-auto max-w-2xl sm:pb-24 sm:pt-1 lg:max-w-none">
         <Albums
           :albums="albums"
           :album-loading="albumLoading"

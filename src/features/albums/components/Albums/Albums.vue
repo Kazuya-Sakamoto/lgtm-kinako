@@ -20,7 +20,7 @@ const props = defineProps<Props>()
     </div>
     <div
       v-show="!props.albumLoading"
-      class="lg:grid lg:grid-cols-5 lg:gap-x-2 lg:space-y-0 mt-3"
+      class="mt-3 lg:grid lg:grid-cols-5 lg:gap-x-2 lg:space-y-0"
     >
       <div v-for="(album, i) in props.albums" :key="i">
         <Album

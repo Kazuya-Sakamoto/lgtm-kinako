@@ -55,7 +55,7 @@ const { showHeaderMenu } = toRefs(state)
       :loading="loginState.loading"
       :login-validation="loginValidation"
     />
-    <header class="transition duration-300 ease-in-out dark:theme__dark">
+    <header class="dark:theme__dark transition duration-300 ease-in-out">
       <div>
         <TAlert
           v-if="isLogin()"
@@ -64,7 +64,7 @@ const { showHeaderMenu } = toRefs(state)
         />
       </div>
       <nav
-        class="mx-auto flex max-w-7xl items-center justify-between px-6 pt-6 pb-4 lg:px-8"
+        class="mx-auto flex max-w-7xl items-center justify-between px-6 pb-4 pt-6 lg:px-8"
         aria-label="Global"
       >
         <div class="flex lg:flex-1">
@@ -84,7 +84,7 @@ const { showHeaderMenu } = toRefs(state)
         </div>
       </nav>
     </header>
-    <div class="transition duration-300 ease-in-out theme__dark">
+    <div class="theme__dark transition duration-300 ease-in-out">
       <NuxtPage />
     </div>
     <Footer />

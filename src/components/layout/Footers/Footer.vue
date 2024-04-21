@@ -56,9 +56,6 @@ const colorMode = useColorMode()
 .wcb-chan {
   animation: img-move 6s steps(6, start) infinite;
 }
-.wcb-chan-nostep {
-  animation: img-move 6s infinite;
-}
 @keyframes img-move {
   to {
     transform: translateX(300px);
