@@ -13,15 +13,15 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <div
-    class="block rounded-lg shadow-xl bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 border-2 border-gray-300"
+    class="text-surface shadow-secondary-1 dark:bg-surface-dark block rounded-lg border-2 border-gray-300 bg-white shadow-xl dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
   >
     <div class="border-b-2 border-neutral-100 px-6 py-3 dark:border-gray-600">
       タグ一覧
     </div>
     <div class="relative shadow-md sm:rounded-lg">
-      <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+      <table class="w-full text-left text-sm text-gray-500 rtl:text-right">
         <thead
-          class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+          class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400"
           style="position: sticky; top: 0; z-index: 1"
         >
           <tr>
@@ -44,36 +44,37 @@ const props = withDefaults(defineProps<Props>(), {
           </template>
           <template v-else>
             <tr
-              v-for="(albumTagCounts, _) in props.albumTagsCounts"
-              class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+              v-for="(albumTagCounts, index) in props.albumTagsCounts"
+              :key="index"
+              class="border-b bg-white dark:border-gray-700 dark:bg-gray-800"
             >
               <td
                 scope="row"
-                class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+                class="whitespace-nowrap px-6 py-4 text-gray-900 dark:text-white"
               >
                 {{ albumTagCounts.id }}
               </td>
               <td
-                class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+                class="whitespace-nowrap px-6 py-4 text-gray-900 dark:text-white"
               >
                 {{ albumTagCounts.name }}
               </td>
               <td
-                class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+                class="whitespace-nowrap px-6 py-4 text-gray-900 dark:text-white"
               >
                 {{ albumTagCounts.count }}
               </td>
               <td class="px-6 py-4">
                 <span
-                  @click="props.openDeleteDialog(albumTagCounts)"
                   class="cursor-pointer font-medium text-rose-500 hover:underline"
+                  @click="props.openDeleteDialog(albumTagCounts)"
                   ><svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke-width="1.5"
                     stroke="currentColor"
-                    class="w-6 h-6"
+                    class="h-6 w-6"
                   >
                     <path
                       stroke-linecap="round"

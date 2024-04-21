@@ -61,7 +61,7 @@ const loadingClass = computed(() => {
 <template>
   <button :class="[buttonClass, loadingClass]" :disabled="props.disabled">
     <slot v-if="!props.loading">ボタン</slot>
-    <span className="flex justify-center" aria-label="読み込み中" v-else>
+    <span v-else className="flex justify-center" aria-label="読み込み中">
       <span
         className="h-6 w-6 animate-spin rounded-full border-4 border-t-transparent"
     /></span>

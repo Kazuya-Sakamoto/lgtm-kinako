@@ -32,7 +32,7 @@ const alertClass = computed(() => {
 <template>
   <div :class="alertClass" role="alert">
     <svg
-      class="flex-shrink-0 inline w-4 h-4 me-3"
+      class="me-3 inline h-4 w-4 shrink-0"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"

@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<Props>(), {})
         <div
           v-for="(albumTagCounts, i) in props.albumTagsCounts"
           :key="i"
-          class="mb-2 mr-2 flex-shrink-0 mt-1"
+          class="mb-2 mr-2 mt-1 shrink-0"
         >
           <Tag
             :album-tag-counts="albumTagCounts"

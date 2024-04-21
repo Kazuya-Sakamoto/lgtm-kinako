@@ -27,7 +27,7 @@ const props = withDefaults(defineProps<Props>(), {
     <div
       v-if="props.showDialog"
       tabindex="-1"
-      class="fixed inset-x-0 top-0 z-50 flex h-[calc(100%)] max-h-full w-full items-center justify-center overflow-y-auto bg-gray-800 bg-opacity-70 p-4 md:inset-0"
+      class="fixed inset-x-0 top-0 z-50 flex h-[calc(100%)] max-h-full w-full items-center justify-center overflow-y-auto bg-black/70 p-4 md:inset-0"
     >
       <div class="relative max-h-full w-full max-w-md">
         <div class="dark:theme__dark relative rounded-lg bg-white shadow">

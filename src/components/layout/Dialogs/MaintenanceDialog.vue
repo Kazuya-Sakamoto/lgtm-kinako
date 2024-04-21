@@ -15,7 +15,7 @@ const onVideoLoaded = () => {
 <template>
   <div>
     <div
-      class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 fixed inset-x-0 top-0 z-50 flex h-[calc(100%)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden bg-gray-800 bg-opacity-70 p-4 md:inset-0"
+      class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 fixed inset-x-0 top-0 z-50 flex h-[calc(100%)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden bg-black/70 p-4 md:inset-0"
     >
       <div class="relative max-h-full w-full max-w-md" @click.stop>
         <div class="dark:theme__dark relative rounded-lg bg-white shadow">

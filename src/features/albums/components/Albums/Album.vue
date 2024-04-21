@@ -30,7 +30,7 @@ const props = defineProps<Props>()
     </div>
     <div
       v-show="props.showClipboardMap[props.album.id]"
-      class="z-10 absolute inset-0 flex items-center justify-center rounded border-2 border-yellow-300 bg-slate-900 bg-opacity-75 font-bold text-white"
+      class="absolute inset-0 z-10 flex items-center justify-center rounded border-2 border-yellow-300 bg-black/65 font-bold text-white"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +48,7 @@ const props = defineProps<Props>()
       </svg>
       Copied as Markdown
     </div>
-    <div class="gradient-filter rounded absolute inset-x-0 bottom-0 h-1/3" />
+    <div class="gradient-filter absolute inset-x-0 bottom-0 h-1/3 rounded" />
     <h3
       class="absolute bottom-0 left-0 mb-2 ml-2 pb-2 text-center text-sm text-white"
     >

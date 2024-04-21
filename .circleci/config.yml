@@ -22,7 +22,7 @@ jobs:
           paths:
             - src/node_modules
 
-  build:
+  lint:
     docker:
       - image: cimg/node:18.18
     steps:
@@ -30,10 +30,10 @@ jobs:
       - restore_cache:
           key: v1-dependencies-{{ checksum "src/package.json" }}
       - run:
-          name: "Run Build"
+          name: "Run Lint"
           command: |
             cd src &&
-            pnpm run build
+            pnpm run lint
 
   test:
     docker:
@@ -48,14 +48,31 @@ jobs:
             cd src &&
             pnpm run test
 
+  build:
+    docker:
+      - image: cimg/node:18.18
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-dependencies-{{ checksum "src/package.json" }}
+      - run:
+          name: "Run Build"
+          command: |
+            cd src &&
+            pnpm run build
+
 workflows:
   version: 2
   build-and-test:
     jobs:
       - install_dependencies
-      - build:
+      - lint:
           requires:
             - install_dependencies
       - test:
           requires:
             - install_dependencies
+      - build:
+          requires:
+            - lint
+            - test
