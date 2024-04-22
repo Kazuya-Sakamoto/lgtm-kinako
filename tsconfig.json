@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["vue"],
+    "types": ["vue", "vitest/globals"],
     "noImplicitAny": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
