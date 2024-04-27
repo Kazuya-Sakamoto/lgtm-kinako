@@ -17,7 +17,7 @@
 - Nuxt v3.6.5
 - vue v3.2.36
 - pnpm v8.13.1
-- typeScript v5.2.2
+- TypeScript v5.2.2
 - tailwind css v3.3.5
 - storybook 7.6.17
 
