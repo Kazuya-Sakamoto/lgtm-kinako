@@ -13,6 +13,9 @@ dev:
 story:
 	docker-compose exec app sh -c "pnpm storybook"
 
+test:
+	docker-compose exec app sh -c "pnpm test"
+
 down:
 	docker-compose down --volumes --rmi local
 

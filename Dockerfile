@@ -1,6 +1,6 @@
-FROM node:18.18.0-alpine
+FROM node:20.12.2-alpine
 
-ENV TZ Asia/Tokyo
+ENV TZ=Asia/Tokyo
 
 RUN npm install -g pnpm
 
@@ -8,8 +8,8 @@ RUN npm install -g pnpm
 RUN mkdir -p /usr/local/share/pnpm-global
 
 # 環境変数の設定
-ENV PNPM_HOME /usr/local/share/pnpm-global
-ENV PATH $PNPM_HOME:$PATH
+ENV PNPM_HOME=/usr/local/share/pnpm-global
+ENV PATH=$PNPM_HOME:$PATH
 
 RUN mkdir src
 

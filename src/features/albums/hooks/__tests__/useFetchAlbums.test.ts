@@ -16,7 +16,7 @@ describe('useFetchAlbums', () => {
     setActivePinia(createPinia())
     vi.mock('nuxt/app', () => ({
       useRuntimeConfig: () => ({
-        public: { API_URL: 'http://localhost:8080/api/v1' },
+        public: { API_URL: 'http://localhost:8081/api/v1' },
       }),
       useRoute: () => ({
         query: {},
@@ -54,7 +54,7 @@ describe('useFetchAlbums', () => {
     await fetchAlbums('2')
 
     expect(fetchSpy).toHaveBeenCalledWith(
-      'http://localhost:8080/api/v1/albums?tag=2',
+      'http://localhost:8081/api/v1/albums?tag=2',
       {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },

@@ -51,7 +51,7 @@ export const useCreateAlbum = () => {
     const params = {
       ...state.input,
     }
-    console.log('---params---', params)
+
     state.loading = true
     try {
       const response = await fetch(`${config.public.API_URL}/albums`, {
