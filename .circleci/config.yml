@@ -6,7 +6,7 @@ orbs:
 jobs:
   install_dependencies:
     docker:
-      - image: cimg/node:18.18
+      - image: cimg/node:20.12.2
     steps:
       - checkout
       - run:
@@ -24,7 +24,7 @@ jobs:
 
   lint:
     docker:
-      - image: cimg/node:18.18
+      - image: cimg/node:20.12.2
     steps:
       - checkout
       - restore_cache:
@@ -37,7 +37,7 @@ jobs:
 
   test:
     docker:
-      - image: cimg/node:18.18
+      - image: cimg/node:20.12.2
     steps:
       - checkout
       - restore_cache:
@@ -50,7 +50,7 @@ jobs:
 
   build:
     docker:
-      - image: cimg/node:18.18
+      - image: cimg/node:20.12.2
     steps:
       - checkout
       - restore_cache:
