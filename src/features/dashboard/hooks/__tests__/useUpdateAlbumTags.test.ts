@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
-import { useCreateAlbum } from '../useCreateAlbum'
+import { useUpdateAlbumTags } from '../useUpdateAlbumTags'
 import { ref, Ref } from 'vue'
 
 const API_URL = 'http://localhost:8081/api/v1'
@@ -9,6 +9,7 @@ vi.mock('nuxt/app', () => ({
     public: { API_URL },
   }),
 }))
+
 vi.mock('@/store/login', () => ({
   useLoginStore: vi.fn(() => {
     const csrfToken: Ref<string> = ref('test-token')
@@ -29,7 +30,7 @@ vi.mock('@/hooks/useErrorHandler', () => ({
   })),
 }))
 
-describe('useCreateAlbum', () => {
+describe('useUpdateAlbumTags', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
   })
@@ -38,38 +39,15 @@ describe('useCreateAlbum', () => {
     vi.restoreAllMocks()
   })
 
-  describe('onInput', () => {
-    it('タイトルが入力できること', () => {
-      const { state, onInput } = useCreateAlbum()
-      onInput({ name: 'title', value: 'New Album' })
-      expect(state.input.title).toBe('New Album')
-    })
-  })
-
-  describe('onFileChange', () => {
-    it('ファイル変更ができること', () => {
-      const { onFileChange } = useCreateAlbum()
-      const mockFile = new File([''], 'test.png', { type: 'image/png' })
-      const mockEvt = { target: { files: [mockFile] } } as unknown as Event
-
-      const readAsDataURL = vi.fn()
-      window.FileReader = vi.fn(() => ({
-        readAsDataURL,
-        onload: null,
-      })) as any
-
-      onFileChange(mockEvt)
-      expect(readAsDataURL).toHaveBeenCalledWith(mockFile)
-    })
-  })
-
-  describe('createAlbum', () => {
-    it('アルバムの作成が正常にできること', async () => {
-      const { createAlbum, state } = useCreateAlbum()
-      state.input = { image: 'data:image/png;base64,...', title: 'アルバム1' }
+  describe('updateAlbumTags', () => {
+    it('アルバムのタグの更新が正常にできること', async () => {
+      const { updateAlbumTags, state, setAlbumId, setTagIds } =
+        useUpdateAlbumTags()
+      setAlbumId(1)
+      setTagIds([10, 20])
 
       const fetchMock = vi.spyOn(global, 'fetch').mockResolvedValueOnce(
-        new Response(JSON.stringify({ message: 'Album Created' }), {
+        new Response(JSON.stringify({ message: 'Updated successfully' }), {
           status: 200,
           statusText: 'OK',
           headers: {
@@ -79,18 +57,28 @@ describe('useCreateAlbum', () => {
         })
       )
 
-      await createAlbum()
+      await updateAlbumTags()
 
-      expect(fetchMock).toHaveBeenCalledWith(`${API_URL}/albums`, {
+      expect(fetchMock).toHaveBeenCalledWith(`${API_URL}/albums/tags/update`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'X-CSRF-Token': 'test-token',
         },
-        body: JSON.stringify(state.input),
+        body: JSON.stringify({ albumId: 1, tagIds: [10, 20] }),
         credentials: 'include',
       })
       expect(state.loading).toBe(false)
     })
+  })
+
+  it('選択されたタグIDを追加および削除できる', () => {
+    const { state, addSelectedTagIds, deleteSelectedTagIds } =
+      useUpdateAlbumTags()
+    addSelectedTagIds(5)
+    expect(state.input.tagIds.includes(5)).toBe(true)
+
+    deleteSelectedTagIds(5)
+    expect(state.input.tagIds.includes(5)).toBe(false)
   })
 })

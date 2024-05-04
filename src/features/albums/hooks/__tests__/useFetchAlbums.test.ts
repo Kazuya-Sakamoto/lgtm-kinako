@@ -4,6 +4,15 @@ import { useFetchAlbums } from '../useFetchAlbums'
 import { Album } from '@/hooks/types'
 import { mockAlbumsQuery } from '@/mock/mockQuery'
 
+const API_URL = 'http://localhost:8081/api/v1'
+vi.mock('nuxt/app', () => ({
+  useRuntimeConfig: () => ({
+    public: { API_URL },
+  }),
+  useRoute: () => ({
+    query: {},
+  }),
+}))
 vi.mock('@/lib/headers', () => ({
   h: () => ({ 'Content-Type': 'application/json' }),
 }))
@@ -14,14 +23,6 @@ vi.mock('@/lib/gtagEvent', () => ({
 describe('useFetchAlbums', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
-    vi.mock('nuxt/app', () => ({
-      useRuntimeConfig: () => ({
-        public: { API_URL: 'http://localhost:8081/api/v1' },
-      }),
-      useRoute: () => ({
-        query: {},
-      }),
-    }))
   })
 
   afterEach(() => {
@@ -53,14 +54,11 @@ describe('useFetchAlbums', () => {
     const { fetchAlbums } = useFetchAlbums()
     await fetchAlbums('2')
 
-    expect(fetchSpy).toHaveBeenCalledWith(
-      'http://localhost:8081/api/v1/albums?tag=2',
-      {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-      }
-    )
+    expect(fetchSpy).toHaveBeenCalledWith(`${API_URL}/albums?tag=2`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+    })
     expect(fetchSpy).toHaveBeenCalledTimes(1)
   })
 })
