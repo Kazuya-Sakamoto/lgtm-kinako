@@ -20,7 +20,7 @@ export type Tag = {
   name: string
 }
 
-export type AlbumTagCounts = {
+export type TagWithAlbumCount = {
   count: number
   id: number
   name: string

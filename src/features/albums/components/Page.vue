@@ -9,6 +9,8 @@ import { sendGtagEvent } from '@/lib/gtagEvent'
 import { useFetchAlbums } from '../hooks/useFetchAlbums'
 import { Albums } from './Albums'
 import { Tags } from './Tags'
+import { getLoadingAlbumCount } from '../lib/getLoadingAlbumCount'
+import { mergeTagsWithAlbumCounts } from '@/lib/mergeTagsWithAlbumCounts'
 
 const route = useRoute()
 const router = useRouter()
@@ -52,15 +54,11 @@ const {
   ])
 })()
 
-const albumTagsCounts = computed(() => {
-  return tags.value.map((tag) => {
-    const count =
-      counts.value.find((count) => count.tag_id === tag.id)?.count || 0
-    return { ...tag, count }
-  })
-})
-const loadingCount = computed(
-  () => albumTagsCounts.value[currentTag.value - 1]?.count ?? 10
+const tagsWithAlbumCounts = computed(() =>
+  mergeTagsWithAlbumCounts(tags.value, counts.value)
+)
+const loadingCount = computed(() =>
+  getLoadingAlbumCount(tagsWithAlbumCounts.value, parseInt(currentTag.value))
 )
 
 const onCopyImage = (album: AlbumQuery) => {
@@ -137,7 +135,7 @@ const { showClipboardMap } = toRefs(state)
         </div>
       </div>
       <Tags
-        :album-tags-counts="albumTagsCounts"
+        :tags-with-album-counts="tagsWithAlbumCounts"
         :navigate-with-tag="navigateWithTag ?? (() => {})"
         :current-tag="currentTag"
         :loading="tagLoading || albumCountsLoading"

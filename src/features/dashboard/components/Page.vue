@@ -16,6 +16,7 @@ import {
 import { TagsTable, DeleteDialog } from './Tags'
 import { AlbumsTable, NewAlbumDialog, UpdateAlbumTagsDialog } from './Albums'
 import Cards from './Cards.vue'
+import { mergeTagsWithAlbumCounts } from '@/lib/mergeTagsWithAlbumCounts'
 
 const loginStore = useLoginStore()
 const { isLogin } = loginStore
@@ -50,14 +51,9 @@ const {
   await Promise.all([fetchAllAlbums(), fetchTags(), fetchAlbumCountsByTag()])
 })()
 
-const albumTagsCounts = computed(() => {
-  return tags.value.map((tag) => {
-    const count =
-      counts.value.find((count) => count.tag_id === tag.id)?.count || 0
-    return { ...tag, count }
-  })
-})
-
+const tagsWithAlbumCounts = computed(() =>
+  mergeTagsWithAlbumCounts(tags.value, counts.value)
+)
 /**
  * * Tagの作成
  */
@@ -219,7 +215,7 @@ const { showCreateAlbumDialog, showDeleteDialog, showUpdateAlbumTagsDialog } =
 
       <div class="pb-10">
         <TagsTable
-          :album-tags-counts="albumTagsCounts"
+          :tags-with-album-counts="tagsWithAlbumCounts"
           :loading="tagLoading || countsLoading"
           :open-delete-dialog="openDeleteDialog"
         />

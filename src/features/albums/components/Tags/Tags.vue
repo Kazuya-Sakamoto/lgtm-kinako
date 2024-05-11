@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { AlbumTagCounts } from '@/hooks/types'
+import { TagWithAlbumCount } from '@/hooks/types'
 import Tag from './Tag.vue'
 
 export type Props = {
-  albumTagsCounts: AlbumTagCounts[]
+  tagsWithAlbumCounts: TagWithAlbumCount[]
   navigateWithTag: (tagId: number) => void
   currentTag: any
   loading: boolean
@@ -16,12 +16,12 @@ const props = withDefaults(defineProps<Props>(), {})
     <div v-show="!props.loading" class="mt-4 flex-wrap">
       <div class="flex overflow-x-auto">
         <div
-          v-for="(albumTagCounts, i) in props.albumTagsCounts"
+          v-for="(tagWithAlbumCount, i) in props.tagsWithAlbumCounts"
           :key="i"
           class="mb-2 mr-2 mt-1 shrink-0"
         >
           <Tag
-            :album-tag-counts="albumTagCounts"
+            :tag-with-album-count="tagWithAlbumCount"
             :current-tag="props.currentTag"
             :navigate-with-tag="props.navigateWithTag"
           />

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Tag, AlbumTagCounts } from '@/hooks/types'
+import { Tag, TagWithAlbumCount } from '@/hooks/types'
 
 export type Props = {
-  albumTagsCounts: AlbumTagCounts[]
+  tagsWithAlbumCounts: TagWithAlbumCount[]
   loading: boolean
   openDeleteDialog: (tag: Tag) => void
 }
@@ -44,7 +44,7 @@ const props = withDefaults(defineProps<Props>(), {
           </template>
           <template v-else>
             <tr
-              v-for="(albumTagCounts, index) in props.albumTagsCounts"
+              v-for="(tagWithAlbumCount, index) in props.tagsWithAlbumCounts"
               :key="index"
               class="border-b bg-white dark:border-gray-700 dark:bg-gray-800"
             >
@@ -52,22 +52,22 @@ const props = withDefaults(defineProps<Props>(), {
                 scope="row"
                 class="whitespace-nowrap px-6 py-4 text-gray-900 dark:text-white"
               >
-                {{ albumTagCounts.id }}
+                {{ tagWithAlbumCount.id }}
               </td>
               <td
                 class="whitespace-nowrap px-6 py-4 text-gray-900 dark:text-white"
               >
-                {{ albumTagCounts.name }}
+                {{ tagWithAlbumCount.name }}
               </td>
               <td
                 class="whitespace-nowrap px-6 py-4 text-gray-900 dark:text-white"
               >
-                {{ albumTagCounts.count }}
+                {{ tagWithAlbumCount.count }}
               </td>
               <td class="px-6 py-4">
                 <span
                   class="cursor-pointer font-medium text-rose-500 hover:underline"
-                  @click="props.openDeleteDialog(albumTagCounts)"
+                  @click="props.openDeleteDialog(tagWithAlbumCount)"
                   ><svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"

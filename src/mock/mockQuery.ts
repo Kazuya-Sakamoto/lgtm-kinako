@@ -1,7 +1,7 @@
 import {
   Album as AlbumQuery,
   Tag as TagQuery,
-  AlbumTagCounts,
+  TagWithAlbumCount,
 } from '@/hooks/types'
 
 const mockAlbumsQuery = (): AlbumQuery[] => [
@@ -59,11 +59,11 @@ const mockTagsQuery = (): TagQuery[] => [
   { id: 4, name: 'いべんと' },
 ]
 
-const mockAlbumTagCounts = (): AlbumTagCounts[] => [
+const mockTagsWithAlbumCounts = (): TagWithAlbumCount[] => [
   { count: 10, id: 1, name: 'かわいい' },
   { count: 1, id: 2, name: 'へんてこ' },
   { count: 5, id: 3, name: 'えもい' },
   { count: 20, id: 4, name: 'いべんと' },
 ]
 
-export { mockAlbumsQuery, mockTagsQuery, mockAlbumTagCounts }
+export { mockAlbumsQuery, mockTagsQuery, mockTagsWithAlbumCounts }
