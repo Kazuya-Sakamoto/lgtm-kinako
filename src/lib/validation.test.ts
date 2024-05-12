@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { checkEmailVal, isPasswordLengthValid } from '../validation'
+import { checkEmailVal, isPasswordLengthValid } from './validation'
 
 describe('checkEmailVal', () => {
   test('正常なEmailを入力', () => {

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
-import { useFetchTags } from '../useFetchTags'
+import { useFetchTags } from './useFetchTags'
 import { Tag } from '@/hooks/types'
 
 const API_URL = 'http://localhost:8081/api/v1'

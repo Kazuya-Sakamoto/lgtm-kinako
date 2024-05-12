@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
-import { useCreateTag } from '../useCreateTag'
+import { useCreateTag } from './useCreateTag'
 import { ref, Ref } from 'vue'
 
 const API_URL = 'http://localhost:8081/api/v1'

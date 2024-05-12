@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { mergeTagsWithAlbumCounts } from '../mergeTagsWithAlbumCounts'
+import { mergeTagsWithAlbumCounts } from './mergeTagsWithAlbumCounts'
 import { Tag } from '@/hooks/types'
 
 describe('mergeTagsWithAlbumCounts', () => {

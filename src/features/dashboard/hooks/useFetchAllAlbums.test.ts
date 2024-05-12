@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
-import { useFetchAllAlbums } from '../useFetchAllAlbums'
+import { useFetchAllAlbums } from './useFetchAllAlbums'
 import { Album } from '@/hooks/types'
 import { mockAlbumsQuery } from '@/mock/mockQuery'
 import { ref } from 'vue'

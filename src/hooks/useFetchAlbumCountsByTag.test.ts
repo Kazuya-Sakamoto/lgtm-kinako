@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
-import { useFetchAlbumCountsByTag } from '../useFetchAlbumCountsByTag'
+import { useFetchAlbumCountsByTag } from './useFetchAlbumCountsByTag'
 
 const API_URL = 'http://localhost:8081/api/v1'
 vi.mock('nuxt/app', () => ({

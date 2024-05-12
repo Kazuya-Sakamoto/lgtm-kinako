@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
-import { useLogin } from '../useLogin'
+import { useLogin } from './useLogin'
 
 vi.mock('@/store/login', () => ({
   useLoginStore: vi.fn(() => ({

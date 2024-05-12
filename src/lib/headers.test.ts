@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { h } from '../headers'
+import { h } from './headers'
 
 describe('h', () => {
   test('defaultのhedaers', () => {
