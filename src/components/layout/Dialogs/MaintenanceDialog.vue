@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-// type Props = {
-//   show: boolean
-//   closeDialog: () => void
-// }
-// const props = withDefaults(defineProps<Props>(), {})
+type Props = {
+  show: boolean
+}
+const props = withDefaults(defineProps<Props>(), {
+  show: false,
+})
 
 const videoLoaded = ref(false)
 const onVideoLoaded = () => {
@@ -15,6 +16,7 @@ const onVideoLoaded = () => {
 <template>
   <div>
     <div
+      v-if="props.show"
       class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 fixed inset-x-0 top-0 z-50 flex h-[calc(100%)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden bg-black/70 p-4 md:inset-0"
     >
       <div class="relative max-h-full w-full max-w-md" @click.stop>
@@ -23,7 +25,7 @@ const onVideoLoaded = () => {
             <h2
               class="mb-3 text-center text-xl font-medium text-gray-800 dark:text-white"
             >
-              ただいまメンテナンス中です🙇
+              ただいまメンテナンス中です
             </h2>
             <div class="relative text-center">
               <div v-show="!videoLoaded" class="w-auto animate-pulse">
@@ -44,12 +46,18 @@ const onVideoLoaded = () => {
                 style="pointer-events: none"
                 @loadeddata="onVideoLoaded"
               >
-                <source src="@/assets/movie/welcome.mp4" type="video/mp4" />
+                <source
+                  src="https://d18g0hf2wnz3gs.cloudfront.net/maintenance.mp4"
+                  type="video/mp4"
+                />
               </video>
               <h3
                 class="absolute bottom-5 my-2 px-3 font-bold leading-8 text-white"
               >
-                当サイトにアクセスいただきありがとうございます。ただいまメンテナンスを行なっております。ご迷惑おかけしますが、再開までしばらくお待ちください。
+                当サイトにアクセスいただきありがとうございます🐶<br />
+                ただいまメンテナンスを行なっております。<br />
+                ご迷惑おかけしますが、<br />
+                再開までしばらくお待ちください。
               </h3>
             </div>
           </div>
