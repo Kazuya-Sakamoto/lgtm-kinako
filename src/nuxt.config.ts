@@ -101,7 +101,6 @@ export default defineNuxtConfig({
     apiKey: '',
     public: {
       API_URL: '',
-      MAINTENANCE_MODE: false,
       persistedState: {
         storage: 'localStorage',
         debug: false,

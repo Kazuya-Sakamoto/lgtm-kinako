@@ -1,19 +1,12 @@
 <script setup lang="ts">
-import { useHead, useRuntimeConfig } from 'nuxt/app'
+import { useHead } from 'nuxt/app'
 import Page from '@/features/albums/components/Page.vue'
 import { useMaintenanceStore } from '@/store/maintenance'
 import { setSeo } from '@/lib/seo'
 
 const maintenanceStore = useMaintenanceStore()
-const { show, openDialog, closeDialog } = maintenanceStore
-const config = useRuntimeConfig()
-
 ;(() => {
-  if (config.public.MAINTENANCE_MODE) {
-    openDialog()
-  } else {
-    closeDialog()
-  }
+  maintenanceStore.openDialog()
 })()
 
 const json = {
@@ -37,7 +30,8 @@ useHead({
 
 <template>
   <div>
-    <MaintenanceDialog :show="show" />
+    <!-- TODO: メンテナンスダイアログを表示する際にopenにする -->
+    <!-- <MaintenanceDialog :show="show" :close-dialog="closeDialog" /> -->
     <Page />
   </div>
 </template>
