@@ -29,7 +29,7 @@ export default defineNuxtConfig({
         { property: 'og:site_name', content: 'LGTM-kinako' },
         {
           property: 'og:image',
-          content: 'https://d18g0hf2wnz3gs.cloudfront.net/favicon.jpg',
+          content: 'https://d18g0hf2wnz3gs.cloudfront.net/favicon.png',
         },
         {
           property: 'og:url',
