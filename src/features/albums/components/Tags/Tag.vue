@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<Props>(), {})
   <div>
     <span
       :class="[
-        'tag-size inline-flex cursor-pointer items-center rounded-md px-3 py-2.5 text-xs font-medium shadow-md shadow-yellow-600/35 ring-1 ring-inset ring-yellow-600/20',
+        'tag-size inline-flex cursor-pointer items-center rounded-md p-3 text-xs font-medium shadow-md shadow-yellow-600/35 ring-1 ring-inset ring-yellow-600/20',
         props.tagWithAlbumCount.id == props.currentTag
           ? 'bg-yellow-400 text-white'
           : 'bg-yellow-50 text-yellow-800',
