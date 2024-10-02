@@ -40,14 +40,4 @@ const props = withDefaults(defineProps<Props>(), {})
   </div>
 </template>
 
-<style scoped lang="scss">
-@media (max-width: 640px) {
-  .tag-size {
-    padding: 6px 8px;
-    .w-6.h-6 {
-      width: 1rem;
-      height: 1.5rem;
-    }
-  }
-}
-</style>
+<style scoped lang="scss"></style>
