@@ -31,7 +31,7 @@ This is a service that allows you to share LGTM images featuring Kinako (my belo
 - 🌐 [service URL](https://lgtm-kinako.com/)  
 - 🔧 [backend api repository](https://github.com/Kazuya-Sakamoto/lgtm-kinako-api)  
 
-## Setup Instructions
+## Environment Setup
 
 - Start the Container
 
