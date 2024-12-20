@@ -24,34 +24,34 @@
 </div>
 
 
-## 概要
+## Overview
 
-きなこ（愛犬）の LGTM 画像を共有出来るサービスです。画像をクリックすると Markdown がコピーされ使用することができます。
+This is a service that allows you to share LGTM images featuring Kinako (my beloved dog). By clicking on an image, the corresponding Markdown code is copied, making it easy to use.
 
-- 🌐 [サービス URL](https://lgtm-kinako.com/)  
-- 🔧 [バックエンドリポジトリ](https://github.com/Kazuya-Sakamoto/lgtm-kinako-api)  
+- 🌐 [service URL](https://lgtm-kinako.com/)  
+- 🔧 [backend api repository](https://github.com/Kazuya-Sakamoto/lgtm-kinako-api)  
 
 ## 環境構築
 
-- コンテナ起動
+- Start the Container
 
 ```bash
 $ make up
 ```
 
-- 初期設定
+- Initial Setup
 
 ```bash
 $ make install
 ```
 
-- 起動
+- Start the Application
 
 ```bash
 $ make dev
 ```
 
-- storybook の起動
+- Start Storybook
 
 ```bash
 $ make story
@@ -59,7 +59,7 @@ $ make story
 
 ## Tips
 
-- うまく起動しない時
+- If the Application Fails to Start
 
 ```bash
 $ make down
